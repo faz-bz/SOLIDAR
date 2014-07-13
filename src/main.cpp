@@ -64,7 +64,7 @@ map<uint256, set<uint256> > mapOrphanTransactionsByPrev;
 // Constant stuff for coinbase transactions we create:
 CScript COINBASE_FLAGS;
 
-const string strMessageMagic = "Freicoin Signed Message:\n";
+const string strMessageMagic = "Worldleadcurrency Signed Message:\n";
 
 double dHashesPerSec = 0.0;
 int64 nHPSTimerStart = 0;
@@ -3423,7 +3423,7 @@ Let this be the awaited dawn.";
             << ParseHex("c26be5ec809aa4bf6b30aa89823cff7cedc3679a")
             << OP_EQUALVERIFY
             << OP_CHECKSIG;
-        const char* pszMessage4 = "Ich w\xc3\xbc""nsche Freicoin viel Erfolg zum Nutzen der 99 Prozent!";
+        const char* pszMessage4 = "Ich w\xc3\xbc""nsche Worldleadcurrency viel Erfolg zum Nutzen der 99 Prozent!";
         txNew.vout[4].SetInitialValue(1LL);
         txNew.vout[4].scriptPubKey = CScript()
             << ParseHex("202020202020")

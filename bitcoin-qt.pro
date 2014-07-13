@@ -1,6 +1,6 @@
 TEMPLATE = app
-TARGET = freicoin-qt
-macx:TARGET = "Freicoin-Qt"
+TARGET = worldleadcurrency-qt
+macx:TARGET = "Worldleadcurrency-Qt"
 VERSION = 0.8.6.1
 INCLUDEPATH += src src/json src/qt
 QT += network

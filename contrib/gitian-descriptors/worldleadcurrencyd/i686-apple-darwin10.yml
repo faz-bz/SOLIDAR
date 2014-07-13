@@ -1,5 +1,5 @@
 ---
-name: "freicoind"
+name: "worldleadcurrencyd"
 suites:
 - "precise"
 architectures:
@@ -10,19 +10,19 @@ packages:
 reference_datetime: "2012-07-01 00:00:00"
 remotes: []
 files:
-- "boost-x86_64-apple-darwin10-1_50_0-gitian.zip"
-- "db-x86_64-apple-darwin10-4.8.30.NC-gitian.zip"
-- "gmp-x86_64-apple-darwin10-5.1.2-gitian.zip"
-- "libpng-x86_64-apple-darwin10-1.6.3-gitian.zip"
-- "miniupnpc-x86_64-apple-darwin10-1.8-gitian.zip"
-- "mpfr-x86_64-apple-darwin10-3.1.2-gitian.zip"
-- "openssl-x86_64-apple-darwin10-1.0.1c-gitian.zip"
-- "qrencode-x86_64-apple-darwin10-3.4.2-gitian.zip"
+- "boost-i686-apple-darwin10-1_50_0-gitian.zip"
+- "db-i686-apple-darwin10-4.8.30.NC-gitian.zip"
+- "gmp-i686-apple-darwin10-5.1.2-gitian.zip"
+- "libpng-i686-apple-darwin10-1.6.3-gitian.zip"
+- "miniupnpc-i686-apple-darwin10-1.8-gitian.zip"
+- "mpfr-i686-apple-darwin10-3.1.2-gitian.zip"
+- "openssl-i686-apple-darwin10-1.0.1c-gitian.zip"
+- "qrencode-i686-apple-darwin10-3.4.2-gitian.zip"
 - "src-local.tar.xz"
-- "toolchain-x86_64-apple-darwin10-20120119-gitian.zip"
-- "zlib-x86_64-apple-darwin10-1.2.8-gitian.zip"
+- "toolchain-i686-apple-darwin10-20120119-gitian.zip"
+- "zlib-i686-apple-darwin10-1.2.8-gitian.zip"
 script: |
-  export TARGET=x86_64-apple-darwin10
+  export TARGET=i686-apple-darwin10
   export XCHAIN=$HOME/x-tools/target/$TARGET
   export PREFIX=$HOME/sysroot
   export BUILD=$HOME/build
@@ -31,7 +31,7 @@ script: |
   
   BOOST_VER=1_50_0
   DB_VER=4.8.30.NC
-  FREICOIN_VER=0.8.6.1
+  WORLDLEADCURRENCY_VER=0.8.6.1
   GMP_VER=5.1.2
   LIBPNG_VER=1.6.3
   MINIUPNPC_VER=1.8
@@ -71,12 +71,12 @@ script: |
   popd
   export PATH=$PREFIX/bin:$PREFIX/usr/bin:$PATH
   
-  mkdir -p "$BUILD"/src/freicoin
-  tar -C "$BUILD"/src/freicoin -xf "$GITIANDIR"/src-local.tar.xz
-  pushd "$BUILD"/src/freicoin/src
+  mkdir -p "$BUILD"/src/worldleadcurrency
+  tar -C "$BUILD"/src/worldleadcurrency -xf "$GITIANDIR"/src-local.tar.xz
+  pushd "$BUILD"/src/worldleadcurrency/src
   sed 's:/opt/local:'"$PREFIX"':' -i makefile.osx
   sed 's:/db48/:/:' -i makefile.osx
-  sed 's:-arch x86_64:-m64:' -i makefile.osx
+  sed 's:-arch i386:-m32:' -i makefile.osx
   CC=llvm-gcc \
   CXX=llvm-g++ \
   make \
@@ -86,18 +86,18 @@ script: |
     USE_QRCODE=1 \
     USE_UPNP=0 \
     DEBUGFLAGS= \
-    freicoind
-  ${TARGET}-strip freicoind
+    worldleadcurrencyd
+  ${TARGET}-strip worldleadcurrencyd
   find "$PREFIX" -mindepth 1 -maxdepth 1 -print0 | xargs -0 rm -rf
   popd
   
   mkdir -p "$PREFIX"/bin
-  cp -a "$BUILD"/src/freicoin/src/freicoind "$PREFIX"/bin
+  cp -a "$BUILD"/src/worldleadcurrency/src/worldleadcurrencyd "$PREFIX"/bin
   
   mkdir -p "$PREFIX"/src
   tar -C "$PREFIX"/src -xf "$GITIANDIR"/src-local.tar.xz
   
   pushd "$PREFIX"
   find * -not -type d -print0 | sort -z | xargs -0 \
-    zip -r "$OUTDIR"/freicoind-${TARGET}-${FREICOIN_VER}-gitian.zip
+    zip -r "$OUTDIR"/worldleadcurrencyd-${TARGET}-${WORLDLEADCURRENCY_VER}-gitian.zip
   popd

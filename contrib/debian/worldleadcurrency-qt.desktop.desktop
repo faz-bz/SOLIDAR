@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Worldleadcurrency
+Comment=Worldleadcurrency P2P Cryptocurrency
+Exec=/usr/bin/worldleadcurrency-qt %u
+Terminal=false
+Type=Application
+Icon=/usr/share/pixmaps/worldleadcurrency128.png
+MimeType=x-scheme-handler/worldleadcurrency;
+Categories=Office; Finance;
+Name[de_DE]=worldleadcurrency-qt.desktop

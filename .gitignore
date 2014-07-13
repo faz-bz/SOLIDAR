@@ -1,7 +1,7 @@
 src/*.exe
-src/freicoin
-src/freicoind
-src/test_freicoin
+src/worldleadcurrency
+src/worldleadcurrencyd
+src/test_worldleadcurrency
 .*.swp
 *.*~*
 *.bak
@@ -9,17 +9,17 @@ src/test_freicoin
 *.orig
 *.o
 *.patch
-.freicoin
+.worldleadcurrency
 
 # Compilation and Qt preprocessor part
 *.qm
 Makefile
-freicoin-qt
-Freicoin-Qt.app
+worldleadcurrency-qt
+Worldleadcurrency-Qt.app
 
 # Unit-tests
 Makefile.test
-freicoin-qt_test
+worldleadcurrency-qt_test
 
 # Resources cpp
 qrc_*.cpp

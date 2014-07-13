@@ -11,8 +11,8 @@ packages:
 reference_datetime: "2012-07-01 00:00:00"
 remotes: []
 files:
-- "Freicoin-Qt-i686-static-mingw32-0.8.6.1-gitian.zip"
-- "freicoind-i686-static-mingw32-0.8.6.1-gitian.zip"
+- "Worldleadcurrency-Qt-i686-static-mingw32-0.8.6.1-gitian.zip"
+- "worldleadcurrencyd-i686-static-mingw32-0.8.6.1-gitian.zip"
 - "src-local.tar.xz"
 script: |
   export ARCH=win32
@@ -22,7 +22,7 @@ script: |
   
   export GITIANDIR=`pwd`
   
-  FREICOIN_VER=0.8.6.1
+  WORLDLEADCURRENCY_VER=0.8.6.1
   
   export LD_PRELOAD=/usr/lib/faketime/libfaketime.so.1
   export TZ=UTC
@@ -32,12 +32,12 @@ script: |
   pushd "$PREFIX"/src
 
   tar -xf "$GITIANDIR"/src-local.tar.xz
-  unzip "$GITIANDIR"/freicoind-i686-static-mingw32-${FREICOIN_VER}-gitian.zip bin/freicoind.exe
-  unzip "$GITIANDIR"/Freicoin-Qt-i686-static-mingw32-${FREICOIN_VER}-gitian.zip bin/Freicoin-Qt.exe
+  unzip "$GITIANDIR"/worldleadcurrencyd-i686-static-mingw32-${WORLDLEADCURRENCY_VER}-gitian.zip bin/worldleadcurrencyd.exe
+  unzip "$GITIANDIR"/Worldleadcurrency-Qt-i686-static-mingw32-${WORLDLEADCURRENCY_VER}-gitian.zip bin/Worldleadcurrency-Qt.exe
   mkdir -p release
-  mv bin/Freicoin-Qt.exe release/
-  mv bin/freicoind.exe src/
+  mv bin/Worldleadcurrency-Qt.exe release/
+  mv bin/worldleadcurrencyd.exe src/
   cd src
   makensis ../share/setup.nsi
-  mv ../share/freicoin-${FREICOIN_VER}-${ARCH}-setup.exe $OUTDIR/
+  mv ../share/worldleadcurrency-${WORLDLEADCURRENCY_VER}-${ARCH}-setup.exe $OUTDIR/
   popd
