@@ -56,11 +56,8 @@ inline bool MoneyRange(int64 nValue) { return (nValue >= 0 && nValue <= I64_MAX_
 inline bool MoneyRange(mpz zValue) { return (zValue >= 0 && zValue <= MPZ_MAX_MONEY); }
 inline bool MoneyRange(mpq qValue) { return (qValue >= 0 && qValue <= MPQ_MAX_MONEY); }
 /** Subsidy, demurrage, and budgetary requirements for Worldleadcurrency host currency */
-static const int EQ_HEIGHT = 161280;
-static const mpq TITHE_RATIO = mpq("4/5");
-static const mpq TITHE_AMOUNT = MPQ_MAX_MONEY * TITHE_RATIO / EQ_HEIGHT;
-static const mpq INITIAL_SUBSIDY = mpq("15916928404");
-static const int DEMURRAGE_RATE = 1048576;
+static const int EQ_HEIGHT = 25000;
+static const int DEMURRAGE_RATE = 262144;
 /** Coinbase transaction outputs can only be spent after this number of new blocks (network rule) */
 static const int COINBASE_MATURITY = 100;
 /** Threshold for nLockTime: below this value it is interpreted as block number, otherwise as UNIX timestamp. */
