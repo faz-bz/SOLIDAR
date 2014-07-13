@@ -3405,7 +3405,7 @@ Let this be the awaited dawn.";
             << OP_DROP
             << OP_DUP
             << OP_HASH160
-            << ParseHex("0ef0f9d19a653023554146a866238b8822bc84df")
+     g       << ParseHex("0ef0f9d19a653023554146a866238b8822bc84df")
             << OP_EQUALVERIFY
             << OP_CHECKSIG;
         const char* pszMessage3 = "\
@@ -3496,6 +3496,29 @@ Let this be the awaited dawn.";
         printf("%s\n", hashGenesisBlock.ToString().c_str());
         printf("%s\n", block.hashMerkleRoot.ToString().c_str());
         assert(block.hashMerkleRoot == uint256("0xf53b1baa971ea40be88cf51288aabd700dfec96c486bf7155a53a4919af4c8bd"));
+
+        //// Code to hash a new genesis block.
+        //// Will hash a new block as long as set to "true" and no valid genesis block found.
+        if (true && block.GetHash() != hashGenesisBlock)
+               {
+            uint256 hashTarget = CBigNum().SetCompact(block.nBits).getuint256();
+            loop
+                        {
+                            if (block.GetHash() <= hashTarget)
+                                break;
+                            ++block.nNonce;
+                            if (block.nNonce == 0)
+                            {
+                                printf("NONCE WRAPPED, incrementing time\n");
+                                ++block.nTime;
+                            }
+                        }
+                        printf("block.nTime = %u \n", block.nTime);
+                        printf("block.nNonce = %u \n", block.nNonce);
+                        printf("block.GetHash = %s\n", block.GetHash().ToString().c_str());
+                    }
+        //// Genesis block hash code end.
+
         block.print();
         assert(hash == hashGenesisBlock);
 
