@@ -1483,8 +1483,7 @@ CBudget static GetInitialDistributionBudget(int nHeight)
     std::vector<CBudgetEntry> vBudgetEntries;
     vBudgetEntries.reserve(1);
     vBudgetEntries.push_back(CBudgetEntry(1, vAddresses[nHeight*320/EQ_HEIGHT].Get()));
-    mpq qRatio = 19 / 20;
-    return CBudget(qRatio, vBudgetEntries);
+    return CBudget(TITHE_RATIO_ADJUST, vBudgetEntries);
 }
 
 mpq static GetPerpetualSubsidyAmount(int nHeight)
@@ -1494,13 +1493,13 @@ mpq static GetPerpetualSubsidyAmount(int nHeight)
 
 CBudget static GetPerpetualSubsidyBudget(int nHeight)
 {
-    static CBudget emptyBudget = CBudget(0, std::vector<CBudgetEntry>());
+    static CBudget emptyBudget = CBudget(TITHE_RATIO_ADJUST, std::vector<CBudgetEntry>());
     return emptyBudget;
 }
 
 CBudget static GetTransactionFeeBudget(int nHeight)
 {
-    static CBudget emptyBudget = CBudget(0, std::vector<CBudgetEntry>());
+    static CBudget emptyBudget = CBudget(TITHE_RATIO_ADJUST, std::vector<CBudgetEntry>());
     return emptyBudget;
 }
 
@@ -5200,7 +5199,7 @@ CBlockTemplate* CreateNewBlock(CReserveKey& reservekey)
         nLastBlockSize = nBlockSize;
         printf("CreateNewBlock(): total size %"PRI64u"\n", nBlockSize);
 
-        mpq nBlockReward = GetBlockValue(nHeight, nFees) - nBudgetPaid;
+        mpq nBlockReward = GetBlockValue(nHeight, nFees) * (1 - TITHE_RATIO);
         pblock->vtx[0].vout[0].SetInitialValue(RoundAbsolute(nBlockReward, ROUND_TOWARDS_ZERO));
         pblocktemplate->vTxFees[0] = -nFees;
 
