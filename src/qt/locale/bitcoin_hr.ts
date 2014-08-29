@@ -1332,8 +1332,8 @@ Adresa:%4
     </message>
     <message>
         <location line="+10"/>
-        <source>123.456 FRC</source>
-        <translation>123,456 FRC</translation>
+        <source>123.456 WLC</source>
+        <translation>123,456 WLC</translation>
     </message>
     <message>
         <location line="+31"/>

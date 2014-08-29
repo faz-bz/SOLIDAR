@@ -1324,7 +1324,7 @@ Address: %4
     </message>
     <message>
         <location line="+10"/>
-        <source>123.456 FRC</source>
+        <source>123.456 WLC</source>
         <translation>123.456 بتس</translation>
     </message>
     <message>

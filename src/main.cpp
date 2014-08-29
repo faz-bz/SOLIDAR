@@ -31,7 +31,7 @@ CTxMemPool mempool;
 unsigned int nTransactionsUpdated = 0;
 
 map<uint256, CBlockIndex*> mapBlockIndex;
-uint256 hashGenesisBlock("0x000000005b1e3d23ecfd2dd4a6e1a35238aa0392c0a8528c40df52376d7efe2c");
+uint256 hashGenesisBlock("0x000000007ebd4433f3de976aba73790d119f0bf7cd83a7f44a148596c701bf73");
 static CBigNum bnProofOfWorkLimit(~uint256(0) >> 32);
 CBlockIndex* pindexGenesisBlock = NULL;
 int nBestHeight = -1;
@@ -1079,428 +1079,24 @@ uint256 static GetOrphanRoot(const CBlockHeader* pblock)
     return pblock->GetHash();
 }
 
-typedef boost::tuple<mpz, CTxDestination> CBudgetEntry;
-typedef boost::tuple<mpq, std::vector<CBudgetEntry> > CBudget;
-
-void static ApplyBudget(const mpq& qAmount, const CBudget& budget,
-                        std::map<CTxDestination, mpq>& mapBudgetRet)
-{
-    const std::vector<CBudgetEntry>& vBudgetEntries = boost::get<1>(budget);
-
-    mpz zWeightTotal = 0;
-    BOOST_FOREACH(const CBudgetEntry &entry, vBudgetEntries)
-        zWeightTotal += boost::get<0>(entry);
-
-    BOOST_FOREACH(const CBudgetEntry &entry, vBudgetEntries) {
-        mpq tmp = qAmount;
-        tmp *= boost::get<0>(budget);
-        tmp *= boost::get<0>(entry);
-        tmp /= zWeightTotal;
-        mapBudgetRet[boost::get<1>(entry)] += tmp;
-    }
-
-    std::map<CTxDestination, mpq>::iterator itr = mapBudgetRet.begin();
-    while (itr != mapBudgetRet.end())
-        if (itr->second <= 0)
-            mapBudgetRet.erase(itr++);
-        else
-            ++itr;
-}
-
-bool static VerifyBudget(const std::map<CTxDestination, mpq>& mapBudget,
-                         const std::vector<CTransaction>& vtx, int nBlockHeight)
-{
-    std::map<CTxDestination, mpq> mapActuals;
-
-    CTxDestination address;
-    BOOST_FOREACH(const CTransaction &tx, vtx)
-        BOOST_FOREACH(const CTxOut &txout, tx.vout)
-            if (ExtractDestination(txout.scriptPubKey, address))
-                mapActuals[address] += GetPresentValue(tx, txout, nBlockHeight);
-
-    std::map<CTxDestination, mpq>::const_iterator itr;
-    for (itr = mapBudget.begin(); itr != mapBudget.end(); ++itr) {
-        if (itr->second <= 0)
-            continue;
-
-        if (!mapActuals.count(itr->first))
-            return error("VerifyBudget() : missing budget entry");
-
-        if (mapActuals[itr->first] < itr->second)
-            return error("VerifyBudget() : got %s for line-item, expected %s", FormatMoney(mapActuals[itr->first]).c_str(), FormatMoney(itr->second).c_str());
-    }
-
-    return true;
-}
-
 mpq static GetInitialDistributionAmount(int nHeight)
 {
     mpq nSubsidy = 0;
     if (nHeight < EQ_HEIGHT) {
-        mpq nSubsidy = 4000 * COIN;
+        nSubsidy = 4000 * COIN;
         // Subsidy is cut in half every 2500 blocks, which will occur approximately every 17.36 days ~98% will be distributed within 174 days
         nSubsidy >>= (nHeight / 2500);
     }
     return nSubsidy;
 }
 
-CBudget static GetInitialDistributionBudget(int nHeight)
-{
-    static CBitcoinAddress vAddresses[320] = {
-        CBitcoinAddress("1AVNrf1Bhc3vnWjrVYUJvNFVY1zHY3ukuc"),
-        CBitcoinAddress("142pSCSjbiaC68xratCgEBySgHWrhBezQo"),
-        CBitcoinAddress("1D3oP6kGWeVvnhdCVoKkEpqxDsW5revc43"),
-        CBitcoinAddress("1C9jJFQkaB7hRZXJBjaw7P9e4bbQbV8Auv"),
-        CBitcoinAddress("1FeiEYFsmeYUeXhmDEMeTsMeTyBaDiZ5zn"),
-        CBitcoinAddress("1GFwM9Zfxeos2BXLpfjo9MhN773Sgj3r5T"),
-        CBitcoinAddress("1JTbXp3idmx76nZ1EreJrHG4X8kjdwyJLW"),
-        CBitcoinAddress("1AkGQFD9d3vG4hAbbP7qNBkPFUMxFy7TJM"),
-        CBitcoinAddress("13bCDBbeVm43SYVoNUwMGP5qNgR7ZsfeBu"),
-        CBitcoinAddress("1CpibVV2UZtusvgsRdiTML77Rf5JfhGZ5E"),
-        CBitcoinAddress("15Ah12W74SruHP34ZgmhE3EgPjkzKQbCDN"),
-        CBitcoinAddress("1F3Hawn3JPQvqz1EbRbkr4D8BkysE771h7"),
-        CBitcoinAddress("1Lfy7jDj6Mr1sZkUyoh4AE2PSgdFhhCgZA"),
-        CBitcoinAddress("1LpMeyFnJg5dUXqTb1AmVhLpRut8iBjWV9"),
-        CBitcoinAddress("1GDmfNZg3FWZNe9bBWhdoX7mhBsCFuNEQg"),
-        CBitcoinAddress("1DK1ENfQ63MvJ3y6CakPgzKnaHzLVYV6SF"),
-        CBitcoinAddress("1HEq8cJsBKyZgzAt2NMHE2zz7nRGVLXrBF"),
-        CBitcoinAddress("1JPStsUbaPJwJwGKh5Rvora5a374PHgAy4"),
-        CBitcoinAddress("14LRbqRbWUvsapZaNwCWBBSvnELTv334QA"),
-        CBitcoinAddress("1NSLo9dLWxQw2G2T2BFXotuQvW31qgg62X"),
-        CBitcoinAddress("1J3hLk8K7YYLz2cofTsZe4CPLZWT96DEVQ"),
-        CBitcoinAddress("147tQXgSieJkmT6RzghQMn5WMjbzbyKSNx"),
-        CBitcoinAddress("1LjmcqLwFj7kRy4L2hpEobdesYwQHXF8pr"),
-        CBitcoinAddress("17164Q7Tu4JAf3UirGmK8HJ8YFwDFcgGqz"),
-        CBitcoinAddress("1Boji5k88Cj7cDWfnTCBcXH49AXsYUAUct"),
-        CBitcoinAddress("1JcLDkESdYBvgzFddzgS2556jVXH1RMoiB"),
-        CBitcoinAddress("1PoFHqEZ9mxoTbmQhj39XKuN5AeAqxD3Up"),
-        CBitcoinAddress("1Ayrx5zekJQiqyVXiaFfH48sFzgNQLKnCy"),
-        CBitcoinAddress("1AMozrEfHzyW4BRjjvTYY4xPx81TioyfvX"),
-        CBitcoinAddress("1DU2kkYtMmbWN6dtxmvbEA1pTer2x9tWBi"),
-        CBitcoinAddress("1CWFZjMYHSwhkptLCzmNDa5TTmPqz6Ney8"),
-        CBitcoinAddress("12sdukAdPBF5bFFYtseFmoneD77krUq7YL"),
-        CBitcoinAddress("12uAKWsmmmcb2Vn1BpcY7BpqNVpQhSK1qe"),
-        CBitcoinAddress("1G2VSsPfTTxr35ZPAa8YLGyTU4uxn2BWKq"),
-        CBitcoinAddress("1LHJSwjJdqkARiy6nG3EK3FiSJ3ZBAqaCm"),
-        CBitcoinAddress("1N8uAeXEAHVQaEkptHXsLWcg43DTPqhDTY"),
-        CBitcoinAddress("1Jhs62fkiSvhVVoaJ9YAsVzGk1cRqN1APa"),
-        CBitcoinAddress("18gGmEjTA3yTJW1E8Rwive3Nx2RtSH59WU"),
-        CBitcoinAddress("16Wo2MHxCLMxh3cPURXf97sJNTstJpAKrQ"),
-        CBitcoinAddress("1F4Ad3Ywj9qeCc8RvjTUjrZfoAKwCPCdwV"),
-        CBitcoinAddress("16UMGdJsgeD7FTkmM3s4WiKYpxaku8BSY8"),
-        CBitcoinAddress("1Q99ej2Ds1UcM2y98FvQwNGVAryjpWSEYn"),
-        CBitcoinAddress("1Ark6SpVHNucdRCqjvBCvfE2kgZpxtU1no"),
-        CBitcoinAddress("1GufG8iyV9hU92vNhm2rGbAmkSck24ix31"),
-        CBitcoinAddress("1MfGGTUmnbUMM1CaeWqsWDN1BGfwxp9eZr"),
-        CBitcoinAddress("15fwmKsdJeQ374adA77bBfQiR66HeJMbJu"),
-        CBitcoinAddress("15PEC3hCNf7iXgCGdkFojs248trh3a4BRP"),
-        CBitcoinAddress("1Eb777A35QgoN4k9CVtE7uDbszFvAiTXHi"),
-        CBitcoinAddress("1MjA7izX4Jxfs8XR5VoNAhnXU1WRFZzAco"),
-        CBitcoinAddress("1FQzEcPXeksuRqGL75yDzhGJVhBQEmH9CP"),
-        CBitcoinAddress("17cK1F6n347P5DfcmirGAvZaDeWBw3EGWq"),
-        CBitcoinAddress("15noiRoccm49Xo6NcSXxHxEHCXS43befBD"),
-        CBitcoinAddress("1Nu7L8tByF7mDbQBCrszECzBz1Ad2izENL"),
-        CBitcoinAddress("12Vy4svhKvgyKmazXjCQP6Yaj5mHmTGGVw"),
-        CBitcoinAddress("1NJH3kJLP8qpLgeqj88PdT8WUGkoMefScW"),
-        CBitcoinAddress("1CdvVrGSJHyz4Fm4g7VBjHKirvm3w2oQbn"),
-        CBitcoinAddress("177ASFz7KNrmbiVwxEeSMYur3oZvoYMjxT"),
-        CBitcoinAddress("18YNtrA57MQ6wGdJG2xAr1srEhit9MsE7z"),
-        CBitcoinAddress("1DDBDRhMTxPApNTfymqAdRxFc8Xj1qqGhj"),
-        CBitcoinAddress("1GnfDCGHGPduZ8MqNh5Te5VMwJeUVe8D2U"),
-        CBitcoinAddress("19dCHLfbrqUt99j4ZxX2jnanexmgxmXfjG"),
-        CBitcoinAddress("1JXsEAbGmpFJyryBYgZVMoq7szKYQSBxcm"),
-        CBitcoinAddress("1MdnpEnsqzsdAtbsyUx1UoHDgFtMqxmsgs"),
-        CBitcoinAddress("1LzrVFpQ9gi5a9iYBrzUDnfUw8eYiYLGfj"),
-        CBitcoinAddress("1N4hN8CEmaWpPRRAMGf2fBnSWh3tceQmaK"),
-        CBitcoinAddress("12eX1HfgcjSuZY98x7Fb4y8yAkZYZPbeAu"),
-        CBitcoinAddress("1JoFbDULwdTvHGKZyvooTYwPkoNZ1B4oqs"),
-        CBitcoinAddress("1CKNhxc7RnchkBSXvo56whzdEPSui5TmTN"),
-        CBitcoinAddress("13DPxQ5Xh7jxQieKtbeNRWQxnNLHHpX2go"),
-        CBitcoinAddress("1GvFbD72mmRHwp4V19xpu1c3zBxHtYEXVA"),
-        CBitcoinAddress("1LW321f84iJen3UWnKADPfrcNs6cRTRk58"),
-        CBitcoinAddress("15PFcnSQkMKF96u1J2GmfaaNe4e9dqq58V"),
-        CBitcoinAddress("1DN5AhZu4tNQd5t8WRgv96UfRGDDYUQeom"),
-        CBitcoinAddress("1JTqKMSogvMEbYS3MK5xEnDYvGDRdP855c"),
-        CBitcoinAddress("1DdcgBU7Zqr3T9jUecUvtVbAyj7HdHhLrQ"),
-        CBitcoinAddress("1L72cmkS2ydM4TvYnLXYeRpndNKTunMWC"),
-        CBitcoinAddress("1J2HMqBJJbTKJgFfbTPFDkhFFhabLk3wtw"),
-        CBitcoinAddress("1L5gzLuCkaFdQFjWJft75VDoqhzk8UiGTv"),
-        CBitcoinAddress("12o1tADQ73ufDxoiBzaeGYj57vHZL18MwE"),
-        CBitcoinAddress("1KugmjohKUALW5tWzofJ5DzwJth99wmyHb"),
-        CBitcoinAddress("1MwWpXTHvgSGbiUircaM5xsgeGacsHDRy8"),
-        CBitcoinAddress("1F2rTQhxmm1F9dqT7GhLWK3F9o31WRQBGx"),
-        CBitcoinAddress("1K9Gvgjym1SCPtKTp4TB1aT5k9s7ngzsX2"),
-        CBitcoinAddress("139aCkXquCn5B8tj7KF2AVuWqJGg5yGeZD"),
-        CBitcoinAddress("1HamexiJ42TLkMi1kaK5zTWt3j4ZK7V4zZ"),
-        CBitcoinAddress("1Cu7fi7XrkGxshj7kE9xwAGqeXLreuwswW"),
-        CBitcoinAddress("17V35wFa6JL4gds53H57n6TUutsow6o8LL"),
-        CBitcoinAddress("1B7vSMYJjdBzzLXipQ2WNKkFiQDa8WxBFK"),
-        CBitcoinAddress("1MG2zMD23xBXSRTStGVTa6RzGHCrsAf5Sr"),
-        CBitcoinAddress("1Pzs3hKNsMpwWKLY9AM6Ww598BCyb5hhMS"),
-        CBitcoinAddress("13izYbrH2otzs63VNmasf6SEqRHZXCZ7MR"),
-        CBitcoinAddress("1HYScz6WvXLqhfpYqym9JpjehiynNyNBjy"),
-        CBitcoinAddress("17hygMFSaQnkyBECy717QCUvRd1GKMUGmF"),
-        CBitcoinAddress("1GXuZQ15dZc8QC9qxRNjAPbYLZwaAbesnZ"),
-        CBitcoinAddress("1GRKeQ28WN4To2xpR9aUmQYWmf8i37adGR"),
-        CBitcoinAddress("12pccJJLDQProJUV2Fj3z6aakKnvzW9KGM"),
-        CBitcoinAddress("1GB4G3QpT1QwZry1b9grdb9EKhkJyxXgTi"),
-        CBitcoinAddress("1BtgMbG6XZdPkx6JomaKhzgijzpTkVGPfJ"),
-        CBitcoinAddress("1BnuCFQn3tgXmZYaVX7vRWrSdFU1BdKhbL"),
-        CBitcoinAddress("1EBXqGnTweG3h3j5cD69GAC2hE9w6MRCgh"),
-        CBitcoinAddress("1F4jjfmaht5upveyPBNCMJvDWfzkZrw5xH"),
-        CBitcoinAddress("1BGoQ2siXbmyxPJzwo17F2HXQBxndTw8TA"),
-        CBitcoinAddress("1NkYzoYNfBqutMxD85rJRt1VtEX8DGDFmA"),
-        CBitcoinAddress("1Ju3iXAua6ZYHDKEMN7KVAToPh1cF6fw2V"),
-        CBitcoinAddress("15UFrRzC2Ssvdbv1gAZeVtrmSUWZWQQm8r"),
-        CBitcoinAddress("18qZuri3Bf5qcATv9X9J8VtdxiHkqJmBa5"),
-        CBitcoinAddress("12LarbPGzyQUUpRVQky1zvDZNM6WJknt5X"),
-        CBitcoinAddress("1E2pKFDyFFyveAmhi42siQm21zzXdu9u4i"),
-        CBitcoinAddress("1KTx7nGauqPpFJd17547FkCrf6sFgdUfM"),
-        CBitcoinAddress("1EqAtbmX5pUtUprZvS7PHoBkmJPtrH4DF9"),
-        CBitcoinAddress("1ABh5bodwnvxQs2ypq1yxZ3gCrNbCGsjfD"),
-        CBitcoinAddress("1Kau8tU8wvy75XnKAEZ8RCFmwY6nMVrFYM"),
-        CBitcoinAddress("1CyQ1tvzbbJbD2g84RJZ13rytu7ins65Lh"),
-        CBitcoinAddress("15pTz59nuCdL5QxZvLVwhDSuUsg8pcUMMk"),
-        CBitcoinAddress("12gisrPBRQZQpCtb7TK1z9ac47bW5xBAiv"),
-        CBitcoinAddress("1QEa3CSWpdDYCHbWxb6Zi9hG8VBeERHCZ"),
-        CBitcoinAddress("1Cxc4CSiBMHtBGmuBgyTouaiYNk3N5iCVn"),
-        CBitcoinAddress("1ENJ2GuYHLyEsErriEALgJEvjvoZerBq8t"),
-        CBitcoinAddress("19PCebEbf6CCBG8RXVeqVLtXKguZ91prer"),
-        CBitcoinAddress("1PJT5u2KQHLWyGVbuv3hQfPeHk6QUHL7YW"),
-        CBitcoinAddress("17QPhtT7whFiPhCowDjhn8zM3rZaV54Gy9"),
-        CBitcoinAddress("1sw466RctgoVYNmsFv31wAgnyQoVwkaqF"),
-        CBitcoinAddress("1PkbuGyspQhxQf68B26FjhCCvbG1Bc1aiy"),
-        CBitcoinAddress("1HgiJmkz6DZC62gXiWuTKQcG8k7MnJgPvK"),
-        CBitcoinAddress("14y3xKJ89pHxfM6qP4239WYCTG7qtL4aii"),
-        CBitcoinAddress("1CdXN8DxZrveok7VqnP2HAM7ayfLGEqo3B"),
-        CBitcoinAddress("1mDUMjPvK1mFo1LS7ixu8wQuTsHpCy4NA"),
-        CBitcoinAddress("19h5AcZ8jH6MTYn3pkbA6Qro3CE4SPq4hP"),
-        CBitcoinAddress("1AgbmRiyeEEkdxaQNPLaWGze44vST1WLoX"),
-        CBitcoinAddress("18n2pNtXXwimnuR3rMvTwsNwkmwp8bp76q"),
-        CBitcoinAddress("171qmyxgG4gq2guttfgZ2iVHHYA2a1tj49"),
-        CBitcoinAddress("174Gkqf4A7HGorz3BXdzt89HS6P8dxjKVy"),
-        CBitcoinAddress("1CxHM7izgGATJeVCoiWcfx2ryQjGMxuCUD"),
-        CBitcoinAddress("1CGWZyhJVrmmEZzYkgYxSwojd238PMQsgX"),
-        CBitcoinAddress("13oteJukXxjQAb9j2Ykts4xJb9v9pUcZr2"),
-        CBitcoinAddress("1NyiihwZiAJDG5VfugTgDkEqodDtkThewA"),
-        CBitcoinAddress("1JbxyhgmGFAVeT4vxReTqK5j5PcNU5eSAr"),
-        CBitcoinAddress("1CvuVy1bTLstk6qLJka2ToKdGkrGkwD7RW"),
-        CBitcoinAddress("1Q3D7bmaFEsTtKgocA3etHDFBL1iZhxp4N"),
-        CBitcoinAddress("1LCnkKzZwMJHQHbdTHqXN2AxTMyomCmPgv"),
-        CBitcoinAddress("1Bc8of2w5EX7uoKBk1aoKKgTCmcSVkrjb2"),
-        CBitcoinAddress("1Kxuew9PCQXgfjbwvJXYrE1542o1cWBtb9"),
-        CBitcoinAddress("1Mv38ubzkbDqpCtGCAw2SVaiZNMAnoFjbN"),
-        CBitcoinAddress("147pE42xro72GuD8oaPy6W4acMuwp4nXND"),
-        CBitcoinAddress("1A4Dd6jhA3tLHL9eGXRiGHETpGVjCzPU9c"),
-        CBitcoinAddress("19crt9YKU4t4aq4UKZewhua49QntWjRYww"),
-        CBitcoinAddress("17bdwaDy2zXavYHYaLvMU1SHAofz7kWUG7"),
-        CBitcoinAddress("18BMLykkv79aQydV1QBzFeup7zZ1cqY8y"),
-        CBitcoinAddress("1QDQL7HmjxTEivrzfKveQSgVnQSRFzec2x"),
-        CBitcoinAddress("1CwPzFKqDkxuCoZVRcimHqa3jNYD9s9756"),
-        CBitcoinAddress("1CExkzitjHuHy6LmSKFGXs6gn89ccvoywo"),
-        CBitcoinAddress("1KyQv7j9cWADvKRPSuzwBAUSziGxuuZX9G"),
-        CBitcoinAddress("1MqsgA71jAyg6SWWbXuki91V8UVo14AmCL"),
-        CBitcoinAddress("1AsdJkbxCZfEP1YoQrkefKDga7AFC2DY2j"),
-        CBitcoinAddress("1MpCPSxhsNRqZZyLvBbW7iR69zjBSXvAR"),
-        CBitcoinAddress("1FmmV9sZdYQtdfKEHMU8x29jjfr5RShsYU"),
-        CBitcoinAddress("1L3fKJ4rbZFpSeS9wvfPgRUQQCwUSSvMVs"),
-        CBitcoinAddress("1GmciFhvMYUHZ2apKC5x7vnmGW5KFDvbge"),
-        CBitcoinAddress("19ZsmtHxvPxPL8GhjM9n7twPDoQwBhuan4"),
-        CBitcoinAddress("1PSdCCmZYxrShtdut2WcrwW2cPhkfxeCRi"),
-        CBitcoinAddress("151WnB64CBWXNkNb5JnYrPMwoYDSboVQFg"),
-        CBitcoinAddress("1FbmAuU2qZX6HVHpozCBAniMcY1yb149mm"),
-        CBitcoinAddress("1LxkFAzLvC8dDFqdjb58Vo1k4pEYbED5eL"),
-        CBitcoinAddress("1JPgEDffCX9Nk6QdBwTkPrcu5qa5SgJNFT"),
-        CBitcoinAddress("134FeMGokhu3opQ8jkJjaWqpwhE9625zRS"),
-        CBitcoinAddress("17UcY6bp2XfBJKXDs1oW6vzccxDvVzwKby"),
-        CBitcoinAddress("1DqXpduUri6umRUEmHiHSrP2naaKBWhA6P"),
-        CBitcoinAddress("17BhpCurLRC6o6y75fVhMrq2FXPx313Kcb"),
-        CBitcoinAddress("12KmzEQEeRp1iMdabfTb6xoXyBe2bQ5Rck"),
-        CBitcoinAddress("1MeTWRzEmZTZNceGgcRKky2RCvkNREAtqC"),
-        CBitcoinAddress("17zfEo2h2gFRP7rVG9MNwTcD6bZ8Uijhzk"),
-        CBitcoinAddress("1PjKz4QPv1PWQRbNeRtdsTRUwQbKSg7htb"),
-        CBitcoinAddress("1F3qDU5ZCL2vuXiBmBNscf3qGXWu4StDtQ"),
-        CBitcoinAddress("18wWomNukrzKtmTh5As3Kwb59hM4RWXepQ"),
-        CBitcoinAddress("17oxJbybu4x1yeGtinW3rqafrMHhyq37u6"),
-        CBitcoinAddress("1KfXqMXujytJsxyCkLz3w5pGzHMmjuyfht"),
-        CBitcoinAddress("1FsvtdfdvGFLnpUnXdETotiucDowDEmgTb"),
-        CBitcoinAddress("1D2u9obBjC2AzcN5KCCus6LeYVk3QwyiWT"),
-        CBitcoinAddress("16kHa8ELoZEF8XastFkkkpyiV7n7y46C7y"),
-        CBitcoinAddress("1MGYFYMki81pSdnduMLFmKcUPp96J6FBKM"),
-        CBitcoinAddress("14zfk9BQJ5t3sJDX9NSttAJevitx3N8TxF"),
-        CBitcoinAddress("1LV4CGvV955HNHPkhugSAkQBiaM3ZjhEFs"),
-        CBitcoinAddress("1J3Kfkx4AYPWy4dX8KtgTnz5BYgtZN5Khc"),
-        CBitcoinAddress("16EdgVYSHoMo6gX87FPpAuqXdpEmw4DzHv"),
-        CBitcoinAddress("16BGM6FCCK5rFsE4BW6B9WtXDLJmhLgigZ"),
-        CBitcoinAddress("138q8ZTFWj3oTk6Cm6idAbfBQMp81Vz6M3"),
-        CBitcoinAddress("1JH3yPpECPQCrKLHk8q7m8usB629rirT7u"),
-        CBitcoinAddress("16mx3YynbEDvwEVNKa7N1iknPDJsKDAk5X"),
-        CBitcoinAddress("19X2EPD7VSJ5nuMepYrJUJWJZBAR7aKxhW"),
-        CBitcoinAddress("16XMzpUYpBmjEgm1ZookvFkiqaGukNy4DT"),
-        CBitcoinAddress("1JN93AHdQPXYxFfCVNuSbd96SUEKyMrUqy"),
-        CBitcoinAddress("1Ehb9TQuQnyiQkMT1pGTPJ22oMhV5RQ34z"),
-        CBitcoinAddress("1EapLBLv9goU3yXKmNwarkUs4pCaFWzXgF"),
-        CBitcoinAddress("16AYpb3SZhXqrLJWNhXFAZuCqZLLvbiuW5"),
-        CBitcoinAddress("18Fn4Vsp5ZZjjmtNi8sESPNnA9NxeHz2Zb"),
-        CBitcoinAddress("13VSKhBieJqF58kprs74Xv3zi9qsJzLxph"),
-        CBitcoinAddress("1JLsJaE253mvrB48mLngAza9MRumMfiL2E"),
-        CBitcoinAddress("19zKBamksKPiQ9pwY3yeJ21y4bTQBiha6Y"),
-        CBitcoinAddress("1GgP7xCGbHchRzfuPwD2h6E5Hpy94vAkxY"),
-        CBitcoinAddress("1BCaQYRr5Y9BjuvvBHfMqU3Su8Vq43YZV5"),
-        CBitcoinAddress("14XP9gWfuTrF8QHSUm81DGGeRsSS7CaE4E"),
-        CBitcoinAddress("16W9LZTZ4zRpCBKFy8KaCGeKXMKYGwy8Me"),
-        CBitcoinAddress("18A1bccFLeWizT1PJ8LZ4ThQ8FMVtuojfd"),
-        CBitcoinAddress("1HuKD67hBfcPk4AojC9tg1GaL6P99pb6nS"),
-        CBitcoinAddress("18QX9bAEgbbrfVXvfousBkmoiTqn4ERDNc"),
-        CBitcoinAddress("1Bpp28RZTJN9okqAxR2j2sGHNj7gRT18bv"),
-        CBitcoinAddress("1Kp5VAKsrDwPPVUozwzC5ENhCuUnfyjUgQ"),
-        CBitcoinAddress("1L6wZnCogFiBFKN6BRSwQd5Pks2P2vCHWt"),
-        CBitcoinAddress("1Dn4xhwsggXrqDASVRJk5qpDA626ZHM4Jv"),
-        CBitcoinAddress("1HMasFeXzQn4bY1g8TKXsiChNMXG6Ctqcj"),
-        CBitcoinAddress("1692rytbxZfvKbGBSAmogkroRQ7fvLD26M"),
-        CBitcoinAddress("1An9QT5mqk6JgMCirRfvPgNoaHAuC1pHLv"),
-        CBitcoinAddress("1B6ZMoSiVzzGe3CU51MRqCqrxcfoceRDvj"),
-        CBitcoinAddress("1ALkuMbSxKtQMYzofSkfj3aFsFQDepWnoB"),
-        CBitcoinAddress("1KdBccvhgZiCW92N13v1sSEBaBKBsoLy99"),
-        CBitcoinAddress("12PyVvC5Lbmh7hi6uWKydfnjEnJj22GC6b"),
-        CBitcoinAddress("1FMKLQghFAMWFJyKpA2gKqtt2YFQDSZTp6"),
-        CBitcoinAddress("1Mb9CsTdKdP4Wz8svU7Rty4StWthbQ89od"),
-        CBitcoinAddress("1DUGgt6jXD8bhuWQx43rDw4VfSjGxTpQhT"),
-        CBitcoinAddress("1Ju4izf6Ta8cSxcNR9DQyKMgyGYxsFML7P"),
-        CBitcoinAddress("1HniRnSDwQnx7YAXgpb2C7SCL7ZNWjfB4N"),
-        CBitcoinAddress("15U4bW8t3zxXTg4Ni6EhBgPG5tCJd34yfU"),
-        CBitcoinAddress("1FR3EKNkkUA3m2mKb5j77EaemQJaRQKSw2"),
-        CBitcoinAddress("1CwFGAHGocKWL76V1bDLz6Ljauqh24vEkq"),
-        CBitcoinAddress("1GjJDARsVYxQX9ZUpWWjuetdkrhnQzWp3f"),
-        CBitcoinAddress("1Lvnreo5tRVzYAja5vfqykpkmkBt5b3guE"),
-        CBitcoinAddress("1NNTtUWvBR2vmFagqAVQqRUXB3tf6tr5Sk"),
-        CBitcoinAddress("138vWUjTbUYfjNKtaUvNoPUDTcVReZpqTg"),
-        CBitcoinAddress("1EwHuQS8mPmKdFi7KppiNGohCiFMSg2ZWE"),
-        CBitcoinAddress("1LcQjPxErDArAEBcVcdcT64MHW2UQBVDnZ"),
-        CBitcoinAddress("1LAkxKabzKunEhz7Ecp8nufjkUfeR1xyiA"),
-        CBitcoinAddress("1S11ayfBrhz1nRd2e7URAX6o5nwPoNpA3"),
-        CBitcoinAddress("1JJxsGji7UZqiWPu2b6puMp3QhdyjRr2A1"),
-        CBitcoinAddress("1F5TMaPJJXxE4yH743fqPwyRw79PG9U6rb"),
-        CBitcoinAddress("14is5hNyxJD8QymSh7A4TTrR47YsR187UF"),
-        CBitcoinAddress("15uQavAmEGfCtLvRBwBSqfKFreMVxRHmJE"),
-        CBitcoinAddress("17k7Qms42ygiexDcqNbvQ5rAGQinCZKWGm"),
-        CBitcoinAddress("1W4upYVaMS2oQ8ji7Z61fCXXsbvddwRTV"),
-        CBitcoinAddress("1CaQyzymHjMckZigT4FGg6p6i9v3RVFsET"),
-        CBitcoinAddress("1HBG2gjk58LxX7ma27GqhLsirD8VHgE1LS"),
-        CBitcoinAddress("1PwbwUuELRRQysQqdd9y2VQ7g1exhJop5G"),
-        CBitcoinAddress("1CHLrXq5aU5gGLQqpS2Ns258MxWRpmNkpq"),
-        CBitcoinAddress("1PAjD4nscfhsW91ermnzng21oVJu4nF9Ro"),
-        CBitcoinAddress("1DVnURcGEpUynSuAkQ5EfkZ7a8AKAZaoSa"),
-        CBitcoinAddress("1CBJGcpHnhGG9e6q43VBGRdSRGKzDpFz9H"),
-        CBitcoinAddress("18KWecg9hfGRVW4GLAeBU67PEEfhCEideT"),
-        CBitcoinAddress("1CFLjuMUbxj6UYRLHikwBfno9axafxtK1J"),
-        CBitcoinAddress("1JiSv7YLKBJ2gZxUAV1sEzz8c7XS2wp365"),
-        CBitcoinAddress("1GRF62CmxMJCDQUHKeZTq3J8vKYwMLjyRy"),
-        CBitcoinAddress("133VqD5pLogidFSxaYT3Rr2X994mJw6Nsp"),
-        CBitcoinAddress("1Q9DQzhatdpyeBMZZ72dkeSbPuBfPbKYct"),
-        CBitcoinAddress("1Nr4Mqx1S6S8Wr2nYWTKd5CGNNoVe3ATj5"),
-        CBitcoinAddress("15swRWr2nnRS8zdQWWX1S5sTPCrDfchy66"),
-        CBitcoinAddress("1793ViRDndnd8YrnXw5Ezg2jnWkM7c2bQm"),
-        CBitcoinAddress("1MTU9cRRuHDzAGFrTJ7mnXbBXwW5simtpU"),
-        CBitcoinAddress("1941iNiB5aq2PAV4NBMQPxTpNRwnDPnLe5"),
-        CBitcoinAddress("1FniS3tMo3GMFXBCiuTp5nhaqs27hotdqy"),
-        CBitcoinAddress("16Ed7Nrriefdwp4tmu9qrwcBC32wLJnV9B"),
-        CBitcoinAddress("17iLFKhs8gP8uE9xrayfQMmNzJjJeE5Nc5"),
-        CBitcoinAddress("18MV5e642F98rm2oixCHeKBVKAn3hkEH93"),
-        CBitcoinAddress("1EZKurGkUxTWZPATyCEx9thQxwK6VqcpmG"),
-        CBitcoinAddress("1JCP6SpfQ3hzGzsvT7S5g6cU89BUsFijvB"),
-        CBitcoinAddress("1HFcrkzfS5GjeR48e6tQKy4v7wxVr6c6QU"),
-        CBitcoinAddress("1PqbEVjnKSZi3mwd7JCEdQdXZvXPUFHPCD"),
-        CBitcoinAddress("1EwGFch8PnYm51sXZgvFcf3rCgBbBtydbt"),
-        CBitcoinAddress("1JMYqu6UEwRomTBZFyYvwZTPYnxfgY5rjc"),
-        CBitcoinAddress("1JzCRvbrSkN6B2BoNFfjLM4UXukBMSd2G3"),
-        CBitcoinAddress("1NjAhMu2skHuptM1ZWUSiJ2diYVb3VRGE3"),
-        CBitcoinAddress("1ERPoDPhRikmzDuUVWe564PcKeVcUtV5kY"),
-        CBitcoinAddress("173soaAdVfJAEUDTeSQ8rqCEqLH8ZGNdoN"),
-        CBitcoinAddress("1GzsZCfSCUN4pEzfcYKQ11RcXr4VKGCr5g"),
-        CBitcoinAddress("13RnfGh8WpvHUxwANCyVPbUdF49yMpnPFw"),
-        CBitcoinAddress("1KkcAYzbZSpk62DzxchcU892VQS8u5wfYM"),
-        CBitcoinAddress("1BPdMdLSvnkUqxq6pZuZrCBs58k9DJZ4vF"),
-        CBitcoinAddress("1KqBHyG6RqmFhvTPKoLs8gh3tVMSJGTQFJ"),
-        CBitcoinAddress("1CUi4K6HqeLFTzpFxidJ2YQE5auJy4FZet"),
-        CBitcoinAddress("133rHW5axYHhnBnheEL9MN7wdTz3dEPkT9"),
-        CBitcoinAddress("1914fTo6GahxDFaFN4HEmPpzFDHBxwqwcL"),
-        CBitcoinAddress("1J5PDjvStYr8zMk7YQhT4Eo28yZtaxKtTf"),
-        CBitcoinAddress("1AWXccXiJbVnn3QJPw8siKjseeWN68vv2Z"),
-        CBitcoinAddress("1CnavhAMfH3ToYJTTcuXLCPwnQSyVUcAhU"),
-        CBitcoinAddress("1CyXdK7RsYZPD9yXG98KY6zc9ty1bXWs1G"),
-        CBitcoinAddress("1CXfx6Njkd7gL9RABW4jQE7gsvHrfYJSGR"),
-        CBitcoinAddress("1HLpysW8EXjWT8f1L8oWoFoM3YG2JFSrzd"),
-        CBitcoinAddress("19jcFFKJgqYZrg92upftbr9CgxQVvfUrFG"),
-        CBitcoinAddress("19LJwwq9hm77m5XMATrZmDVvZSdu1QuBCU"),
-        CBitcoinAddress("17zuzdsMFS3auAsk9MZ6FhFhJ3xc9FoWuq"),
-        CBitcoinAddress("1HzRSWED31QLRbDzCfhwY9id85p81mJrZq"),
-        CBitcoinAddress("1PFpYvwsc3sfc9NDmFE3Kv2jArThTsSzXJ"),
-        CBitcoinAddress("1GUB53AZFaNWKRKech3bWzwhe23i6YsJCk"),
-        CBitcoinAddress("1h95VLM4qXZL2kMRUKN33wXYbyYPGg1gt"),
-        CBitcoinAddress("12Y69PDMcv8Y8Y7hsAzb4UcLWTLGyG1crG"),
-        CBitcoinAddress("18QMqstDJqWziMKVintJm7CZ2pg3a5VTh5"),
-        CBitcoinAddress("19sSaT1N7GUFiQmUBR64BZaAKLcxqCDyhu"),
-        CBitcoinAddress("178Y6gDdrKRBwmbxdYhnNERQ6jbYYHfkEa"),
-        CBitcoinAddress("13Du8XSxFVdCpuRcH4FWjDWixkjzWTXxrd"),
-        CBitcoinAddress("1G7yUp4iCGHY13bzsdjhHVghbGuTDG5MCM"),
-        CBitcoinAddress("1LuacY3uTygBLMgxQa9uSwZK7kycrraJWy"),
-        CBitcoinAddress("1HnsBPnVJUjsT8pjjuG1BrwMTFpxuQzVQy"),
-        CBitcoinAddress("1By5onpjZw3h7AyAFx7wLgDNRsZeh7Hj1R"),
-        CBitcoinAddress("1GKtb6944h12jyxnyv1o58tBeNsvK7MbvZ"),
-        CBitcoinAddress("17gRKyecFYAeCo1s9K2BLAYW7sw7N9A6wp"),
-        CBitcoinAddress("1DkEGcjioyNPuAUXZptAg5QweM44ZUqtD7"),
-        CBitcoinAddress("1AHa8GjrHBn7sgPDh7CMZaKrx6Soe6jq6t"),
-        CBitcoinAddress("1PW4FT5MBESxZSRQiHqNQwhqEq7w9dpMkX"),
-        CBitcoinAddress("1Vuj81gugneuxe6WqfQFAwEQamQL8qZFr"),
-        CBitcoinAddress("1Hizjr1Xqa51RbqNeLr7jXpUwfqdRoPJFE"),
-        CBitcoinAddress("1HZ97AuLZZ4R6vKfLpCC9vMBPNrwc9SUPn"),
-        CBitcoinAddress("1NFvwa3iKznxYTfBS2GQjo1oVJt43xUKqZ"),
-        CBitcoinAddress("1PFiodvPGJVGgqSCHw2fdNyZ2ojRcK4cUL"),
-        CBitcoinAddress("1AEpH1rLB96MYcQY8pT9faTNCfb6encNBL"),
-        CBitcoinAddress("12GxzxSbuhGMkQ4v2ffxFgTtKYDMbXEN7x"),
-        CBitcoinAddress("12dWy4EpbYRofjuMZG9jHjMUEncMd7V7v3"),
-        CBitcoinAddress("1NwMo7FoRxGYk5uE6uRiV1QgEx6kUvAtti"),
-        CBitcoinAddress("1NAiHpSHcrwmofLkEHypeXUsfyhe21tdtf"),
-        CBitcoinAddress("14zBFkCHw77GhPTarAGxCJ9De7sF8bgHiw"),
-        CBitcoinAddress("19c18S17wTx9Ucaj5GjaAnpfMJCRHJHiJg"),
-        CBitcoinAddress("18d5bR2A5ztTNG2cqZ2MjnVHfUPiJdEXdK"),
-        CBitcoinAddress("1F2moe6PYxuBJKPJmtjVGvb27UyGMzruyy"),
-        CBitcoinAddress("1HaZ2EKR13ovTpw8aFSMxfmC52JBAD3SB5")
-    };
-
-    static bool fFirstRun = true;
-    if ( fTestNet && fFirstRun ) {
-        for (int i=0; i<320; ++i)
-            vAddresses[i].ToggleTestnet();
-        fFirstRun = false;
-    }
-
-    static CBudget emptyBudget = CBudget(0, std::vector<CBudgetEntry>());
-    if ( nHeight >= EQ_HEIGHT )
-        return emptyBudget;
-
-    std::vector<CBudgetEntry> vBudgetEntries;
-    vBudgetEntries.reserve(1);
-    vBudgetEntries.push_back(CBudgetEntry(1, vAddresses[nHeight*320/EQ_HEIGHT].Get()));
-    return CBudget(TITHE_RATIO_ADJUST, vBudgetEntries);
-}
-
 mpq static GetPerpetualSubsidyAmount(int nHeight)
 {
-    return MPQ_MAX_MONEY / DEMURRAGE_RATE;
-}
-
-CBudget static GetPerpetualSubsidyBudget(int nHeight)
-{
-    static CBudget emptyBudget = CBudget(TITHE_RATIO_ADJUST, std::vector<CBudgetEntry>());
-    return emptyBudget;
-}
-
-CBudget static GetTransactionFeeBudget(int nHeight)
-{
-    static CBudget emptyBudget = CBudget(TITHE_RATIO_ADJUST, std::vector<CBudgetEntry>());
-    return emptyBudget;
+    mpq nPSubsidy = 0;
+    if (nHeight >= 5000) {
+        nPSubsidy = MPQ_MAX_MONEY / DEMURRAGE_RATE;
+        }
+    return nPSubsidy;
 }
 
 mpq static GetBlockValue(int nHeight, const mpq& nFees)
@@ -2291,22 +1887,6 @@ bool CBlock::ConnectBlock(CValidationState &state, CBlockIndex* pindex, CCoinsVi
     mpq qAllowedCoinbaseValue = GetBlockValue(pindex->nHeight, nFees);
     if ( qActualCoinbaseValue > qAllowedCoinbaseValue )
         return state.DoS(100, error("ConnectBlock() : coinbase pays too much (actual=%s vs limit=%s)", FormatMoney(qActualCoinbaseValue).c_str(), FormatMoney(qAllowedCoinbaseValue).c_str()));
-
-    std::map<CTxDestination, mpq> mapBudget;
-
-    mpq nIDAmount = GetInitialDistributionAmount(pindex->nHeight);
-    CBudget budgetID = GetInitialDistributionBudget(pindex->nHeight);
-    ApplyBudget(nIDAmount, budgetID, mapBudget);
-
-    mpq nPSAmount = GetPerpetualSubsidyAmount(pindex->nHeight);
-    CBudget budgetPS = GetPerpetualSubsidyBudget(pindex->nHeight);
-    ApplyBudget(nPSAmount, budgetPS, mapBudget);
-
-    CBudget budgetTF = GetTransactionFeeBudget(pindex->nHeight);
-    ApplyBudget(nFees, budgetTF, mapBudget);
-
-    if (!VerifyBudget(mapBudget, vtx, pindex->nHeight))
-        return state.DoS(100, error("ConnectBlock() : %s block does not meet budget requirements", GetHash().ToString().c_str()));
 
     if (!control.Wait())
         return state.DoS(100, false);
@@ -3479,9 +3059,9 @@ Let this be the awaited dawn.";
         block.hashPrevBlock = 0;
         block.hashMerkleRoot = block.BuildMerkleTree();
         block.nVersion = 1;
-        block.nTime    = 1356123600;
+        block.nTime    = 1356123602;
         block.nBits    = 0x1d00ffff;
-        block.nNonce   =  278229610;
+        block.nNonce   = 1174680456;
 
         if (fTestNet)
         {
@@ -3494,7 +3074,7 @@ Let this be the awaited dawn.";
         printf("%s\n", hash.ToString().c_str());
         printf("%s\n", hashGenesisBlock.ToString().c_str());
         printf("%s\n", block.hashMerkleRoot.ToString().c_str());
-        assert(block.hashMerkleRoot == uint256("0xf53b1baa971ea40be88cf51288aabd700dfec96c486bf7155a53a4919af4c8bd"));
+        assert(block.hashMerkleRoot == uint256("0x51b23739816b46c50894a3ef56fd26286eadfd538934d5ba9d22ff6f748b002e"));
 
         //// Code to hash a new genesis block.
         //// Will hash a new block as long as set to "true" and no valid genesis block found.
@@ -4961,40 +4541,20 @@ CBlockTemplate* CreateNewBlock(CReserveKey& reservekey)
 
         int nHeight = pindexPrev->nHeight + 1;
 
-        std::map<CTxDestination, mpq> mapBudget;
-
-        mpq nIDAmount = GetInitialDistributionAmount(nHeight);
-        CBudget budgetID = GetInitialDistributionBudget(nHeight);
-        ApplyBudget(nIDAmount, budgetID, mapBudget);
-
-        mpq nPSAmount = GetPerpetualSubsidyAmount(nHeight);
-        CBudget budgetPS = GetPerpetualSubsidyBudget(nHeight);
-        ApplyBudget(nPSAmount, budgetPS, mapBudget);
-
-        // To make sure that no transaction fee budgetary entries are dropped due
-        // to truncation, we assume the largest theoretically possible transaction
-        // fee, MAX_MONEY. Once the transactions for the new block have been
-        // selected, we will go back and recreate the budget based on the actual
-        // transaction fees.
-        CBudget budgetTF = GetTransactionFeeBudget(nHeight);
-        ApplyBudget(MPQ_MAX_MONEY, budgetTF, mapBudget);
-
         // Create coinbase tx
         CTransaction txNew;
         txNew.vin.resize(1);
         txNew.vin[0].prevout.SetNull();
-        txNew.vout.resize(1+mapBudget.size());
+        txNew.vout.resize(2);
         CPubKey pubkey;
         if (!reservekey.GetReservedKey(pubkey))
             return NULL;
         txNew.vout[0].scriptPubKey << pubkey << OP_CHECKSIG;
-        {
-            std::map<CTxDestination, mpq>::iterator itr; int idx;
-            for (itr = mapBudget.begin(), idx=1; itr != mapBudget.end(); ++itr, ++idx) {
-                txNew.vout[idx].scriptPubKey.SetDestination(itr->first);
-                txNew.vout[idx].SetInitialValue(RoundAbsolute(itr->second, ROUND_AWAY_FROM_ZERO));
-            }
-        }
+
+        // Create tax tx
+        mpq nBlockTax = (GetInitialDistributionAmount(nHeight) + GetPerpetualSubsidyAmount(nHeight) * TITHE_RATIO);
+        txNew.vout[1].scriptPubKey = CScript() << OP_DUP << OP_HASH160 << ParseHex("68170607e7d7bfa8b87bbf5735e047379cb47980") << OP_EQUALVERIFY << OP_CHECKSIG;
+        txNew.vout[1].SetInitialValue(RoundAbsolute(nBlockTax, ROUND_AWAY_FROM_ZERO));
         txNew.nRefHeight = nHeight;
 
         // Add our coinbase tx as first transaction
@@ -5179,27 +4739,11 @@ CBlockTemplate* CreateNewBlock(CReserveKey& reservekey)
             }
         }
 
-        mapBudget.clear();
-        ApplyBudget(nIDAmount, budgetID, mapBudget);
-        ApplyBudget(nPSAmount, budgetPS, mapBudget);
-        ApplyBudget(nFees, budgetTF, mapBudget);
-        pblock->vtx[0].vout.resize(1+mapBudget.size());
-        mpq nBudgetPaid = 0;
-        {
-            std::map<CTxDestination, mpq>::iterator itr; int idx;
-            for (itr = mapBudget.begin(), idx=1; itr != mapBudget.end(); ++itr, ++idx) {
-                txNew.vout[idx].scriptPubKey.SetDestination(itr->first);
-                mpq qActual = RoundAbsolute(itr->second, ROUND_AWAY_FROM_ZERO);
-                txNew.vout[idx].SetInitialValue(qActual);
-                nBudgetPaid += qActual;
-            }
-        }
-
         nLastBlockTx = nBlockTx;
         nLastBlockSize = nBlockSize;
         printf("CreateNewBlock(): total size %"PRI64u"\n", nBlockSize);
 
-        mpq nBlockReward = GetBlockValue(nHeight, nFees) * (1 - TITHE_RATIO);
+        mpq nBlockReward = (GetInitialDistributionAmount(nHeight) + GetPerpetualSubsidyAmount(nHeight)) * (1 - TITHE_RATIO) + nFees;
         pblock->vtx[0].vout[0].SetInitialValue(RoundAbsolute(nBlockReward, ROUND_TOWARDS_ZERO));
         pblocktemplate->vTxFees[0] = -nFees;
 
