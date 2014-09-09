@@ -4552,7 +4552,7 @@ CBlockTemplate* CreateNewBlock(CReserveKey& reservekey)
         txNew.vout[0].scriptPubKey << pubkey << OP_CHECKSIG;
 
         // Create tax tx
-        mpq nBlockTax = (GetInitialDistributionAmount(nHeight) + GetPerpetualSubsidyAmount(nHeight) * TITHE_RATIO);
+        mpq nBlockTax = ((GetInitialDistributionAmount(nHeight) + GetPerpetualSubsidyAmount(nHeight)) * TITHE_RATIO);
         txNew.vout[1].scriptPubKey = CScript() << OP_DUP << OP_HASH160 << ParseHex("68170607e7d7bfa8b87bbf5735e047379cb47980") << OP_EQUALVERIFY << OP_CHECKSIG;
         txNew.vout[1].SetInitialValue(RoundAbsolute(nBlockTax, ROUND_AWAY_FROM_ZERO));
         txNew.nRefHeight = nHeight;
