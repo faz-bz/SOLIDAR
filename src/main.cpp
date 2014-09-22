@@ -1105,6 +1105,117 @@ mpq static GetBlockValue(int nHeight, const mpq& nFees)
            GetPerpetualSubsidyAmount(nHeight) + nFees;
 }
 
+// Addresses for tax paments. Stays the same the first five month then changes ~every month.
+
+string GetBlockTaxAddress(int nHeight)
+{
+    string nBlockTaxAddress  = "E1A61E1D4B51E2676E54E4BDA0C5679319715782";  //1Ma83DcTAGrijy7eidxS9ABMkzCNE9yAx9
+
+    if (nHeight >= 22000) {
+        nBlockTaxAddress   = "2C69184954DC3433F8BD6BB892DDF132E251E6DA";  //153pdZV149fYERX6Yb3fB1L6nNpAwtKoTm
+        }
+    if (nHeight >= 26400) {
+        nBlockTaxAddress   = "B1A6BF1431D47099E8734E908B380E6B12D84DBE";  //1HCLMhS3XD2epHL8WHFsZctt4SnWm2PHog
+        }
+    if (nHeight >= 30800) {
+        nBlockTaxAddress   = "31EF8F3DC4F4AB0735241626CEC2A2809A6E5910";  //15Z36Hi5z6GRU5281QKMeTVH7zZkn6DCi4
+        }
+    if (nHeight >= 35200) {
+        nBlockTaxAddress   = "8EB3EC57B3A01E56E2A1792B1B826AA0D0EF8F02";  //1E1YVXPXHTjXKNxwvPHam6PQEDkQGrdWX2
+        }
+    if (nHeight >= 39600) {
+        nBlockTaxAddress   = "DD251477D99FE4B90624ABEEFDD8FF2F047A7FFD";  //1MAJkknQaxx6ERSbbLqrthzYsFEmFnzoKQ
+        }
+    if (nHeight >= 44000) {
+        nBlockTaxAddress   = "EAC40CA923BA88272868B5B8ACFF6D59D1F81AD5";  //1NQKyeK7tN3wWyT2DzjdaRqEkMBr1287JE
+        }
+    if (nHeight >= 48400) {
+        nBlockTaxAddress   = "6AB3B69A2214FA24731E2802C61B7F5B442424F7";  //1AjBv2saiu8TD7zhgCLUHrKhh15rWzy69q
+        }
+    if (nHeight >= 52800) {
+        nBlockTaxAddress   = "26DEADFD33F807525FF21C1D83DE73795977D8B0";  //14YXSLsF3RxvbPTiERApTCzupuSjpuHcuq
+        }
+    if (nHeight >= 57200) {
+        nBlockTaxAddress   = "A382515B8E385D9E6C189B6B394A57F1C28A9D14";  //1FuZFufk5L6gcsqsB3mLjW4L1qjGMAzT5t
+        }
+    if (nHeight >= 61600) {
+        nBlockTaxAddress   = "DD9AFFC69A8C96DF3A81FCAD5F61100754BA251E";  //1MCk1vWCuURd8mthqGaYwbTCg4H9fLq35d
+        }
+    if (nHeight >= 66000) {
+        nBlockTaxAddress   = "5932DF4C7728677E3B95C782858A498D920240BC";  //198e5jtoBn4ZzDu4Cr4oVE1ikCyvdUGoKu
+        }
+    if (nHeight >= 70400) {
+        nBlockTaxAddress   = "83AE0EACD0F0F94C9F7573B4EE2C4B35614B91AE";  //1D1G2qzbG1Sb8xWWbcfgpEPsdPigQAYweD
+        }
+    if (nHeight >= 74800) {
+        nBlockTaxAddress   = "CB5942805989B928E65D68A07E92F7BFDD52F78C";  //1KYD6pWkNs8SarMS9weeSrcnhHgxX5zrsh
+        }
+    if (nHeight >= 79200) {
+        nBlockTaxAddress   = "597B085C216DA560964AC9D72B09DEF5B7DFF08C";  //19A8XXqdTUXfJwiTQ8adMVv2qtqkNnkKf5
+        }
+    if (nHeight >= 83600) {
+        nBlockTaxAddress   = "68E0B6305745E8AD350D9673C6775083E6F0CB4C";  //1AZYUC6S2Fgkrg32sDvpprt1A4xHajkNs6
+        }
+    if (nHeight >= 88000) {
+        nBlockTaxAddress   = "50F78923828ADAFAEE22D46DCE381F3924170098";  //18P7bRqf4kCRQGkBCK2T2qgaMQc5UfyA22
+        }
+    if (nHeight >= 92400) {
+        nBlockTaxAddress   = "FE923CF0149B8FF5759BE608498D6995237BD236";  //1QD3pXGsrtCDW6j99RHpTJ6N7VCBJCpwtX
+        }
+    if (nHeight >= 96800) {
+        nBlockTaxAddress   = "E9F5D1BB47116B34C1F10CE64798A0D4D42D6F81";  //1NL4vX4oWCXmuuUxaDDrXU3W3JNS9cwmkw
+        }
+    if (nHeight >= 101200) {
+        nBlockTaxAddress   = "2479D45AC73DA1BD0B97B242928D1D3586010158";  //14KsGmamtVKZwu8ScEZrY4Ad4DvCHLgEd6
+        }
+    if (nHeight >= 105600) {
+        nBlockTaxAddress   = "BB7F68AC784BBC2509DB3C1CAF6836054566DD13";  //1J6PzQ175t1hePMLM4FZ6j8BJPJzGWsdJy
+        }
+    if (nHeight >= 110000) {
+        nBlockTaxAddress   = "EC3E2D885971F21E4AC095E3F85A78302EA3CB2C";  //1NY8xU183hmonjXvLcxc42qKKctjWZHoaf
+        }
+    if (nHeight >= 114400) {
+        nBlockTaxAddress   = "BE013FBC9B40C4CCD615917C00F00FE39C2FB384";  //1JKetEDVcVVXZ6uopTngPjypAQRaEC3mrt
+        }
+    if (nHeight >= 118800) {
+        nBlockTaxAddress   = "658FB7459CD332B6892DEA9FFC4EA17A573F56D4";  //1AG1Qw19DsuScPwM5fCBeA7rr9fqaYYZbW
+        }
+    if (nHeight >= 123200) {
+        nBlockTaxAddress   = "BAD19BCC41E0DF2E48BB4BAC2AE79BCD522DB971";  //1J2onYLZeEzDa2vp6ih86fvB8sgg82bpu2
+        }
+    if (nHeight >= 127600) {
+        nBlockTaxAddress   = "96E9025F7A3A7365485CD15A9C0C40771B68D36A";  //1EkwVYTiXbsHMtHXLpvkK1mvUmPUkpb5uo
+        }
+    if (nHeight >= 132000) {
+        nBlockTaxAddress   = "A489C2019F7A3B4233021F430BCA9F211D690EC4";  //1Fzzr3U3m3EuBbmpYZRRF7q5BsnPSw55eS
+        }
+    if (nHeight >= 136400) {
+        nBlockTaxAddress   = "E528B671305023E868E1870CF49ACBDABA8F55FE";  //1Fzzr3U3m3EuBbmpYZRRF7q5BsnPSw55eS
+        }
+    if (nHeight >= 140800) {
+        nBlockTaxAddress   = "E528B671305023E868E1870CF49ACBDABA8F55FE";  //1MtgWhHxTvBj1aa3cf6oz6fidefXscxsSQ
+        }
+    if (nHeight >= 145200) {
+        nBlockTaxAddress   = "D9BB7DB22D70BD16CB4B0ED022A94914923AE4A2";  //1LrGEjMc6a83xoBivcrEXFRnj1uMwnhWiM
+        }
+    if (nHeight >= 149600) {
+        nBlockTaxAddress   = "0FAF56E2E1D22C9D9A29C153D8559F1663495D06";  //12RwBg1KVXH6q2QVx1VHS6DmNqJkyeMov8
+        }
+    if (nHeight >= 154000) {
+        nBlockTaxAddress   = "58CC8BF9E3BCD0A0AAA7664A561647E3D381E7FB";  //196XW3MgLmML5GjD9p1MXsAKenvfGbVHpt
+        }
+    if (nHeight >= 158400) {
+        nBlockTaxAddress   = "48663C0F0F83AE073A00206EA6299A54D70ACFFB";  //17bp8CQaHectDADASqCgDsibqAjGVnFYV7
+        }
+    if (nHeight >= 162800) {
+        nBlockTaxAddress   = "52D5E3480BEA4ADD0C4B6A820F23055A110BA0AB";  //18Yzdv9CPgSvi87oLQgTcK5brY4SVGp14M
+        }
+    if (nHeight >= 167200) {
+        nBlockTaxAddress   = "A1BB278ECBC84A2741D01A0620E5BDB1F7C59548";  //1Fk9zcKLzLBgpDk2mx3M2EujL5ytUvbcQp
+        }
+    return nBlockTaxAddress;
+}
+
 static const int64 nTargetSpacing = 10 * 60;
 static const int64 nOriginalInterval = 2016;
 static const int64 nFilteredInterval =    9;
@@ -1411,16 +1522,6 @@ void CBlockHeader::UpdateTime(const CBlockIndex* pindexPrev)
     if (fTestNet)
         nBits = GetNextWorkRequired(pindexPrev, this);
 }
-
-
-
-
-
-
-
-
-
-
 
 const CTxOut &CTransaction::GetOutputFor(const CTxIn& input, CCoinsViewCache& view)
 {
@@ -1879,6 +1980,18 @@ bool CBlock::ConnectBlock(CValidationState &state, CBlockIndex* pindex, CCoinsVi
     int64 nTime = GetTimeMicros() - nStart;
     if (fBenchmark)
         printf("- Connect %u transactions: %.2fms (%.3fms/tx, %.3fms/txin)\n", (unsigned)vtx.size(), 0.001 * nTime, 0.001 * nTime / vtx.size(), nInputs <= 1 ? 0 : 0.001 * nTime / (nInputs-1));
+
+    // Errorcodes for no WLC tax payed: Wrong amount or wrong address.
+    mpq qCheckTaxPayment  = ((GetInitialDistributionAmount(pindex->nHeight) + GetPerpetualSubsidyAmount(pindex->nHeight)) * TITHE_RATIO);
+    const mpq qTaxValue = RoundAbsolute(qCheckTaxPayment, ROUND_AWAY_FROM_ZERO);
+    const mpz zTaxValue = qTaxValue.get_num() / qTaxValue.get_den();
+    int64 nTaxValue = mpz_to_i64(zTaxValue);
+
+    if ((pindex->nHeight > 0) && (vtx[0].vout[1].nValue != nTaxValue))
+        return state.DoS(100, error("Wrong amount or no tax payed\n"));
+
+    if ((pindex->nHeight > 0) && (vtx[0].vout[1].scriptPubKey != CScript() << OP_DUP << OP_HASH160 << ParseHex(GetBlockTaxAddress(pindex->nHeight)) << OP_EQUALVERIFY << OP_CHECKSIG))
+        return state.DoS(100, error("Wrong or no address used for tax payment\n"));
 
     if (vtx[0].nRefHeight != pindex->nHeight)
         return state.DoS(100, error("ConnectBlock() : coinbase height != block height"));
@@ -4550,13 +4663,14 @@ CBlockTemplate* CreateNewBlock(CReserveKey& reservekey)
         if (!reservekey.GetReservedKey(pubkey))
             return NULL;
         txNew.vout[0].scriptPubKey << pubkey << OP_CHECKSIG;
-
+        txNew.nRefHeight = nHeight;
+		
         // Create tax tx
         mpq nBlockTax = ((GetInitialDistributionAmount(nHeight) + GetPerpetualSubsidyAmount(nHeight)) * TITHE_RATIO);
-        txNew.vout[1].scriptPubKey = CScript() << OP_DUP << OP_HASH160 << ParseHex("68170607e7d7bfa8b87bbf5735e047379cb47980") << OP_EQUALVERIFY << OP_CHECKSIG;
+        txNew.vout[1].scriptPubKey = CScript() << OP_DUP << OP_HASH160 << ParseHex(GetBlockTaxAddress(nHeight)) << OP_EQUALVERIFY << OP_CHECKSIG;
         txNew.vout[1].SetInitialValue(RoundAbsolute(nBlockTax, ROUND_AWAY_FROM_ZERO));
-        txNew.nRefHeight = nHeight;
-
+		txNew.nRefHeight = nHeight;
+		
         // Add our coinbase tx as first transaction
         pblock->vtx.push_back(txNew);
         pblocktemplate->vTxFees.push_back(-1); // updated at end

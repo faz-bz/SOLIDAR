@@ -60,12 +60,12 @@ static const mpq TITHE_RATIO = mpq("19/20");
 static const int EQ_HEIGHT = 25000;
 static const int DEMURRAGE_RATE = 262144;
 /** Coinbase transaction outputs can only be spent after this number of new blocks (network rule) */
-static const int COINBASE_MATURITY = 5;
+static const int COINBASE_MATURITY = 100;
 /** Threshold for nLockTime: below this value it is interpreted as block number, otherwise as UNIX timestamp. */
 static const unsigned int LOCKTIME_THRESHOLD = 500000000; // Tue Nov  5 00:53:20 1985 UTC
 /** FIR difficulty filter parameters */
 static const int DIFF_FILTER_THRESHOLD_TESTNET =  2016;
-static const int DIFF_FILTER_THRESHOLD         = 100;
+static const int DIFF_FILTER_THRESHOLD         = 50;
 /** Maximum number of script-checking threads allowed */
 static const int MAX_SCRIPTCHECK_THREADS = 16;
 #ifdef USE_UPNP
