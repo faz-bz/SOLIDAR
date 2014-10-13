@@ -6,6 +6,7 @@
 #include "txdb.h"
 #include "main.h"
 #include "hash.h"
+#include "auxpow.h"
 
 using namespace std;
 
@@ -68,10 +69,28 @@ bool CCoinsViewDB::BatchWrite(const std::map<uint256, CCoins> &mapCoins, CBlockI
 CBlockTreeDB::CBlockTreeDB(size_t nCacheSize, bool fMemory, bool fWipe) : CLevelDB(GetDataDir() / "blocks" / "index", nCacheSize, fMemory, fWipe) {
 }
 
-bool CBlockTreeDB::WriteBlockIndex(const CDiskBlockIndex& blockindex)
+// Me patch
+
+bool CBlockTreeDB::WriteDiskBlockIndex(const CDiskBlockIndex& diskblockindex)
 {
-    return Write(make_pair('b', blockindex.GetBlockHash()), blockindex);
+    return Write(boost::tuples::make_tuple('b', *diskblockindex.phashBlock, 'a'), diskblockindex);
 }
+
+// Memi end
+
+bool CBlockTreeDB::WriteBlockIndex(const CBlockIndex& blockindex) // Me mi patch -CDiskBlockIndex& +CBlockIndex
+{
+    return Write(boost::tuples::make_tuple('b', blockindex.GetBlockHash(), 'b'), blockindex); // Memi patch
+    //return Write(make_pair('b', blockindex.GetBlockHash()), blockindex);
+}
+
+// Memi patch
+
+bool CBlockTreeDB::ReadDiskBlockIndex(const uint256 &blkid, CDiskBlockIndex &diskblockindex) {
+    return Read(boost::tuples::make_tuple('b', blkid, 'a'), diskblockindex);
+}
+
+// Memi end
 
 bool CBlockTreeDB::ReadBestInvalidWork(CBigNum& bnBestInvalidWork)
 {
@@ -192,7 +211,8 @@ bool CBlockTreeDB::LoadBlockIndexGuts()
     leveldb::Iterator *pcursor = NewIterator();
 
     CDataStream ssKeySet(SER_DISK, CLIENT_VERSION);
-    ssKeySet << make_pair('b', uint256(0));
+    ssKeySet << boost::tuples::make_tuple('b', uint256(0), 'a'); // Memi patch: 'b' is the prefix for BlockIndex, 'a' sigifies the first part
+    // ssKeySet << make_pair('b', uint256(0));
     pcursor->Seek(ssKeySet.str());
 
     // Load mapBlockIndex
@@ -204,6 +224,7 @@ bool CBlockTreeDB::LoadBlockIndexGuts()
             char chType;
             ssKey >> chType;
             if (chType == 'b') {
+
                 leveldb::Slice slValue = pcursor->value();
                 CDataStream ssValue(slValue.data(), slValue.data()+slValue.size(), SER_DISK, CLIENT_VERSION);
                 CDiskBlockIndex diskindex;
@@ -211,6 +232,8 @@ bool CBlockTreeDB::LoadBlockIndexGuts()
 
                 // Construct block index object
                 CBlockIndex* pindexNew = InsertBlockIndex(diskindex.GetBlockHash());
+
+
                 pindexNew->pprev          = InsertBlockIndex(diskindex.hashPrev);
                 pindexNew->nHeight        = diskindex.nHeight;
                 pindexNew->nFile          = diskindex.nFile;
@@ -225,10 +248,12 @@ bool CBlockTreeDB::LoadBlockIndexGuts()
                 pindexNew->nTx            = diskindex.nTx;
 
                 // Watch for genesis block
-                if (pindexGenesisBlock == NULL && diskindex.GetBlockHash() == hashGenesisBlock)
+                if (pindexGenesisBlock == NULL && pindexNew->GetBlockHash() == hashGenesisBlock)
                     pindexGenesisBlock = pindexNew;
 
-                if (!pindexNew->CheckIndex())
+                // CheckIndex needs phashBlock to be set // Memi patch
+                diskindex.phashBlock = pindexNew->phashBlock;
+                if (!diskindex.CheckIndex())
                     return error("LoadBlockIndex() : CheckIndex failed: %s", pindexNew->ToString().c_str());
 
                 pcursor->Next();

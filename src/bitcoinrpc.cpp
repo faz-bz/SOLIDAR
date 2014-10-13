@@ -11,6 +11,10 @@
 #include "bitcoinrpc.h"
 #include "db.h"
 
+// Memi patch
+#include "auxpow.h"
+// Memi end
+
 #include <boost/asio.hpp>
 #include <boost/asio/ip/v6_only.hpp>
 #include <boost/bind.hpp>
@@ -193,7 +197,6 @@ Value stop(const Array& params, bool fHelp)
 // Call Table
 //
 
-
 static const CRPCCommand vRPCCommands[] =
 { //  name                      actor (function)         okSafeMode threadSafe
   //  ------------------------  -----------------------  ---------- ----------
@@ -241,12 +244,19 @@ static const CRPCCommand vRPCCommands[] =
     { "listaddressgroupings",   &listaddressgroupings,   false,     false },
     { "signmessage",            &signmessage,            false,     false },
     { "verifymessage",          &verifymessage,          false,     false },
-    { "getwork",                &getwork,                true,      false },
+  //MeMi patch
+    { "getwork",                &getwork,                true,     false },
+    { "getworkaux",             &getworkaux,             true,     false },
+    { "getauxblock",            &getauxblock,            true,     false },
+    { "buildmerkletree",        &buildmerkletree,        false,     false },
+  //Memi end
     { "listaccounts",           &listaccounts,           false,     false },
     { "settxfee",               &settxfee,               false,     false },
     { "getblocktemplate",       &getblocktemplate,       true,      false },
     { "submitblock",            &submitblock,            false,     false },
+  //Memi patch
     { "listsinceblock",         &listsinceblock,         false,     false },
+  //Memi end
     { "dumpprivkey",            &dumpprivkey,            true,      false },
     { "importprivkey",          &importprivkey,          false,     false },
     { "listunspent",            &listunspent,            false,     false },
@@ -361,6 +371,30 @@ static string HTTPReply(int nStatus, const string& strMsg, bool keepalive)
         FormatFullVersion().c_str(),
         strMsg.c_str());
 }
+
+// Memi patch
+/*
+
+int GetPostIndex(const vector<string>& vWords)
+{
+    if (vWords[0] == "GET" || vWords[0] == "POST")
+        return 0;
+    if (vWords[1] == "GET" || vWords[1] == "POST")
+        return 1;
+    return -1;
+}
+int GetURIIndex(const vector<string>& vWords)
+{
+    if (vWords[0].size() > 0 && vWords[0][0] == '/')
+        return 0;
+    if (vWords[1].size() > 0 && vWords[1][0] == '/')
+        return 1;
+    return -1;
+}
+
+*/
+
+// Memi end
 
 bool ReadHTTPRequestLine(std::basic_istream<char>& stream, int &proto,
                          string& http_method, string& http_uri)
@@ -885,7 +919,8 @@ void JSONRequest::parse(const Value& valRequest)
     if (valMethod.type() != str_type)
         throw JSONRPCError(RPC_INVALID_REQUEST, "Method must be a string");
     strMethod = valMethod.get_str();
-    if (strMethod != "getwork" && strMethod != "getblocktemplate")
+    if (strMethod != "getwork" && strMethod != "getblocktemplate" &&
+            strMethod != "getworkaux" && strMethod != "getauxblock") // Memi patch
         printf("ThreadRPCServer method=%s\n", strMethod.c_str());
 
     // Parse params
@@ -1159,6 +1194,7 @@ Array RPCConvertValues(const std::string &strMethod, const std::vector<std::stri
     if (strMethod == "sendfrom"               && n > 3) ConvertTo<boost::int64_t>(params[3]);
     if (strMethod == "listtransactions"       && n > 1) ConvertTo<boost::int64_t>(params[1]);
     if (strMethod == "listtransactions"       && n > 2) ConvertTo<boost::int64_t>(params[2]);
+    if (strMethod == "getworkaux"             && n > 2) ConvertTo<boost::int64_t>(params[2]); // Memi patch
     if (strMethod == "listaccounts"           && n > 0) ConvertTo<boost::int64_t>(params[0]);
     if (strMethod == "walletpassphrase"       && n > 1) ConvertTo<boost::int64_t>(params[1]);
     if (strMethod == "getblocktemplate"       && n > 0) ConvertTo<Object>(params[0]);
