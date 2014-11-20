@@ -372,7 +372,7 @@ static string HTTPReply(int nStatus, const string& strMsg, bool keepalive)
         strMsg.c_str());
 }
 
-// Memi patch
+// Memi from DVC
 /*
 
 int GetPostIndex(const vector<string>& vWords)
@@ -920,7 +920,7 @@ void JSONRequest::parse(const Value& valRequest)
         throw JSONRPCError(RPC_INVALID_REQUEST, "Method must be a string");
     strMethod = valMethod.get_str();
     if (strMethod != "getwork" && strMethod != "getblocktemplate" &&
-            strMethod != "getworkaux" && strMethod != "getauxblock") // Memi patch
+            strMethod != "getworkaux" && strMethod != "getauxblock") // Memi from DVC
         printf("ThreadRPCServer method=%s\n", strMethod.c_str());
 
     // Parse params
@@ -1194,7 +1194,7 @@ Array RPCConvertValues(const std::string &strMethod, const std::vector<std::stri
     if (strMethod == "sendfrom"               && n > 3) ConvertTo<boost::int64_t>(params[3]);
     if (strMethod == "listtransactions"       && n > 1) ConvertTo<boost::int64_t>(params[1]);
     if (strMethod == "listtransactions"       && n > 2) ConvertTo<boost::int64_t>(params[2]);
-    if (strMethod == "getworkaux"             && n > 2) ConvertTo<boost::int64_t>(params[2]); // Memi patch
+    if (strMethod == "getworkaux"             && n > 2) ConvertTo<boost::int64_t>(params[2]); // Memi from DVC
     if (strMethod == "listaccounts"           && n > 0) ConvertTo<boost::int64_t>(params[0]);
     if (strMethod == "walletpassphrase"       && n > 1) ConvertTo<boost::int64_t>(params[1]);
     if (strMethod == "getblocktemplate"       && n > 0) ConvertTo<Object>(params[0]);

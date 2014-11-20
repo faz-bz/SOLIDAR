@@ -19,27 +19,29 @@ CONFIG += static
 # Dependency library locations can be customized with:
 #    BOOST_INCLUDE_PATH, BOOST_LIB_PATH, BDB_INCLUDE_PATH,
 #    BDB_LIB_PATH, OPENSSL_INCLUDE_PATH and OPENSSL_LIB_PATH respectively
-BOOST_LIB_SUFFIX=-mgw49-mt-s-1_55
-BOOST_INCLUDE_PATH=C:/MinGW/dev/boost_1_55_0
-BOOST_LIB_PATH=C:/MinGW/dev/boost_1_55_0/stage/lib
-BDB_INCLUDE_PATH=C:/MinGW/dev/db-4.8.30.NC/build_unix
-BDB_LIB_PATH=C:/MinGW/dev/db-4.8.30.NC/build_unix
-OPENSSL_INCLUDE_PATH=C:/MinGW/dev/openssl-1.0.1i/include
-OPENSSL_LIB_PATH=C:/MinGW/dev/openssl-1.0.1i
-MINIUPNPC_INCLUDE_PATH=C:/MinGW/dev
-MINIUPNPC_LIB_PATH=C:/MinGW/dev/miniupnpc
-QRENCODE_INCLUDE_PATH=C:/MinGW/dev/qrencode-3.4.3
-QRENCODE_LIB_PATH=C:/MinGW/dev/qrencode-3.4.3/.libs
 
-MPFR_INCLUDE_PATH=C:/MinGW/dev/mpfr-3.1.2/src
-MPFR_LIB_PATH=C:/MinGW/dev/mpfr-3.1.2/src/.libs
-INCLUDEPATH += $$MPFR_INCLUDE_PATH
-QMAKE_LIBDIR += $$MPFR_LIB_PATH
+# Dependencies for Windows:
+#BOOST_LIB_SUFFIX=-mgw49-mt-s-1_55
+#BOOST_INCLUDE_PATH=C:/MinGW/dev/boost_1_55_0
+#BOOST_LIB_PATH=C:/MinGW/dev/boost_1_55_0/stage/lib
+#BDB_INCLUDE_PATH=C:/MinGW/dev/db-4.8.30.NC/build_unix
+#BDB_LIB_PATH=C:/MinGW/dev/db-4.8.30.NC/build_unix
+#OPENSSL_INCLUDE_PATH=C:/MinGW/dev/openssl-1.0.1i/include
+#OPENSSL_LIB_PATH=C:/MinGW/dev/openssl-1.0.1i
+#MINIUPNPC_INCLUDE_PATH=C:/MinGW/dev
+#MINIUPNPC_LIB_PATH=C:/MinGW/dev/miniupnpc
+#QRENCODE_INCLUDE_PATH=C:/MinGW/dev/qrencode-3.4.3
+#QRENCODE_LIB_PATH=C:/MinGW/dev/qrencode-3.4.3/.libs
 
-GMP_INCLUDE_PATH=C:/mingw/dev/gmp-5.0.2
-GMP_LIB_PATH=C:/mingw/dev/gmp-5.0.2/.libs
-INCLUDEPATH += $$GMP_INCLUDE_PATH
-QMAKE_LIBDIR += $$GMP_LIB_PATH
+#MPFR_INCLUDE_PATH=C:/MinGW/dev/mpfr-3.1.2/src
+#MPFR_LIB_PATH=C:/MinGW/dev/mpfr-3.1.2/src/.libs
+#INCLUDEPATH += $$MPFR_INCLUDE_PATH
+#QMAKE_LIBDIR += $$MPFR_LIB_PATH
+
+#GMP_INCLUDE_PATH=C:/mingw/dev/gmp-5.0.2
+#GMP_LIB_PATH=C:/mingw/dev/gmp-5.0.2/.libs
+#INCLUDEPATH += $$GMP_INCLUDE_PATH
+#QMAKE_LIBDIR += $$GMP_LIB_PATH
 
 OBJECTS_DIR = build
 MOC_DIR = build

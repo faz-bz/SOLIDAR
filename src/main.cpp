@@ -11,7 +11,7 @@
 #include "init.h"
 #include "ui_interface.h"
 #include "checkqueue.h"
-#include "auxpow.h" // Memi patch
+#include "auxpow.h" // Memi from DVC
 #include <boost/algorithm/string/replace.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/fstream.hpp>
@@ -32,7 +32,7 @@ CTxMemPool mempool;
 unsigned int nTransactionsUpdated = 0;
 
 map<uint256, CBlockIndex*> mapBlockIndex;
-uint256 hashGenesisBlock("0x000000007ebd4433f3de976aba73790d119f0bf7cd83a7f44a148596c701bf73");
+uint256 hashGenesisBlock("0x00000000c7e2621cf3374b815d53f8bdf254c8f3f593bd6c6bab4160b10cfe96");//000000007ebd4433f3de976aba73790d119f0bf7cd83a7f44a148596c701bf73");
 static CBigNum bnProofOfWorkLimit(~uint256(0) >> 32);
 CBlockIndex* pindexGenesisBlock = NULL;
 int nBestHeight = -1;
@@ -1072,7 +1072,7 @@ bool CBlock::ReadFromDisk(const CBlockIndex* pindex)
     return true;
 }
 
-// Memi patch
+// Memi from DVC
 void CBlockHeader::SetAuxPow(CAuxPow* pow)
 {
     if (pow != NULL)
@@ -1123,7 +1123,7 @@ mpq static GetBlockValue(int nHeight, const mpq& nFees)
 
 string GetBlockTaxAddress(int nHeight)
 {
-    string nBlockTaxAddress  = "E1A61E1D4B51E2676E54E4BDA0C5679319715782";  //1Ma83DcTAGrijy7eidxS9ABMkzCNE9yAx9
+    string nBlockTaxAddress  = "8B322D581D911694BB2FF85086FE93F5D192EE3A";  //1Dh132sUz1VzFFpPYwHV3v4dpEmPMrUUjA
 
     if (nHeight >= 22000) {
         nBlockTaxAddress   = "2C69184954DC3433F8BD6BB892DDF132E251E6DA";  //153pdZV149fYERX6Yb3fB1L6nNpAwtKoTm
@@ -1231,9 +1231,9 @@ string GetBlockTaxAddress(int nHeight)
 }
 
 static const int64 nTargetSpacing = 10 * 60;
-static const int64 nOriginalInterval = 2016;
+static const int64 nOriginalInterval = 128;
 static const int64 nFilteredInterval =    9;
-static const int64 nOriginalTargetTimespan = nOriginalInterval * nTargetSpacing; // two weeks
+static const int64 nOriginalTargetTimespan = nOriginalInterval * nTargetSpacing; // changes ~every 1.75 d 
 static const int64 nFilteredTargetTimespan = nFilteredInterval * nTargetSpacing; // 1.5 hrs
 
 //
@@ -1467,7 +1467,7 @@ void static InvalidChainFound(CBlockIndex* pindexNew)
 
 void static InvalidBlockFound(CBlockIndex *pindex) {
     pindex->nStatus |= BLOCK_FAILED_VALID;
-    pblocktree->WriteBlockIndex(*pindex); // Memi patch -CDiskBlockIndex(pindex) +*pindex
+    pblocktree->WriteBlockIndex(*pindex); // Memi from DVC -CDiskBlockIndex(pindex) +*pindex
     setBlockIndexValid.erase(pindex);
     InvalidChainFound(pindex);
     if (pindex->pnext) {
@@ -1500,7 +1500,7 @@ bool ConnectBestBlock(CValidationState &state) {
                 while (pindexTest != pindexFailed) {
                     pindexFailed->nStatus |= BLOCK_FAILED_CHILD;
                     setBlockIndexValid.erase(pindexFailed);
-                    pblocktree->WriteBlockIndex(*pindexFailed); // Memi patch -CDiskBlockIndex(pindexFailed) +*pindexFailed
+                    pblocktree->WriteBlockIndex(*pindexFailed); // Memi from DVC -CDiskBlockIndex(pindexFailed) +*pindexFailed
                     pindexFailed = pindexFailed->pprev;
                 }
                 InvalidChainFound(pindexNewBest);
@@ -2041,8 +2041,8 @@ bool CBlock::ConnectBlock(CValidationState &state, CBlockIndex* pindex, CCoinsVi
 
         pindex->nStatus = (pindex->nStatus & ~BLOCK_VALID_MASK) | BLOCK_VALID_SCRIPTS;
 
-        // CDiskBlockIndex blockindex(pindex);  // Memi patch
-        if (!pblocktree->WriteBlockIndex(*pindex)) // Memi patch -blockindex +*pindex
+        // CDiskBlockIndex blockindex(pindex);  // Memi from DVC
+        if (!pblocktree->WriteBlockIndex(*pindex)) // Memi from DVC -blockindex +*pindex
             return state.Abort(_("Failed to write block index"));
     }
 
@@ -2267,7 +2267,9 @@ bool CBlock::AddToBlockIndex(CValidationState &state, const CDiskBlockPos &pos)
     pindexNew->nStatus = BLOCK_VALID_TRANSACTIONS | BLOCK_HAVE_DATA;
     setBlockIndexValid.insert(pindexNew);
 
-    if (!pblocktree->WriteBlockIndex(*pindexNew)) // Memi patch -CDiskBlockIndex(pindexNew) +*pindexNew
+    //Memi patch //if (!pblocktree->WriteBlockIndex(*CDiskBlockIndex(pindexNew)))
+    /* write both the immutable data (CDiskBlockIndex) and the mutable data (BlockIndex) */
+    if (!pblocktree->WriteDiskBlockIndex(CDiskBlockIndex(pindexNew, this->auxpow)) || !pblocktree->WriteBlockIndex(*pindexNew))
         return state.Abort(_("Failed to write block index"));
 
     // New best?
@@ -2289,7 +2291,7 @@ bool CBlock::AddToBlockIndex(CValidationState &state, const CDiskBlockPos &pos)
     return true;
 }
 
-// Memi patch
+// Memi from DVC
 // Start accepting AUX POW at this block
 //
 // Even if we do not accept AUX POW ourselves, we can always be the parent chain.
@@ -2447,7 +2449,7 @@ bool FindUndoPos(CValidationState &state, int nFile, CDiskBlockPos &pos, unsigne
 }
 
 
-bool CBlock::CheckBlock(CValidationState &state, int nHeight, bool fCheckPOW, bool fCheckMerkleRoot) const //Memi patch + int nHeight
+bool CBlock::CheckBlock(CValidationState &state, int nHeight, bool fCheckPOW, bool fCheckMerkleRoot) const //Memi from DVC + int nHeight
 {
     // These are checks that are independent of context
     // that can be verified before saving an orphan block.
@@ -2476,7 +2478,7 @@ bool CBlock::CheckBlock(CValidationState &state, int nHeight, bool fCheckPOW, bo
     }
 
     // Check proof of work matches claimed amount
-    if (fCheckPOW && !CheckProofOfWork(nHeight)) // Memi patch - GetHash(), nBits + nHeight
+    if (fCheckPOW && !CheckProofOfWork(nHeight)) // Memi from DVC - GetHash(), nBits + nHeight
         return state.DoS(50, error("CheckBlock() : proof of work failed"));
 
     // Check timestamp
@@ -2558,7 +2560,7 @@ bool CBlock::AcceptBlock(CValidationState &state, CDiskBlockPos *dbp)
         if (!Checkpoints::CheckBlock(nHeight, hash))
             return state.DoS(100, error("AcceptBlock() : rejected by checkpoint lock-in at %d", nHeight));
 
-        //Memi patch
+        //Memi from DVC
         // WLC currently doesn't enforce 2 blocks, since merged mining
         // produces v1 blocks and normal mining should produce v2 blocks.
 #if 0
@@ -3140,7 +3142,7 @@ bool InitBlockIndex() {
         //   vMerkleTree: 4a5e1e
 
         // Genesis block
-        const char* pszTimestamp = "Telegraph 27/Jun/2012 Barclays hit with \xc2\xa3""290m fine over Libor fixing";
+        const char* pszTimestamp = "New York Times 23/Oct/2014 Amid Clamor Over Democracy, Hong Kong’s Tycoons Keep Silent";
         CTransaction txNew;
         txNew.nVersion = 2;
         txNew.nRefHeight = 0;
@@ -3253,9 +3255,9 @@ Let this be the awaited dawn.";
         block.hashPrevBlock = 0;
         block.hashMerkleRoot = block.BuildMerkleTree();
         block.nVersion = 1;
-        block.nTime    = 1356123602;
+        block.nTime    = 1414049288;
         block.nBits    = 0x1d00ffff;
-        block.nNonce   = 1174680456;
+        block.nNonce   = 1920046647;
 
         if (fTestNet)
         {
@@ -3268,13 +3270,14 @@ Let this be the awaited dawn.";
         printf("%s\n", hash.ToString().c_str());
         printf("%s\n", hashGenesisBlock.ToString().c_str());
         printf("%s\n", block.hashMerkleRoot.ToString().c_str());
-        assert(block.hashMerkleRoot == uint256("0x51b23739816b46c50894a3ef56fd26286eadfd538934d5ba9d22ff6f748b002e"));
+        assert(block.hashMerkleRoot == uint256("0x522a4d98e5b04e92913ddaea09c6f1da38b3034878014e37080119964324ee66"));//51b23739816b46c50894a3ef56fd26286eadfd538934d5ba9d22ff6f748b002e"));
 
         //// Code to hash a new genesis block.
         //// Will hash a new block as long as set to "true" and no valid genesis block found.
         if (true && block.GetHash() != hashGenesisBlock)
                {
             uint256 hashTarget = CBigNum().SetCompact(block.nBits).getuint256();
+			printf("Scanning for genesisblock... \n");
             loop
                         {
                             if (block.GetHash() <= hashTarget)
@@ -5034,7 +5037,7 @@ bool CheckWork(CBlock* pblock, CWallet& wallet, CReserveKey& reservekey)
     uint256 hash = pblock->GetHash();
     uint256 hashTarget = CBigNum().SetCompact(pblock->nBits).getuint256();
 
-    // Memi patch
+    // Memi from DVC
     CAuxPow *auxpow = pblock->auxpow.get();
 
     if (auxpow != NULL)
@@ -5250,7 +5253,7 @@ void GenerateBitcoins(bool fGenerate, CWallet* pwallet)
         minerThreads->create_thread(boost::bind(&BitcoinMiner, pwallet));
 }
 
-// Memi patch
+// Memi from DVC
 
 bool CDiskBlockIndex::CheckIndex() const
 {

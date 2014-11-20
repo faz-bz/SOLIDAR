@@ -66,8 +66,8 @@ static const int COINBASE_MATURITY = 100;
 /** Threshold for nLockTime: below this value it is interpreted as block number, otherwise as UNIX timestamp. */
 static const unsigned int LOCKTIME_THRESHOLD = 500000000; // Tue Nov  5 00:53:20 1985 UTC
 /** FIR difficulty filter parameters */
-static const int DIFF_FILTER_THRESHOLD_TESTNET =  2016;
-static const int DIFF_FILTER_THRESHOLD         = 50;
+static const int DIFF_FILTER_THRESHOLD_TESTNET =  INT_MAX;
+static const int DIFF_FILTER_THRESHOLD         = INT_MAX; //FRC filter for future purpose if needed..
 /** Maximum number of script-checking threads allowed */
 static const int MAX_SCRIPTCHECK_THREADS = 16;
 #ifdef USE_UPNP
@@ -172,7 +172,7 @@ void GenerateBitcoins(bool fGenerate, CWallet* pwallet);
 CBlockTemplate* CreateNewBlock(CReserveKey& reservekey);
 /** Modify the extranonce in a block */
 void IncrementExtraNonce(CBlock* pblock, CBlockIndex* pindexPrev, unsigned int& nExtraNonce);
-/** Memi patch */
+/** Memi from DVC */
 void IncrementExtraNonceWithAux(CBlock* pblock, CBlockIndex* pindexPrev, unsigned int& nExtraNonce, std::vector<unsigned char>& vchAux);
 /** Do mining precalculation */
 void FormatHashBuffers(CBlock* pblock, char* pmidstate, char* pdata, char* phash1);
@@ -190,7 +190,7 @@ bool IsInitialBlockDownload();
 std::string GetWarnings(std::string strFor);
 /** Retrieve a transaction (from memory pool, or from disk, if possible) */
 bool GetTransaction(const uint256 &hash, CTransaction &tx, uint256 &hashBlock, bool fAllowSlow = false);
-int GetOurChainID(); // Memi patch
+int GetOurChainID(); // Memi from DVC
 
 /** Calculating present value after subtracting demurrage */
 mpq GetTimeAdjustedValue(int64 nInitialValue, int nRelativeDepth);
@@ -1229,7 +1229,7 @@ public:
     bool AcceptToMemoryPool(bool fCheckInputs=true, bool fLimitFree=true);
 };
 
-// Memi patch
+// Memi from DVC
 
 template <typename Stream>
 int ReadWriteAuxPow(Stream& s, const boost::shared_ptr<CAuxPow>& auxpow, int nType, int nVersion, CSerActionSerialize ser_action);
@@ -1364,14 +1364,14 @@ class CBlockHeader
 {
 public:
     // header
-    static const int CURRENT_VERSION=BLOCK_VERSION_DEFAULT; // Memi patch -2 +BLOCK_VERSION_DEFAULT
+    static const int CURRENT_VERSION=BLOCK_VERSION_DEFAULT; // Memi from DVC -2 +BLOCK_VERSION_DEFAULT
     int nVersion;
     uint256 hashPrevBlock;
     uint256 hashMerkleRoot;
     unsigned int nTime;
     unsigned int nBits;
     unsigned int nNonce;
-    boost::shared_ptr<CAuxPow> auxpow; //Memi patch
+    boost::shared_ptr<CAuxPow> auxpow; //Memi from DVC
 
     CBlockHeader()
     {
@@ -1388,10 +1388,10 @@ public:
         READWRITE(nBits);
         READWRITE(nNonce);
 		
-		nSerSize += ReadWriteAuxPow(s, auxpow, nType, nVersion, ser_action); // Memi patch
+		nSerSize += ReadWriteAuxPow(s, auxpow, nType, nVersion, ser_action); // Memi from DVC
     )
 
-    // Memi patch
+    // Memi from DVC
     int GetChainID() const
     {
         return nVersion / BLOCK_VERSION_CHAIN_START;
@@ -1403,7 +1403,7 @@ public:
 
     void SetNull()
     {
-        nVersion = CBlockHeader::CURRENT_VERSION | (GetOurChainID() * BLOCK_VERSION_CHAIN_START); // Memi patch + | (GetOurChainID() * BLOCK_VERSION_CHAIN_START);
+        nVersion = CBlockHeader::CURRENT_VERSION | (GetOurChainID() * BLOCK_VERSION_CHAIN_START); // Memi from DVC + | (GetOurChainID() * BLOCK_VERSION_CHAIN_START);
         hashPrevBlock = 0;
         hashMerkleRoot = 0;
         nTime = 0;
@@ -1426,7 +1426,7 @@ public:
         return (int64)nTime;
     }
 
-    bool CheckProofOfWork(int nHeight) const; // Memi patch
+    bool CheckProofOfWork(int nHeight) const; // Memi from DVC
 
     void UpdateTime(const CBlockIndex* pindexPrev);
 };
@@ -1622,7 +1622,7 @@ public:
     bool AddToBlockIndex(CValidationState &state, const CDiskBlockPos &pos);
 
     // Context-independent validity checks
-     // Memi patch nHeight is needed to see if merged mining is allowed.
+     // Memi from DVC nHeight is needed to see if merged mining is allowed.
     bool CheckBlock(CValidationState &state, int nHeight, bool fCheckPOW=true, bool fCheckMerkleRoot=true) const;
 
     // Store block on disk
@@ -1802,7 +1802,7 @@ public:
         nNonce         = block.nNonce;
     }
 
-    //Memi patch
+    //Memi from DVC
 
     IMPLEMENT_SERIALIZE
     (
@@ -1842,7 +1842,7 @@ public:
 
     CBlockHeader GetBlockHeader() const;
 
-    //Memi patch
+    //Memi from DVC
     /*
     {
         CBlockHeader block;
@@ -1881,8 +1881,13 @@ public:
     {
         return (pnext || this == pindexBest);
     }
-
-    enum { nMedianTimeSpan=11 };
+	
+	bool CheckIndex() const
+    {
+        return CheckProofOfWork(GetBlockHash(), nBits);
+    }
+    
+	enum { nMedianTimeSpan=11 };
 
     int64 GetMedianTimePast() const
     {
@@ -1946,34 +1951,28 @@ class CDiskBlockIndex : public CBlockIndex
 public:
     uint256 hashPrev;
 
-    // Memi patch if this is an aux work block
+    // Memi from DVC if this is an aux work block
     boost::shared_ptr<CAuxPow> auxpow;
 
     CDiskBlockIndex() {
         hashPrev = 0;
-        auxpow.reset(); // Memi patch
+        auxpow.reset(); // Memi from DVC
     }
 
-    explicit CDiskBlockIndex(CBlockIndex* pindex, boost::shared_ptr<CAuxPow> auxpow) : CBlockIndex(*pindex) { // Memi patch +boost::shared_ptr<CAuxPow> auxpow
+    explicit CDiskBlockIndex(CBlockIndex* pindex, boost::shared_ptr<CAuxPow> auxpow) : CBlockIndex(*pindex) { // Memi from DVC +boost::shared_ptr<CAuxPow> auxpow
         hashPrev = (pprev ? pprev->GetBlockHash() : 0);
-        this->auxpow = auxpow; // Memi patch
+        this->auxpow = auxpow; // Memi from DVC
     }
 
     IMPLEMENT_SERIALIZE
     (
+	    /* immutable stuff goes here, mutable stuff
+        * has SERIALIZE functions in CBlockIndex */
         if (!(nType & SER_GETHASH))
             READWRITE(VARINT(nVersion));
 
         READWRITE(VARINT(nHeight));
-        READWRITE(VARINT(nStatus));
         READWRITE(VARINT(nTx));
-        if (nStatus & (BLOCK_HAVE_DATA | BLOCK_HAVE_UNDO))
-            READWRITE(VARINT(nFile));
-        if (nStatus & BLOCK_HAVE_DATA)
-            READWRITE(VARINT(nDataPos));
-        if (nStatus & BLOCK_HAVE_UNDO)
-            READWRITE(VARINT(nUndoPos));
-
         // block header
         READWRITE(this->nVersion);
         READWRITE(hashPrev);
@@ -1981,7 +1980,7 @@ public:
         READWRITE(nTime);
         READWRITE(nBits);
         READWRITE(nNonce);
-        ReadWriteAuxPow(s, auxpow, nType, this->nVersion, ser_action); // Memi patch
+        ReadWriteAuxPow(s, auxpow, nType, this->nVersion, ser_action); // Memi from DVC
     )
 
     uint256 GetBlockHash() const
@@ -1999,18 +1998,6 @@ public:
     bool CheckIndex() const; // Memi patch
 
     std::string ToString() const;
-
-    /* Memi patch
-    {
-        std::string str = "CDiskBlockIndex(";
-        str += CBlockIndex::ToString();
-        str += strprintf("\n                hashBlock=%s, hashPrev=%s)",
-            GetBlockHash().ToString().c_str(),
-            hashPrev.ToString().c_str());
-        return str;
-    }
-
-   Memi end */
 
     void print() const
     {

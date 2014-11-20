@@ -392,7 +392,7 @@ Value submitblock(const Array& params, bool fHelp)
 }
 
 
-// Memi patch
+// Memi from DVC
 
 Value getworkaux(const Array& params, bool fHelp)
 {

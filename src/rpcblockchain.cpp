@@ -11,7 +11,7 @@ using namespace json_spirit;
 using namespace std;
 
 // from rpcraw.cpp
-void TxToJSON(const CTransaction& tx, const uint256 hashBlock, Object& entry); // Memi patch
+void TxToJSON(const CTransaction& tx, const uint256 hashBlock, Object& entry); // Memi from DVC
 
 void ScriptPubKeyToJSON(const CScript& scriptPubKey, Object& out);
 
@@ -59,7 +59,7 @@ Object blockToJSON(const CBlock& block, const CBlockIndex* blockindex)
     result.push_back(Pair("version", block.nVersion));
     result.push_back(Pair("merkleroot", block.hashMerkleRoot.GetHex()));
 
-    // Memi patch
+    // Memi from DVC
 
     if (block.nVersion & BLOCK_VERSION_AUXPOW) {
         // this block includes auxpow
