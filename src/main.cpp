@@ -32,7 +32,7 @@ CTxMemPool mempool;
 unsigned int nTransactionsUpdated = 0;
 
 map<uint256, CBlockIndex*> mapBlockIndex;
-uint256 hashGenesisBlock("0x00000000c7e2621cf3374b815d53f8bdf254c8f3f593bd6c6bab4160b10cfe96");//000000007ebd4433f3de976aba73790d119f0bf7cd83a7f44a148596c701bf73");
+uint256 hashGenesisBlock("0x00000000656603089ad1051b8c0a21fe1a848edfcab09fbdb25f69d264f26304");
 static CBigNum bnProofOfWorkLimit(~uint256(0) >> 32);
 CBlockIndex* pindexGenesisBlock = NULL;
 int nBestHeight = -1;
@@ -3142,7 +3142,7 @@ bool InitBlockIndex() {
         //   vMerkleTree: 4a5e1e
 
         // Genesis block
-        const char* pszTimestamp = "New York Times 23/Oct/2014 Amid Clamor Over Democracy, Hong Kong’s Tycoons Keep Silent";
+        const char* pszTimestamp = "Spiegel 30/Nov/2014 Todesschuetze von Ferguson quittiert Polizeidienst";
         CTransaction txNew;
         txNew.nVersion = 2;
         txNew.nRefHeight = 0;
@@ -3201,7 +3201,7 @@ Let this be the awaited dawn.";
             << ParseHex("c26be5ec809aa4bf6b30aa89823cff7cedc3679a")
             << OP_EQUALVERIFY
             << OP_CHECKSIG;
-        const char* pszMessage4 = "Ich w\xc3\xbc""nsche Worldleadcurrency viel Erfolg zum Nutzen der 99 Prozent!";
+        const char* pszMessage4 = "Ich w\xc3\xbc""nsche WLC viel Erfolg zum Nutzen der 99 Prozent!";
         txNew.vout[4].SetInitialValue(1LL);
         txNew.vout[4].scriptPubKey = CScript()
             << ParseHex("202020202020")
@@ -3255,13 +3255,13 @@ Let this be the awaited dawn.";
         block.hashPrevBlock = 0;
         block.hashMerkleRoot = block.BuildMerkleTree();
         block.nVersion = 1;
-        block.nTime    = 1414049288;
+        block.nTime    = 1417331514;
         block.nBits    = 0x1d00ffff;
-        block.nNonce   = 1920046647;
+        block.nNonce   = 2595788275;
 
         if (fTestNet)
         {
-            block.nTime    = 1356123600;
+            block.nTime    = 1417331510;
             block.nNonce   = 3098244593;
         }
 
@@ -3270,7 +3270,7 @@ Let this be the awaited dawn.";
         printf("%s\n", hash.ToString().c_str());
         printf("%s\n", hashGenesisBlock.ToString().c_str());
         printf("%s\n", block.hashMerkleRoot.ToString().c_str());
-        assert(block.hashMerkleRoot == uint256("0x522a4d98e5b04e92913ddaea09c6f1da38b3034878014e37080119964324ee66"));//51b23739816b46c50894a3ef56fd26286eadfd538934d5ba9d22ff6f748b002e"));
+        assert(block.hashMerkleRoot == uint256("0x0fc7ca2e66abb333537398e75e06922cec1bddbb8e15d29d8f2774f487269cd6"));
 
         //// Code to hash a new genesis block.
         //// Will hash a new block as long as set to "true" and no valid genesis block found.
