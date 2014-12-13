@@ -1191,9 +1191,8 @@ void MapPort(bool)
 // The first name is used as information source for addrman.
 // The second name should resolve to a list of seed addresses.
 static const char *strMainNetDNSSeed[][2] = {
-    {"109.73.173.119", "seed.wlc.com"},
-    {"bitty.no-ip.info", "seed.bitty.no-ip.info"},
-    {"91.108.68.164", "seed.wlcvpshost.pw"},
+    {"wlchost.no-ip.org", "wlchost.no-ip.org"}, //
+    {"wlcvpshost.no-ip.org", "wlcvpshost.no-ip.org"},
     {NULL, NULL}
 };
 
