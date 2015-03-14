@@ -32,7 +32,7 @@ CTxMemPool mempool;
 unsigned int nTransactionsUpdated = 0;
 
 map<uint256, CBlockIndex*> mapBlockIndex;
-uint256 hashGenesisBlock("0x00000000656603089ad1051b8c0a21fe1a848edfcab09fbdb25f69d264f26304");
+uint256 hashGenesisBlock("0x000000004f7ca0e7345a6c29b19a2d555fe922540adfdd74aeaa2cee98d52d85");
 static CBigNum bnProofOfWorkLimit(~uint256(0) >> 32);
 CBlockIndex* pindexGenesisBlock = NULL;
 int nBestHeight = -1;
@@ -3142,7 +3142,7 @@ bool InitBlockIndex() {
         //   vMerkleTree: 4a5e1e
 
         // Genesis block
-        const char* pszTimestamp = "Spiegel 30/Nov/2014 Todesschuetze von Ferguson quittiert Polizeidienst";
+        const char* pszTimestamp = "NY Times 13/Mar/2015 Producer Price Index Falls, Pointing to Lower Inflation ";
         CTransaction txNew;
         txNew.nVersion = 2;
         txNew.nRefHeight = 0;
@@ -3255,9 +3255,9 @@ Let this be the awaited dawn.";
         block.hashPrevBlock = 0;
         block.hashMerkleRoot = block.BuildMerkleTree();
         block.nVersion = 1;
-        block.nTime    = 1417331514;
+        block.nTime    = 1426224182;
         block.nBits    = 0x1d00ffff;
-        block.nNonce   = 2595788275;
+        block.nNonce   = 2558320123;
 
         if (fTestNet)
         {
@@ -3270,7 +3270,7 @@ Let this be the awaited dawn.";
         printf("%s\n", hash.ToString().c_str());
         printf("%s\n", hashGenesisBlock.ToString().c_str());
         printf("%s\n", block.hashMerkleRoot.ToString().c_str());
-        assert(block.hashMerkleRoot == uint256("0x0fc7ca2e66abb333537398e75e06922cec1bddbb8e15d29d8f2774f487269cd6"));
+        assert(block.hashMerkleRoot == uint256("0xe399be31d62cef5791bd0f944e3a291fb4b22cf5c6528835ce60922977722785"));
 
         //// Code to hash a new genesis block.
         //// Will hash a new block as long as set to "true" and no valid genesis block found.
