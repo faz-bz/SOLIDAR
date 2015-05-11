@@ -1193,6 +1193,7 @@ void MapPort(bool)
 static const char *strMainNetDNSSeed[][2] = {
     {"winc-ev.de", "seed.winc-ev.de"},
     {"winc-ev.com", "seed.winc-ev.com"},
+    {"seed1.wlc-dnsseed.ssdpool.com", "dnsseed.wlc-dnsseed.ssdpool.com"},
     {NULL, NULL}
 };
 
