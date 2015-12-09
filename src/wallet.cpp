@@ -1204,7 +1204,7 @@ bool CWallet::CreateTransaction(const vector<pair<CScript, mpq> >& vecSend, int 
                 BOOST_FOREACH (const PAIRTYPE(CScript, mpq)& s, vecSend)
                 {
                     const mpq qValue = RoundAbsolute(s.second, ROUND_AWAY_FROM_ZERO, 0);
-                    const mpz zValue = nValue.get_num() / qValue.get_den();
+                    const mpz zValue = qValue.get_num() / qValue.get_den();
                     CTxOut txout(mpz_to_i64(zValue), s.first);
                     if (txout.IsDust())
                     {
