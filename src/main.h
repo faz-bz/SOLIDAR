@@ -1371,6 +1371,7 @@ public:
     unsigned int nTime;
     unsigned int nBits;
     unsigned int nNonce;
+    const char stakeKey; // PoS
     boost::shared_ptr<CAuxPow> auxpow; //Memi from DVC
 
     CBlockHeader()
@@ -1387,6 +1388,7 @@ public:
         READWRITE(nTime);
         READWRITE(nBits);
         READWRITE(nNonce);
+        READWRITE(stakeKey); // PoS
 		
 		nSerSize += ReadWriteAuxPow(s, auxpow, nType, nVersion, ser_action); // Memi from DVC
     )
@@ -1419,6 +1421,12 @@ public:
     uint256 GetHash() const
     {
         return Hash(BEGIN(nVersion), END(nNonce));
+    }
+
+    // PoS Hash
+    uint256 GetStakeHash() const
+    {
+        return Hash(BEGIN(hashPrevBlock), END(hashPrevBlock), BEGIN(nTime), END(stakeKey));
     }
 
     int64 GetBlockTime() const
@@ -1753,6 +1761,10 @@ public:
     // Verification status of this block. See enum BlockStatus
     unsigned int nStatus;
 
+    // POS
+    unsigned char stakeKey;
+
+
     // block header
     int nVersion;
     uint256 hashMerkleRoot;
@@ -1774,6 +1786,7 @@ public:
         nChainTx = 0;
         nStatus = 0;
 
+        stakeKey       = 0; // PoS
         nVersion       = 0;
         hashMerkleRoot = 0;
         nTime          = 0;
@@ -1795,6 +1808,7 @@ public:
         nChainTx = 0;
         nStatus = 0;
 
+        stakeKey       = block.stakeKey; // PoS
         nVersion       = block.nVersion;
         hashMerkleRoot = block.hashMerkleRoot;
         nTime          = block.nTime;
