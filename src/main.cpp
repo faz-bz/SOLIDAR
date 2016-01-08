@@ -2015,6 +2015,30 @@ bool CBlock::ConnectBlock(CValidationState &state, CBlockIndex* pindex, CCoinsVi
     if ( qActualCoinbaseValue > qAllowedCoinbaseValue )
         return state.DoS(100, error("ConnectBlock() : coinbase pays too much (actual=%s vs limit=%s)", FormatMoney(qActualCoinbaseValue).c_str(), FormatMoney(qAllowedCoinbaseValue).c_str()));
 
+    if (pindex->nHeight >= GetPosStartBlock())
+    {
+        // PoS provide checks
+        if (pindex->nTime > GetTime())
+            return state.DoS(100, error("ConnectBlock() : Block time lies in the future"));
+
+        if (pindex->nTime =< pindex->pprev->nTime)
+            return state.DoS(100, error("ConnectBlock() : Block solved bevore before its parent"));
+
+        CTxDestination stakeDestination;
+        if (ExtractDestination(vtx[1].vin[0].scriptPubKey, stakeDestination)
+                CBitcoinAddress stakeaddr(stakeDestination));
+        else {
+            return state.DoS(100, error("ConnectBlock() : No Stakeaddress in coinbase"));
+        }
+
+        if (pindex->stakeKey != stakeaddrDest.ToString())
+            return state.DoS(100, error("ConnectBlock() : Block solved for a different Stakeaddress"));
+
+        unsigned int StakeMaxnNonce = vtx[1].getStakeValue(stakeaddr);
+        if (pindex->nNonce < 1 || pindex->nNonce > StakeMaxnNonce)
+            return state.DoS(100, error("ConnectBlock() : Nonce out of range for Stakeaddress"));
+    }
+
     if (!control.Wait())
         return state.DoS(100, false);
     int64 nTime2 = GetTimeMicros() - nStart;
@@ -2311,46 +2335,63 @@ int GetOurChainID()
     return 0x0011;
 }
 
+// PoS Start accepting Proof of Stake
+int GetPosStartBlock()
+{
+    if (fTestNet)
+        return 1; // Always on testnet
+    else
+        return 40466; // From hashcrash on always active on prodnet
+}
+
 bool CBlockHeader::CheckProofOfWork(int nHeight) const
 {
-    if (nHeight >= GetAuxPowStartBlock())
+    if (nHeight >= GetPosStartBlock()) // PoS
     {
-	    // Prevent same work from being submitted twice:
-        // - this block must have our chain ID
-        // - parent block must not have the same chain ID (see CAuxPow::Check)
-        // - index of this chain in chain merkle tree must be pre-determined (see CAuxPow::Check)
-
-        if (!fTestNet && nHeight != INT_MAX && GetChainID() != GetOurChainID())
-            return error("CheckProofOfWork() : block does not have our chain ID");
-		
-        if (auxpow.get() != NULL)
-        {
-            if (!auxpow->Check(GetHash(), GetChainID()))
-                return error("CheckProofOfWork() : AUX POW is not valid");
-
-            // Check proof of work matches claimed amount
-            if (!::CheckProofOfWork(auxpow->GetParentBlockHash(), nBits))
-                return error("CheckProofOfWork() : AUX proof of work failed");
-        }
-        else
-        {
-        // Check proof of work matches claimed amount
-        if (!::CheckProofOfWork(GetHash(), nBits))
-            return error("CheckProofOfWork() : proof of work failed");
-        }
+        if (!::CheckProofOfWork(GetStakeHash(), nBits))
+            return error("CheckProofOfWork() : proof of stake failed");
     }
     else
     {
-        if (auxpow.get() != NULL)
-            {
-            return error("CheckProofOfWork() : AUX POW is not allowed at this block");
-            }
+        if (nHeight >= GetAuxPowStartBlock())
+        {
+    	    // Prevent same work from being submitted twice:
+            // - this block must have our chain ID
+            // - parent block must not have the same chain ID (see CAuxPow::Check)
+            // - index of this chain in chain merkle tree must be pre-determined (see CAuxPow::Check)
 
-        // Check proof of work matches claimed amount
-        if (!::CheckProofOfWork(GetHash(), nBits))
-            return error("CheckProofOfWork() : proof of work failed");
+            if (!fTestNet && nHeight != INT_MAX && GetChainID() != GetOurChainID())
+                 return error("CheckProofOfWork() : block does not have our chain ID");
+		
+            if (auxpow.get() != NULL)
+            {
+                if (!auxpow->Check(GetHash(), GetChainID()))
+                    return error("CheckProofOfWork() : AUX POW is not valid");
+
+                // Check proof of work matches claimed amount
+                if (!::CheckProofOfWork(auxpow->GetParentBlockHash(), nBits))
+                    return error("CheckProofOfWork() : AUX proof of work failed");
+            }
+            else
+            {
+            // Check proof of work matches claimed amount
+            if (!::CheckProofOfWork(GetHash(), nBits))
+                return error("CheckProofOfWork() : proof of work failed");
+            }
+        }
+        else
+        {
+            if (auxpow.get() != NULL)
+                {
+                return error("CheckProofOfWork() : AUX POW is not allowed at this block");
+                }
+
+            // Check proof of work matches claimed amount
+            if (!::CheckProofOfWork(GetHash(), nBits))
+                return error("CheckProofOfWork() : proof of work failed");
+        }
+        return true;
     }
-    return true;
 }
 
 // Memi patch end
