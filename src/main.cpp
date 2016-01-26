@@ -1764,7 +1764,29 @@ bool CTransaction::CheckInputs(CValidationState &state, CCoinsViewCache &inputs,
     return true;
 }
 
+// PoS check Coins to Stake in txStakeCoins
+unsigned int CTransaction::maxCoinsPOS() const
+{
+    mpq nStakeAmount = 0;
+    for (unsigned int i = 0; i < vin.size(); i++)
+    {
+        COutPoint prevout = vin[i].prevout;
+        CTransaction& txPrev = inputsRet[prevout.hash].second;
+        CTxDestination txStakeAddress;
 
+	if (ExtractDestination(txPrev.vout[1].scriptPubKey, txaddress))
+	    CBitcoinAddress nStakeAddress(txStakeAddress);
+        else
+            printf("txCoinsStake input: %s has no output\n", prevout.hash.ToString().substr(0,10).c_str());
+
+        if (nStakeAddress.toString() == pindex->stakeAddress)
+            nStakeAmount = nStakeAmount + txPrev.vout[1].GetValueOut()
+    }
+    mpq qNonceValue = RoundAbsolute(nStakeAmount, ROUND_AWAY_FROM_ZERO, 0);
+    mpz zNonceValue = qNonceValue.get_num() / qNonceValue.get_den();
+    int nMaxCoinPos = mpz_to_i64(zNonceValue);
+    return nMaxCoinPos;
+}
 
 
 bool CBlock::DisconnectBlock(CValidationState &state, CBlockIndex *pindex, CCoinsViewCache &view, bool *pfClean)
@@ -2034,7 +2056,7 @@ bool CBlock::ConnectBlock(CValidationState &state, CBlockIndex* pindex, CCoinsVi
         if (pindex->stakeKey != stakeaddrDest.ToString())
             return state.DoS(100, error("ConnectBlock() : Block solved for a different Stakeaddress"));
 
-        unsigned int StakeMaxnNonce = vtx[1].getStakeValue(stakeaddr);
+        unsigned int StakeMaxnNonce = vtx[1].maxCoinsPOS() / 1000000;
         if (pindex->nNonce < 1 || pindex->nNonce > StakeMaxnNonce)
             return state.DoS(100, error("ConnectBlock() : Nonce out of range for Stakeaddress"));
     }
@@ -4882,7 +4904,26 @@ CBlockTemplate* CreateNewBlock(CReserveKey& reservekey)
             else
                 vecPriority.push_back(TxPriority(dPriority, dFeePerKb, &(*mi).second));
         }
-
+        
+        // PoS First transaction is for staking
+        if (pindex->nHeight >= GetPosStartBlock())
+        {
+            mpq nStakeCoins = GetBalance(nRefHeight);
+            CTransaction txCoinStake;
+            mpq nFeeRequired = 0;
+            string strFailReason;
+            vector<pair<CScript, mpq> > vecSend;
+            CScript scriptPubKey(pubkey);
+            vecSend.push_back(make_pair(scriptPubKey, nStakeCoins));
+            bool fCreated = pwalletMain->CreateTransaction(vecSend, nRefHeight, txCoinStake, reservekey, nFeeRequired, strFailReason);
+            if(!fCreated)
+            {
+               emit message(tr("Create txCoinStake"), QString::fromStdString(strFailReason),
+                            CClientUIInterface::MSG_ERROR);
+               return TransactionCreationFailed;
+            }
+        }
+        
         // Collect transactions into block
         uint64 nBlockSize = 1000;
         uint64 nBlockTx = 0;
@@ -5078,6 +5119,8 @@ void FormatHashBuffers(CBlock* pblock, char* pmidstate, char* pdata, char* phash
 bool CheckWork(CBlock* pblock, CWallet& wallet, CReserveKey& reservekey)
 {
     uint256 hash = pblock->GetHash();
+    if (pblock->nHeight >= GetPosStartBlock())
+        hash = pblock->GetStakeHash();
     uint256 hashTarget = CBigNum().SetCompact(pblock->nBits).getuint256();
 
     // Memi from DVC
@@ -5179,85 +5222,39 @@ void static BitcoinMiner(CWallet *pwallet)
         unsigned int& nBlockBits = *(unsigned int*)(pdata + 64 + 8);
         unsigned int& nBlockNonce = *(unsigned int*)(pdata + 64 + 12);
 
+        //
+        // PoS Search
+        //
 
-        //
-        // Search
-        //
-        int64 nStart = GetTime();
+        pblock->nNonce = 1;
+        pblock->nTime = pindexPrev->nTime + 1;
         uint256 hashTarget = CBigNum().SetCompact(pblock->nBits).getuint256();
-        uint256 hashbuf[2];
-        uint256& hash = *alignup<16>(hashbuf);
+        const mpq qValueMax = RoundAbsolute(GetBalance(nRefHeight), ROUND_AWAY_FROM_ZERO, 0);
+        const mpz zValueMax = qValueMax.get_num() / qValueMax.get_den();
+        int64 nNonceMax = mpz_to_i64(zValueMax) / 10000000;
+        printf("Scanning for stakeblock... \n");
         loop
         {
-            unsigned int nHashesDone = 0;
-            unsigned int nNonceFound;
-
-            // Crypto++ SHA256
-            nNonceFound = ScanHash_CryptoPP(pmidstate, pdata + 64, phash1,
-                                            (char*)&hash, nHashesDone);
-
-            // Check if something found
-            if (nNonceFound != (unsigned int) -1)
-            {
-                for (unsigned int i = 0; i < sizeof(hash)/4; i++)
-                    ((unsigned int*)&hash)[i] = ByteReverse(((unsigned int*)&hash)[i]);
-
-                if (hash <= hashTarget)
-                {
-                    // Found a solution
-                    pblock->nNonce = ByteReverse(nNonceFound);
-                    assert(hash == pblock->GetHash());
-
-                    SetThreadPriority(THREAD_PRIORITY_NORMAL);
-                    CheckWork(pblock, *pwalletMain, reservekey);
-                    SetThreadPriority(THREAD_PRIORITY_LOWEST);
+            if (pblock->GetStakeHash() <= hashTarget)
                     break;
-                }
-            }
-
-            // Meter hashes/sec
-            static int64 nHashCounter;
-            if (nHPSTimerStart == 0)
+            ++pblock->nNonce;
+            if (pblock->nNonce > nNonceMax)
             {
-                nHPSTimerStart = GetTimeMillis();
-                nHashCounter = 0;
-            }
-            else
-                nHashCounter += nHashesDone;
-            if (GetTimeMillis() - nHPSTimerStart > 4000)
-            {
-                static CCriticalSection cs;
-                {
-                    LOCK(cs);
-                    if (GetTimeMillis() - nHPSTimerStart > 4000)
-                    {
-                        dHashesPerSec = 1000.0 * nHashCounter / (GetTimeMillis() - nHPSTimerStart);
-                        nHPSTimerStart = GetTimeMillis();
-                        nHashCounter = 0;
-                        static int64 nLogTime;
-                        if (GetTime() - nLogTime > 30 * 60)
-                        {
-                            nLogTime = GetTime();
-                            printf("hashmeter %6.0f khash/s\n", dHashesPerSec/1000.0);
-                        }
-                    }
-                }
+                printf("NONCE WRAPPED, incrementing time\n");
+                if pblock->nTime >= GetTime()
+                    MilliSleep(900);
+                else
+                    ++pblock->nTime;
             }
 
             // Check for stop or if block needs to be rebuilt
             boost::this_thread::interruption_point();
             if (vNodes.empty())
                 break;
-            if (nBlockNonce >= 0xffff0000)
-                break;
-            if (nTransactionsUpdated != nTransactionsUpdatedLast && GetTime() - nStart > 60)
+            if (nTransactionsUpdated != nTransactionsUpdatedLast && GetTime())
                 break;
             if (pindexPrev != pindexBest)
                 break;
-
-            // Update nTime every few seconds
-            pblock->UpdateTime(pindexPrev);
-            nBlockTime = ByteReverse(pblock->nTime);
             if (fTestNet)
             {
                 // Changing pblock->nTime can change work required on testnet:
