@@ -1765,7 +1765,7 @@ bool CTransaction::CheckInputs(CValidationState &state, CCoinsViewCache &inputs,
 }
 
 // PoS check Coins to Stake in txStakeCoins
-unsigned int CTransaction::maxCoinsPOS() const
+unsigned int CTransaction::maxCoinsPOS(char stakeKey) const
 {
     mpq nStakeAmount = 0;
     for (unsigned int i = 0; i < vin.size(); i++)
@@ -1774,12 +1774,12 @@ unsigned int CTransaction::maxCoinsPOS() const
         CTransaction& txPrev = inputsRet[prevout.hash].second;
         CTxDestination txStakeAddress;
 
-	if (ExtractDestination(txPrev.vout[1].scriptPubKey, txaddress))
+	if (ExtractDestination(txPrev.vout[1].scriptPubKey, txStakeAddress))
 	    CBitcoinAddress nStakeAddress(txStakeAddress);
         else
             printf("txCoinsStake input: %s has no output\n", prevout.hash.ToString().substr(0,10).c_str());
 
-        if (nStakeAddress.toString() == pindex->stakeAddress)
+        if (nStakeAddress.toString() == stakeKey)
             nStakeAmount = nStakeAmount + txPrev.vout[1].GetValueOut()
     }
     mpq qNonceValue = RoundAbsolute(nStakeAmount, ROUND_AWAY_FROM_ZERO, 0);
@@ -2045,18 +2045,20 @@ bool CBlock::ConnectBlock(CValidationState &state, CBlockIndex* pindex, CCoinsVi
 
         if (pindex->nTime =< pindex->pprev->nTime)
             return state.DoS(100, error("ConnectBlock() : Block solved bevore before its parent"));
+            
+        COutPoint prevout = vtx[1].vin[1].prevout;
+        CTransaction& txPrev = inputsRet[prevout.hash].second;
+        CTxDestination txStakeAddress;
 
-        CTxDestination stakeDestination;
-        if (ExtractDestination(vtx[1].vin[0].scriptPubKey, stakeDestination)
-                CBitcoinAddress stakeaddr(stakeDestination));
-        else {
+	if (ExtractDestination(txPrev.vout[1].scriptPubKey, txStakeAddress))
+	    CBitcoinAddress stakeaddrDest(txStakeAddress);
+        else
             return state.DoS(100, error("ConnectBlock() : No Stakeaddress in coinbase"));
-        }
 
-        if (pindex->stakeKey != stakeaddrDest.ToString())
+        if (stakeaddrDest.toString() != pindex->stakeKey)
             return state.DoS(100, error("ConnectBlock() : Block solved for a different Stakeaddress"));
 
-        unsigned int StakeMaxnNonce = vtx[1].maxCoinsPOS() / 1000000;
+        unsigned int StakeMaxnNonce = vtx[1].maxCoinsPOS(pindex->stakeKey) / 1000000;
         if (pindex->nNonce < 1 || pindex->nNonce > StakeMaxnNonce)
             return state.DoS(100, error("ConnectBlock() : Nonce out of range for Stakeaddress"));
     }
@@ -4923,6 +4925,17 @@ CBlockTemplate* CreateNewBlock(CReserveKey& reservekey)
                return TransactionCreationFailed;
             }
         }
+        // PoS Save first vin out as stakeKey
+        COutPoint prevout = vtx[1].vin[1].prevout;
+        CTransaction& txPrev = inputsRet[prevout.hash].second;
+        CTxDestination txStakeAddress;
+
+	if (ExtractDestination(txPrev.vout[1].scriptPubKey, txStakeAddress))
+	    CBitcoinAddress nStakeAddress(txStakeAddress);
+        else
+            printf("Could not save stakeKey from input: %s\n", prevout.hash.ToString().substr(0,10).c_str());
+        pindex->stakeKey = nStakeAddress.ToString();
+
         
         // Collect transactions into block
         uint64 nBlockSize = 1000;
