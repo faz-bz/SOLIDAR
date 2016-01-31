@@ -1765,7 +1765,7 @@ bool CTransaction::CheckInputs(CValidationState &state, CCoinsViewCache &inputs,
 }
 
 // PoS check Coins to Stake in txStakeCoins
-unsigned int CTransaction::maxCoinsPOS(char stakeKey) const
+unsigned int64 CTransaction::maxCoinsPOS(char stakeKey) const
 {
     mpq nStakeAmount = 0;
     for (unsigned int i = 0; i < vin.size(); i++)
@@ -1780,11 +1780,11 @@ unsigned int CTransaction::maxCoinsPOS(char stakeKey) const
             printf("txCoinsStake input: %s has no output\n", prevout.hash.ToString().substr(0,10).c_str());
 
         if (nStakeAddress.toString() == stakeKey)
-            nStakeAmount = nStakeAmount + txPrev.vout[1].GetValueOut()
+            nStakeAmount = nStakeAmount + txPrev.vout[1].nValue;
     }
     mpq qNonceValue = RoundAbsolute(nStakeAmount, ROUND_AWAY_FROM_ZERO, 0);
     mpz zNonceValue = qNonceValue.get_num() / qNonceValue.get_den();
-    int nMaxCoinPos = mpz_to_i64(zNonceValue);
+    int64 nMaxCoinPos = mpz_to_i64(zNonceValue);
     return nMaxCoinPos;
 }
 
