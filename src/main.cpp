@@ -1240,6 +1240,23 @@ static const int64 nFilteredTargetTimespan = nFilteredInterval * nTargetSpacing;
 // minimum amount of work that could possibly be required nTime after
 // minimum work required was nBase
 //
+
+// PoS Start accepting Proof of Stake
+int GetPosStartBlock()
+{
+    if (fTestNet)
+        return 1; // Always on testnet
+    else
+        return 50048; // From hashcrash on always active on prodnet
+}
+
+if (nHeight >= GetPosStartBlock())
+{
+    static CBigNum newbnProofOfWorkLimit(~uint256(0) >> 5);
+    bnProofOfWorkLimit = newbnProofOfWorkLimit;
+    
+}
+
 unsigned int ComputeMinWork(unsigned int nBase, int64 nTime)
 {
     // Testnet has min-difficulty blocks
@@ -1306,7 +1323,7 @@ unsigned int static GetNextWorkRequired(const CBlockIndex* pindexLast, const CBl
     // Special, one-time adjustment due to the "hash crash" of Apr/May 2013
     // which rushed the introduction of the new difficulty adjustment filter.
     // We adjust back to the difficulty prior to the last adjustment.
-    if ( !fTestNet && pindexLast->nHeight==(DIFF_FILTER_THRESHOLD-1) )
+    if ( !fTestNet && pindexLast->nHeight==(GetPosStartBlock()-1) )
         return 0x1b01c13a;
 
     bool fUseFilter =
@@ -2357,15 +2374,6 @@ int GetAuxPowStartBlock()
 int GetOurChainID()
 {
     return 0x0011;
-}
-
-// PoS Start accepting Proof of Stake
-int GetPosStartBlock()
-{
-    if (fTestNet)
-        return 1; // Always on testnet
-    else
-        return 40466; // From hashcrash on always active on prodnet
 }
 
 bool CBlockHeader::CheckProofOfWork(int nHeight) const
