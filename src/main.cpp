@@ -1324,7 +1324,7 @@ unsigned int static GetNextWorkRequired(const CBlockIndex* pindexLast, const CBl
     // which rushed the introduction of the new difficulty adjustment filter.
     // We adjust back to the difficulty prior to the last adjustment.
     if ( !fTestNet && pindexLast->nHeight==(GetPosStartBlock()-1) )
-        return 0x1b01c13a;
+        return nProofOfWorkLimit;
 
     bool fUseFilter =
          (fTestNet && pindexLast->nHeight>=(DIFF_FILTER_THRESHOLD_TESTNET-1)) ||
@@ -2728,9 +2728,6 @@ bool ProcessBlock(CValidationState &state, CNode* pfrom, CBlock* pblock, CDiskBl
         {
             return state.DoS(100, error("ProcessBlock() : block with timestamp before last checkpoint"));
         }
-#if 0
-        // Now that we are using a FIR filter (see above) this is no longer
-        // a straightforward calculation.
         CBigNum bnNewBlock;
         bnNewBlock.SetCompact(pblock->nBits);
         CBigNum bnRequired;
@@ -2739,7 +2736,6 @@ bool ProcessBlock(CValidationState &state, CNode* pfrom, CBlock* pblock, CDiskBl
         {
             return state.DoS(100, error("ProcessBlock() : block with too little proof-of-work"));
         }
-#endif
     }
 
 
