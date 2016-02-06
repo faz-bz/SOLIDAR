@@ -34,6 +34,7 @@ unsigned int nTransactionsUpdated = 0;
 map<uint256, CBlockIndex*> mapBlockIndex;
 uint256 hashGenesisBlock("0x000000004f7ca0e7345a6c29b19a2d555fe922540adfdd74aeaa2cee98d52d85");
 static CBigNum bnProofOfWorkLimit(~uint256(0) >> 32);
+static CBigNum bnProofOfStakeLimit(~uint256(0) >> 5);
 CBlockIndex* pindexGenesisBlock = NULL;
 int nBestHeight = -1;
 uint256 nBestChainWork = 0;
@@ -1250,15 +1251,10 @@ int GetPosStartBlock()
         return 50048; // From hashcrash on always active on prodnet
 }
 
-if (nHeight >= GetPosStartBlock())
-{
-    static CBigNum newbnProofOfWorkLimit(~uint256(0) >> 5);
-    bnProofOfWorkLimit = newbnProofOfWorkLimit;
-    
-}
-
 unsigned int ComputeMinWork(unsigned int nBase, int64 nTime)
 {
+    if (pindexBest->nHeight >= GetPosStartBlock()) // POS
+        bnProofOfWorkLimit = bnProofOfStakeLimit;
     // Testnet has min-difficulty blocks
     // after nTargetSpacing*2 time between blocks:
     if (fTestNet && nTime > nTargetSpacing*2)
@@ -1280,6 +1276,9 @@ unsigned int ComputeMinWork(unsigned int nBase, int64 nTime)
 
 unsigned int static GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock)
 {
+    if ( !fTestNet && pindexLast->nHeight==(GetPosStartBlock()-1) ) // POS
+        bnProofOfWorkLimit = bnProofOfStakeLimit;
+
     static unsigned int nProofOfWorkLimit = bnProofOfWorkLimit.GetCompact();
 
     #define WINDOW 144
@@ -1428,6 +1427,9 @@ unsigned int static GetNextWorkRequired(const CBlockIndex* pindexLast, const CBl
 
 bool CheckProofOfWork(uint256 hash, unsigned int nBits)
 {
+    if (pindexBest->nHeight >= GetPosStartBlock()) // POS
+        bnProofOfWorkLimit = bnProofOfStakeLimit;
+        
     CBigNum bnTarget;
     bnTarget.SetCompact(nBits);
 
