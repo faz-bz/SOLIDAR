@@ -1371,7 +1371,7 @@ public:
     unsigned int nTime;
     unsigned int nBits;
     unsigned int nNonce;
-    const char stakeKey; // PoS
+    unsigned char stakeKey; // PoS
     boost::shared_ptr<CAuxPow> auxpow; //Memi from DVC
 
     CBlockHeader()
