@@ -355,6 +355,16 @@ unsigned int LimitOrphanTxSize(unsigned int nMaxOrphans)
 // CTransaction / CTxOut
 //
 
+bool CTransaction::ReadFromDisk(CTxDB& txdb, const uint256& hash, CTxIndex& txindexRet)
+{
+    SetNull();
+    if (!txdb.ReadTxIndex(hash, txindexRet))
+         return false;
+    if (!ReadFromDisk(txindexRet.pos))
+         return false;
+    return true;
+}
+
 bool CTxOut::IsDust() const
 {
     // "Dust" is defined in terms of CTransaction::nMinRelayTxFee,
@@ -1784,26 +1794,29 @@ bool CTransaction::CheckInputs(CValidationState &state, CCoinsViewCache &inputs,
 }
 
 // PoS check Coins to Stake in txStakeCoins
-unsigned int64 CTransaction::maxCoinsPOS(char stakeKey) const
+unsigned int CTransaction::maxCoinsPOS(char stakeKey) const
 {
     mpq nStakeAmount = 0;
-    for (unsigned int i = 0; i < vin.size(); i++)
+    BOOST_FOREACH(const CTxIn& txin, vin)
     {
-        COutPoint prevout = vin[i].prevout;
-        CTransaction& txPrev = inputsRet[prevout.hash].second;
+    	CTxDB txdb("r");
+        COutPoint prevout = txin.prevout;
+        CTransaction txPrev;
+        if (!txPrev.ReadFromDisk(txdb, prevout.hash, txindex))
+            continue;  // previous transaction not in main chain
         CTxDestination txStakeAddress;
 
-	if (ExtractDestination(txPrev.vout[1].scriptPubKey, txStakeAddress))
+	if (ExtractDestination(txPrev.scriptPubKey, txStakeAddress))
 	    CBitcoinAddress nStakeAddress(txStakeAddress);
         else
             printf("txCoinsStake input: %s has no output\n", prevout.hash.ToString().substr(0,10).c_str());
 
         if (nStakeAddress.toString() == stakeKey)
-            nStakeAmount = nStakeAmount + txPrev.vout[1].nValue;
+            nStakeAmount = nStakeAmount + txPrev.nValue;
     }
     mpq qNonceValue = RoundAbsolute(nStakeAmount, ROUND_AWAY_FROM_ZERO, 0);
     mpz zNonceValue = qNonceValue.get_num() / qNonceValue.get_den();
-    int64 nMaxCoinPos = mpz_to_i64(zNonceValue);
+    int nMaxCoinPos = mpz_to_i64(zNonceValue);
     return nMaxCoinPos;
 }
 
