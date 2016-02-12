@@ -659,6 +659,9 @@ public:
         @return	Sum of value of all inputs (scriptSigs)
      */
     mpq GetValueIn(CCoinsViewCache& mapInputs) const;
+    
+    // POS
+    unsigned int maxCoinsPOS(char stakeKey) const;
 
     static bool AllowFree(double dPriority)
     {
