@@ -478,6 +478,17 @@ void CDBEnv::Flush(bool fShutdown)
 
 
 
+// POS
+// CTxDB
+//
+
+bool CTxDB::ReadTxIndex(uint256 hash, CTxIndex& txindex)
+{
+    assert(!fClient);
+    txindex.SetNull();
+    return Read(make_pair(string("tx"), hash), txindex);
+}
+
 
 
 
