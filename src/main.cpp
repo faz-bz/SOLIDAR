@@ -355,16 +355,6 @@ unsigned int LimitOrphanTxSize(unsigned int nMaxOrphans)
 // CTransaction / CTxOut
 //
 
-bool CTransaction::ReadFromDisk(CBlockTreeDB& txdb, const uint256& hash, CDiskTxPos& txindexRet)
-{
-    SetNull();
-    if (!txdb.ReadTxIndex(hash, txindexRet))
-         return false;
-    if (!ReadFromDisk(txindexRet.pos))
-         return false;
-    return true;
-}
-
 bool CTxOut::IsDust() const
 {
     // "Dust" is defined in terms of CTransaction::nMinRelayTxFee,
@@ -1799,11 +1789,12 @@ unsigned int CTransaction::maxCoinsPOS(char stakeKey) const
     mpq nStakeAmount = 0;
     BOOST_FOREACH(const CTxIn& txin, vin)
     {
-    	CBlockTreeDB txdb("r");
-        COutPoint prevout = txin.prevout;
+    	COutPoint prevout = txin.prevout;
         CTransaction txPrev;
-        if (!txPrev.ReadFromDisk(txdb, prevout.hash, txindex))
-            continue;  // previous transaction not in main chain
+        uint256 hashBlock = 0;
+        if (!GetTransaction(hash, txPrev, hashBlock, true))
+            return error("CTransaction::maxCoinsPOS() : GetTransaction() can't find txid");
+            
         CTxDestination txStakeAddress;
 
 	if (ExtractDestination(txPrev.scriptPubKey, txStakeAddress))
