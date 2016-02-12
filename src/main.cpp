@@ -355,7 +355,7 @@ unsigned int LimitOrphanTxSize(unsigned int nMaxOrphans)
 // CTransaction / CTxOut
 //
 
-bool CTransaction::ReadFromDisk(CTxDB& txdb, const uint256& hash, CTxIndex& txindexRet)
+bool CTransaction::ReadFromDisk(CBlockTreeDB& txdb, const uint256& hash, CDiskTxPos& txindexRet)
 {
     SetNull();
     if (!txdb.ReadTxIndex(hash, txindexRet))
@@ -1799,7 +1799,7 @@ unsigned int CTransaction::maxCoinsPOS(char stakeKey) const
     mpq nStakeAmount = 0;
     BOOST_FOREACH(const CTxIn& txin, vin)
     {
-    	CTxDB txdb("r");
+    	CBlockTreeDB txdb("r");
         COutPoint prevout = txin.prevout;
         CTransaction txPrev;
         if (!txPrev.ReadFromDisk(txdb, prevout.hash, txindex))
