@@ -307,8 +307,18 @@ public:
 };
 
 
-
-
+// POS
+/** Access to the transaction database (blkindex.dat) */
+class CTxDB : public CDB
+{
+public:
+    CTxDB(const char* pszMode="r+") : CDB("blkindex.dat", pszMode) { }
+private:
+    CTxDB(const CTxDB&);
+    void operator=(const CTxDB&);
+public:
+    bool ReadTxIndex(uint256 hash, CTxIndex& txindex);
+};
 
 
 
