@@ -2060,26 +2060,31 @@ bool CBlock::ConnectBlock(CValidationState &state, CBlockIndex* pindex, CCoinsVi
     if ( qActualCoinbaseValue > qAllowedCoinbaseValue )
         return state.DoS(100, error("ConnectBlock() : coinbase pays too much (actual=%s vs limit=%s)", FormatMoney(qActualCoinbaseValue).c_str(), FormatMoney(qAllowedCoinbaseValue).c_str()));
 
+    // POS provide checks
     if (pindex->nHeight >= GetPosStartBlock())
     {
-        // PoS provide checks
         if (pindex->nTime > GetTime())
             return state.DoS(100, error("ConnectBlock() : Block time lies in the future"));
 
-        if (pindex->nTime =< pindex->pprev->nTime)
+        if (pindex->nTime <= pindex->pprev->nTime)
             return state.DoS(100, error("ConnectBlock() : Block solved bevore before its parent"));
-            
+        
         COutPoint prevout = vtx[1].vin[1].prevout;
-        CTransaction& txPrev = inputsRet[prevout.hash].second;
+        CTransaction txPrev;
+        uint256 hashBlock = 0;
+        if (!GetTransaction(prevout.hash, txPrev, hashBlock, true))
+            return error("CTransaction::maxCoinsPOS() : GetTransaction() can't find txid");
+        
         CTxDestination txStakeAddress;
 
-	if (ExtractDestination(txPrev.vout[1].scriptPubKey, txStakeAddress))
-	    CBitcoinAddress stakeaddrDest(txStakeAddress);
+	    if (ExtractDestination(txPrev.vout[1].scriptPubKey, txStakeAddress))
+        {
+	        CBitcoinAddress stakeaddrDest(txStakeAddress);
+            if (stakeaddrDest.toString() != pindex->stakeKey)
+                return state.DoS(100, error("ConnectBlock() : Block solved for a different Stakeaddress"));
+        }
         else
             return state.DoS(100, error("ConnectBlock() : No Stakeaddress in coinbase"));
-
-        if (stakeaddrDest.toString() != pindex->stakeKey)
-            return state.DoS(100, error("ConnectBlock() : Block solved for a different Stakeaddress"));
 
         unsigned int StakeMaxnNonce = vtx[1].maxCoinsPOS(pindex->stakeKey) / 1000000;
         if (pindex->nNonce < 1 || pindex->nNonce > StakeMaxnNonce)
@@ -2999,26 +3004,6 @@ FILE* OpenDiskFile(const CDiskBlockPos &pos, const char *prefix, bool fReadOnly)
 
 FILE* OpenBlockFile(const CDiskBlockPos &pos, bool fReadOnly) {
     return OpenDiskFile(pos, "blk", fReadOnly);
-}
-
-// POS OpenBlockFile
-
-FILE* OpenBlockFile(unsigned int nFile, unsigned int nBlockPos, const char* pszMode)
-{
-    if (nFile == -1)
-        return NULL;
-    FILE* file = fopen((GetDataDir() / strprintf("blk%04d.dat", nFile)).string().c_str(), pszMode);
-    if (!file)
-        return NULL;
-    if (nBlockPos != 0 && !strchr(pszMode, 'a') && !strchr(pszMode, 'w'))
-    {
-        if (fseek(file, nBlockPos, SEEK_SET) != 0)
-        {
-            fclose(file);
-            return NULL;
-        }
-    }
-    return file;
 }
 
 FILE* OpenUndoFile(const CDiskBlockPos &pos, bool fReadOnly) {
@@ -4938,7 +4923,7 @@ CBlockTemplate* CreateNewBlock(CReserveKey& reservekey)
         }
         
         // PoS First transaction is for staking
-        if (pindex->nHeight >= GetPosStartBlock())
+        if (nHeight >= GetPosStartBlock())
         {
             mpq nStakeCoins = GetBalance(nRefHeight);
             CTransaction txCoinStake;
