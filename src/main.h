@@ -171,7 +171,7 @@ void ThreadScriptCheck();
 /** Run the miner threads */
 void GenerateBitcoins(bool fGenerate, CWallet* pwallet);
 /** Generate a new block, without valid proof-of-work */
-CBlockTemplate* CreateNewBlock(CReserveKey& reservekey);
+CBlockTemplate* CreateNewBlock(CReserveKey& reservekey, CWallet pwallet);
 /** Modify the extranonce in a block */
 void IncrementExtraNonce(CBlock* pblock, CBlockIndex* pindexPrev, unsigned int& nExtraNonce);
 /** Memi from DVC */
@@ -661,7 +661,7 @@ public:
     mpq GetValueIn(CCoinsViewCache& mapInputs) const;
     
     // POS
-    unsigned int maxCoinsPOS(char stakeKey) const;
+    unsigned int maxCoinsPOS(CTxDestination &stakeKey) const;
 
     static bool AllowFree(double dPriority)
     {
@@ -1375,7 +1375,7 @@ public:
     unsigned int nTime;
     unsigned int nBits;
     unsigned int nNonce;
-    unsigned char stakeKey; // PoS
+    CTxDestination stakeKey; // PoS
     boost::shared_ptr<CAuxPow> auxpow; //Memi from DVC
 
     CBlockHeader()
@@ -1766,7 +1766,7 @@ public:
     unsigned int nStatus;
 
     // POS
-    unsigned char stakeKey;
+    CTxDestination stakeKey;
 
 
     // block header
