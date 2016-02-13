@@ -1784,7 +1784,7 @@ bool CTransaction::CheckInputs(CValidationState &state, CCoinsViewCache &inputs,
 }
 
 // PoS check Coins to Stake in txStakeCoins
-unsigned int CTransaction::maxCoinsPOS(char stakeKey) const
+unsigned int CTransaction::maxCoinsPOS(CTxDestination &stakeKey) const
 {
     mpq nStakeAmount = 0;
     BOOST_FOREACH(const CTxIn& txin, vin)
@@ -1792,18 +1792,20 @@ unsigned int CTransaction::maxCoinsPOS(char stakeKey) const
     	COutPoint prevout = txin.prevout;
         CTransaction txPrev;
         uint256 hashBlock = 0;
-        if (!GetTransaction(hash, txPrev, hashBlock, true))
+        if (!GetTransaction(prevout.hash, txPrev, hashBlock, true))
             return error("CTransaction::maxCoinsPOS() : GetTransaction() can't find txid");
             
         CTxDestination txStakeAddress;
 
-	if (ExtractDestination(txPrev.scriptPubKey, txStakeAddress))
-	    CBitcoinAddress nStakeAddress(txStakeAddress);
+	if (ExtractDestination(txPrev.vout[1].scriptPubKey, txStakeAddress))
+	{
+            if (nStakeAddress == stakeKey)
+                nStakeAmount = nStakeAmount + txPrev.GetValueOut();
+            else
+                printf("txCoinsStake input: %s has no StakeAddress\n", prevout.hash.ToString().substr(0,10).c_str());
+	}
         else
             printf("txCoinsStake input: %s has no output\n", prevout.hash.ToString().substr(0,10).c_str());
-
-        if (nStakeAddress.toString() == stakeKey)
-            nStakeAmount = nStakeAmount + txPrev.nValue;
     }
     mpq qNonceValue = RoundAbsolute(nStakeAmount, ROUND_AWAY_FROM_ZERO, 0);
     mpz zNonceValue = qNonceValue.get_num() / qNonceValue.get_den();
@@ -2073,14 +2075,13 @@ bool CBlock::ConnectBlock(CValidationState &state, CBlockIndex* pindex, CCoinsVi
         CTransaction txPrev;
         uint256 hashBlock = 0;
         if (!GetTransaction(prevout.hash, txPrev, hashBlock, true))
-            return error("CTransaction::maxCoinsPOS() : GetTransaction() can't find txid");
+            return error("ConnectBlock() : GetTransaction() can't find stake txid");
         
         CTxDestination txStakeAddress;
 
 	    if (ExtractDestination(txPrev.vout[1].scriptPubKey, txStakeAddress))
         {
-	        CBitcoinAddress stakeaddrDest(txStakeAddress);
-            if (stakeaddrDest.toString() != pindex->stakeKey)
+            if (txStakeAddress != pindex->stakeKey)
                 return state.DoS(100, error("ConnectBlock() : Block solved for a different Stakeaddress"));
         }
         else
@@ -4785,7 +4786,7 @@ public:
 };
 
 
-CBlockTemplate* CreateNewBlock(CReserveKey& reservekey)
+CBlockTemplate* CreateNewBlock(CReserveKey& reservekey, CWallet pwallet)
 {
     // Create new block
     auto_ptr<CBlockTemplate> pblocktemplate(new CBlockTemplate());
@@ -4879,7 +4880,7 @@ CBlockTemplate* CreateNewBlock(CReserveKey& reservekey)
                         break;
                     }
 
-                    // Has to wait for dependencies
+                    // Has to wait for  
                     if (!porphan)
                     {
                         // Use list for automatic deletion
@@ -4925,7 +4926,7 @@ CBlockTemplate* CreateNewBlock(CReserveKey& reservekey)
         // PoS First transaction is for staking
         if (nHeight >= GetPosStartBlock())
         {
-            mpq nStakeCoins = GetBalance(nRefHeight);
+            mpq nStakeCoins = pwallet.GetBalance(nRefHeight);
             CTransaction txCoinStake;
             mpq nFeeRequired = 0;
             string strFailReason;
@@ -4935,21 +4936,13 @@ CBlockTemplate* CreateNewBlock(CReserveKey& reservekey)
             bool fCreated = pwalletMain->CreateTransaction(vecSend, nRefHeight, txCoinStake, reservekey, nFeeRequired, strFailReason);
             if(!fCreated)
             {
-               emit message(tr("Create txCoinStake"), QString::fromStdString(strFailReason),
+                emit message(tr("Create txCoinStake"), QString::fromStdString(strFailReason),
                             CClientUIInterface::MSG_ERROR);
-               return TransactionCreationFailed;
+                return TransactionCreationFailed;
             }
+            CTxDestination txStakeAddress(reservekey);
+            pindex->stakeKey = txStakeAddress;
         }
-        // PoS Save first vin out as stakeKey
-        COutPoint prevout = vtx[1].vin[1].prevout;
-        CTransaction& txPrev = inputsRet[prevout.hash].second;
-        CTxDestination txStakeAddress;
-
-	if (ExtractDestination(txPrev.vout[1].scriptPubKey, txStakeAddress))
-	    CBitcoinAddress nStakeAddress(txStakeAddress);
-        else
-            printf("Could not save stakeKey from input: %s\n", prevout.hash.ToString().substr(0,10).c_str());
-        pindex->stakeKey = nStakeAddress.ToString();
 
         
         // Collect transactions into block
@@ -5228,7 +5221,7 @@ void static BitcoinMiner(CWallet *pwallet)
         unsigned int nTransactionsUpdatedLast = nTransactionsUpdated;
         CBlockIndex* pindexPrev = pindexBest;
 
-        auto_ptr<CBlockTemplate> pblocktemplate(CreateNewBlock(reservekey));
+        auto_ptr<CBlockTemplate> pblocktemplate(CreateNewBlock(reservekey, pwallet));
         if (!pblocktemplate.get())
             return;
         CBlock *pblock = &pblocktemplate->block;
