@@ -661,7 +661,7 @@ public:
     mpq GetValueIn(CCoinsViewCache& mapInputs) const;
     
     // POS
-    unsigned int maxCoinsPOS(CTxDestination &stakeKey) const;
+    unsigned int maxCoinsPOS(unsigned char stakeKey) const;
 
     static bool AllowFree(double dPriority)
     {
@@ -1375,7 +1375,7 @@ public:
     unsigned int nTime;
     unsigned int nBits;
     unsigned int nNonce;
-    CTxDestination stakeKey; // PoS
+    unsigned char stakeKey; // PoS
     boost::shared_ptr<CAuxPow> auxpow; //Memi from DVC
 
     CBlockHeader()
@@ -1766,7 +1766,7 @@ public:
     unsigned int nStatus;
 
     // POS
-    CTxDestination stakeKey;
+    unsigned char stakeKey;
 
 
     // block header
