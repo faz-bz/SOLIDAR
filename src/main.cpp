@@ -1784,7 +1784,7 @@ bool CTransaction::CheckInputs(CValidationState &state, CCoinsViewCache &inputs,
 }
 
 // PoS check Coins to Stake in txStakeCoins
-unsigned int CTransaction::maxCoinsPOS(CTxDestination &stakeKey) const
+unsigned int CTransaction::maxCoinsPOS(unsigned char stakeKey) const
 {
     mpq nStakeAmount = 0;
     BOOST_FOREACH(const CTxIn& txin, vin)
@@ -1799,7 +1799,9 @@ unsigned int CTransaction::maxCoinsPOS(CTxDestination &stakeKey) const
 
 	if (ExtractDestination(txPrev.vout[1].scriptPubKey, txStakeAddress))
 	{
-            if (nStakeAddress == stakeKey)
+            CBitcoinAdress nStakeAddress;
+	    unsigned char nStakeKey = nStakeAddress.ToString().c_str();
+            if (nStakeKey == stakeKey)
                 nStakeAmount = nStakeAmount + txPrev.GetValueOut();
             else
                 printf("txCoinsStake input: %s has no StakeAddress\n", prevout.hash.ToString().substr(0,10).c_str());
@@ -2081,7 +2083,9 @@ bool CBlock::ConnectBlock(CValidationState &state, CBlockIndex* pindex, CCoinsVi
 
 	    if (ExtractDestination(txPrev.vout[1].scriptPubKey, txStakeAddress))
         {
-            if (txStakeAddress != pindex->stakeKey)
+            CBitcoinAdress nStakeAddress;
+	    unsigned char nStakeKey = nStakeAddress.ToString().c_str();
+            if (nStakeKey != pindex->stakeKey)
                 return state.DoS(100, error("ConnectBlock() : Block solved for a different Stakeaddress"));
         }
         else
@@ -4926,11 +4930,14 @@ CBlockTemplate* CreateNewBlock(CReserveKey& reservekey, CWallet pwallet)
         // PoS First transaction is for staking
         if (nHeight >= GetPosStartBlock())
         {
-            mpq nStakeCoins = pwallet.GetBalance(nRefHeight);
+            mpq nStakeCoins = pwallet.GetBalance(nHeight);
             CTransaction txCoinStake;
             mpq nFeeRequired = 0;
             string strFailReason;
             vector<pair<CScript, mpq> > vecSend;
+            CPubKey pubkey;
+            if (!reservekey.GetReservedKey(pubkey))
+                return NULL;
             CScript scriptPubKey(pubkey);
             vecSend.push_back(make_pair(scriptPubKey, nStakeCoins));
             bool fCreated = pwalletMain->CreateTransaction(vecSend, nRefHeight, txCoinStake, reservekey, nFeeRequired, strFailReason);
@@ -4941,7 +4948,7 @@ CBlockTemplate* CreateNewBlock(CReserveKey& reservekey, CWallet pwallet)
                 return TransactionCreationFailed;
             }
             CTxDestination txStakeAddress(reservekey);
-            pindex->stakeKey = txStakeAddress;
+            pindex->stakeKey = CBitcoinAddress(txStakeAddress.ToString().c_str();;
         }
 
         
