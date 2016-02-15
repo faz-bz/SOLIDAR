@@ -1997,7 +1997,7 @@ bool CBlock::ConnectBlock(CValidationState &state, CBlockIndex* pindex, CCoinsVi
 
     // Errorcodes for no WLC tax payed: Wrong amount or wrong address.
     mpq qCheckTaxPayment  = ((GetInitialDistributionAmount(pindex->nHeight) + GetPerpetualSubsidyAmount(pindex->nHeight)) * TITHE_RATIO);
-    const mpq qTaxValue = RoundAbsolute(qCheckTaxPayment, ROUND_AWAY_FROM_ZERO);
+    const mpq qTaxValue = RoundAbsolute(qCheckTaxPayment, ROUND_TOWARDS_ZERO);
     const mpz zTaxValue = qTaxValue.get_num() / qTaxValue.get_den();
     int64 nTaxValue = mpz_to_i64(zTaxValue);
 
