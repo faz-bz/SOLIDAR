@@ -1108,7 +1108,7 @@ mpq static GetPerpetualSubsidyAmount(int nHeight)
 {
     mpq nPSubsidy = 0;
     if (nHeight >= 5000) {
-        nPSubsidy = MPQ_MAX_MONEY / DEMURRAGE_RATE;
+        nPSubsidy = MPQ_MAX_MONEY / DEMURRAGE_RATE -1;
         }
     return nPSubsidy;
 }
@@ -1997,7 +1997,7 @@ bool CBlock::ConnectBlock(CValidationState &state, CBlockIndex* pindex, CCoinsVi
 
     // Errorcodes for no WLC tax payed: Wrong amount or wrong address.
     mpq qCheckTaxPayment  = ((GetInitialDistributionAmount(pindex->nHeight) + GetPerpetualSubsidyAmount(pindex->nHeight)) * TITHE_RATIO);
-    const mpq qTaxValue = RoundAbsolute(qCheckTaxPayment, ROUND_TOWARDS_ZERO);
+    const mpq qTaxValue = RoundAbsolute(qCheckTaxPayment, ROUND_AWAY_FROM_ZERO);
     const mpz zTaxValue = qTaxValue.get_num() / qTaxValue.get_den();
     int64 nTaxValue = mpz_to_i64(zTaxValue);
 
