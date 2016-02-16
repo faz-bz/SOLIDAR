@@ -12,7 +12,7 @@
 #include "ui_interface.h"
 #include "checkqueue.h"
 #include "auxpow.h" // Memi from DVC
-#include <boost/algorithm/string/replace.hpp>
+#include <boost/algorithm/string/replace.hpp>ge
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/fstream.hpp>
 
@@ -1108,7 +1108,7 @@ mpq static GetPerpetualSubsidyAmount(int nHeight)
 {
     mpq nPSubsidy = 0;
     if (nHeight >= 5000) {
-        nPSubsidy = MPQ_MAX_MONEY / DEMURRAGE_RATE -1;
+        nPSubsidy = MPQ_MAX_MONEY / DEMURRAGE_RATE;
         }
     return nPSubsidy;
 }
