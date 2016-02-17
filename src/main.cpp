@@ -12,6 +12,7 @@
 #include "ui_interface.h"
 #include "checkqueue.h"
 #include "auxpow.h" // Memi from DVC
+#include "base58.h" // POS
 #include <boost/algorithm/string/replace.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/fstream.hpp>
@@ -1784,7 +1785,7 @@ bool CTransaction::CheckInputs(CValidationState &state, CCoinsViewCache &inputs,
 }
 
 // PoS check Coins to Stake in txStakeCoins
-unsigned int CTransaction::maxCoinsPOS(unsigned char stakeKey) const
+unsigned int CTransaction::maxCoinsPOS(const char *stakeKey) const
 {
     mpq nStakeAmount = 0;
     BOOST_FOREACH(const CTxIn& txin, vin)
@@ -1799,8 +1800,8 @@ unsigned int CTransaction::maxCoinsPOS(unsigned char stakeKey) const
 
 	if (ExtractDestination(txPrev.vout[1].scriptPubKey, txStakeAddress))
 	{
-            CBitcoinAdress nStakeAddress;
-	    unsigned char nStakeKey = nStakeAddress.ToString().c_str();
+            CBitcoinAddress nStakeAddress(txStakeAddress);
+	    const char *nStakeKey = nStakeAddress.ToString().c_str();
             if (nStakeKey == stakeKey)
                 nStakeAmount = nStakeAmount + txPrev.GetValueOut();
             else
@@ -2083,8 +2084,8 @@ bool CBlock::ConnectBlock(CValidationState &state, CBlockIndex* pindex, CCoinsVi
 
 	    if (ExtractDestination(txPrev.vout[1].scriptPubKey, txStakeAddress))
         {
-            CBitcoinAdress nStakeAddress;
-	    unsigned char nStakeKey = nStakeAddress.ToString().c_str();
+            CBitcoinAddress nStakeAddress(txStakeAddress);
+	    const char *nStakeKey = nStakeAddress.ToString().c_str();
             if (nStakeKey != pindex->stakeKey)
                 return state.DoS(100, error("ConnectBlock() : Block solved for a different Stakeaddress"));
         }
@@ -4948,7 +4949,7 @@ CBlockTemplate* CreateNewBlock(CReserveKey& reservekey, CWallet pwallet)
                 return TransactionCreationFailed;
             }
             CTxDestination txStakeAddress(reservekey);
-            pindex->stakeKey = CBitcoinAddress(txStakeAddress.ToString().c_str();;
+            pindex->stakeKey = CBitcoinAddress(txStakeAddress.ToString().c_str());
         }
 
         
