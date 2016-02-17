@@ -661,7 +661,7 @@ public:
     mpq GetValueIn(CCoinsViewCache& mapInputs) const;
     
     // POS
-    unsigned int maxCoinsPOS(unsigned char stakeKey) const;
+    unsigned int maxCoinsPOS(const char *stakeKey) const;
 
     static bool AllowFree(double dPriority)
     {
@@ -1375,7 +1375,7 @@ public:
     unsigned int nTime;
     unsigned int nBits;
     unsigned int nNonce;
-    unsigned char stakeKey; // PoS
+    const char stakeKey; // PoS
     boost::shared_ptr<CAuxPow> auxpow; //Memi from DVC
 
     CBlockHeader()
@@ -1599,8 +1599,9 @@ public:
 
     void print() const
     {
-        printf("CBlock(hash=%s, ver=%d, hashPrevBlock=%s, hashMerkleRoot=%s, nTime=%u, nBits=%08x, nNonce=%u, vtx=%"PRIszu")\n",
+        printf("CBlock(hash=%s, stakeHash=%s, ver=%d, hashPrevBlock=%s, hashMerkleRoot=%s, nTime=%u, nBits=%08x, nNonce=%u, vtx=%"PRIszu")\n",
             GetHash().ToString().c_str(),
+            GetStakeHash().ToString().c_str(),
             nVersion,
             hashPrevBlock.ToString().c_str(),
             hashMerkleRoot.ToString().c_str(),
@@ -1766,7 +1767,7 @@ public:
     unsigned int nStatus;
 
     // POS
-    unsigned char stakeKey;
+    const char stakeKey;
 
 
     // block header
