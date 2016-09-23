@@ -11,8 +11,8 @@ packages:
 reference_datetime: "2012-07-01 00:00:00"
 remotes: []
 files:
-- "Worldleadcurrency-Qt-i686-static-mingw32-0.8.6.1-gitian.zip"
-- "worldleadcurrencyd-i686-static-mingw32-0.8.6.1-gitian.zip"
+- "Solidar-Qt-i686-static-mingw32-0.8.6.1-gitian.zip"
+- "solidard-i686-static-mingw32-0.8.6.1-gitian.zip"
 - "src-local.tar.xz"
 script: |
   export ARCH=win32
@@ -32,12 +32,12 @@ script: |
   pushd "$PREFIX"/src
 
   tar -xf "$GITIANDIR"/src-local.tar.xz
-  unzip "$GITIANDIR"/worldleadcurrencyd-i686-static-mingw32-${WORLDLEADCURRENCY_VER}-gitian.zip bin/worldleadcurrencyd.exe
-  unzip "$GITIANDIR"/Worldleadcurrency-Qt-i686-static-mingw32-${WORLDLEADCURRENCY_VER}-gitian.zip bin/Worldleadcurrency-Qt.exe
+  unzip "$GITIANDIR"/solidard-i686-static-mingw32-${WORLDLEADCURRENCY_VER}-gitian.zip bin/solidard.exe
+  unzip "$GITIANDIR"/Solidar-Qt-i686-static-mingw32-${WORLDLEADCURRENCY_VER}-gitian.zip bin/Solidar-Qt.exe
   mkdir -p release
-  mv bin/Worldleadcurrency-Qt.exe release/
-  mv bin/worldleadcurrencyd.exe src/
+  mv bin/Solidar-Qt.exe release/
+  mv bin/solidard.exe src/
   cd src
   makensis ../share/setup.nsi
-  mv ../share/worldleadcurrency-${WORLDLEADCURRENCY_VER}-${ARCH}-setup.exe $OUTDIR/
+  mv ../share/solidar-${WORLDLEADCURRENCY_VER}-${ARCH}-setup.exe $OUTDIR/
   popd

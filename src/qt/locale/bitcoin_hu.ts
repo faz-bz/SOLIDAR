@@ -6,13 +6,13 @@
     <name>AboutDialog</name>
     <message>
         <location filename="../forms/aboutdialog.ui" line="+14"/>
-        <source>About Worldleadcurrency</source>
-        <translation>A Worldleadcurrencyról</translation>
+        <source>About Solidar</source>
+        <translation>A Solidarról</translation>
     </message>
     <message>
         <location line="+39"/>
-        <source>&lt;b&gt;Worldleadcurrency&lt;/b&gt; version</source>
-        <translation>&lt;b&gt;Worldleadcurrency&lt;/b&gt; verzió</translation>
+        <source>&lt;b&gt;Solidar&lt;/b&gt; version</source>
+        <translation>&lt;b&gt;Solidar&lt;/b&gt; verzió</translation>
     </message>
     <message>
         <location line="+57"/>
@@ -35,7 +35,7 @@ Ez a termék az OpenSSL Project által lett kifejlesztve az OpenSSL Toolkit (htt
     </message>
     <message>
         <location line="+0"/>
-        <source>The Worldleadcurrency developers</source>
+        <source>The Solidar developers</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -68,8 +68,8 @@ Ez a termék az OpenSSL Project által lett kifejlesztve az OpenSSL Toolkit (htt
     </message>
     <message>
         <location filename="../addressbookpage.cpp" line="+63"/>
-        <source>These are your Worldleadcurrency addresses for receiving payments. You may want to give a different one to each sender so you can keep track of who is paying you.</source>
-        <translation>Ezekkel a Worldleadcurrency-címekkel fogadhatod kifizetéseket. Érdemes lehet minden egyes kifizető számára külön címet létrehozni, hogy könnyebben nyomon követhesd, kitől kaptál már pénzt.</translation>
+        <source>These are your Solidar addresses for receiving payments. You may want to give a different one to each sender so you can keep track of who is paying you.</source>
+        <translation>Ezekkel a Solidar-címekkel fogadhatod kifizetéseket. Érdemes lehet minden egyes kifizető számára külön címet létrehozni, hogy könnyebben nyomon követhesd, kitől kaptál már pénzt.</translation>
     </message>
     <message>
         <location filename="../forms/addressbookpage.ui" line="+14"/>
@@ -83,7 +83,7 @@ Ez a termék az OpenSSL Project által lett kifejlesztve az OpenSSL Toolkit (htt
     </message>
     <message>
         <location line="+11"/>
-        <source>Sign a message to prove you own a Worldleadcurrency address</source>
+        <source>Sign a message to prove you own a Solidar address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -108,8 +108,8 @@ Ez a termék az OpenSSL Project által lett kifejlesztve az OpenSSL Toolkit (htt
     </message>
     <message>
         <location line="-44"/>
-        <source>Verify a message to ensure it was signed with a specified Worldleadcurrency address</source>
-        <translation>Üzenet ellenőrzése, hogy valóban a megjelölt Worldleadcurrency címekkel van-e aláírva.</translation>
+        <source>Verify a message to ensure it was signed with a specified Solidar address</source>
+        <translation>Üzenet ellenőrzése, hogy valóban a megjelölt Solidar címekkel van-e aláírva.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -123,7 +123,7 @@ Ez a termék az OpenSSL Project által lett kifejlesztve az OpenSSL Toolkit (htt
     </message>
     <message>
         <location filename="../addressbookpage.cpp" line="-5"/>
-        <source>These are your Worldleadcurrency addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <source>These are your Solidar addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -259,7 +259,7 @@ Ez a termék az OpenSSL Project által lett kifejlesztve az OpenSSL Toolkit (htt
     </message>
     <message>
         <location line="+11"/>
-        <source>Worldleadcurrency will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your worldleadcurrencys from being stolen by malware infecting your computer.</source>
+        <source>Solidar will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your solidars from being stolen by malware infecting your computer.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -375,8 +375,8 @@ Ez a termék az OpenSSL Project által lett kifejlesztve az OpenSSL Toolkit (htt
     </message>
     <message>
         <location line="+4"/>
-        <source>Show information about Worldleadcurrency</source>
-        <translation>Információk a Worldleadcurrencyról</translation>
+        <source>Show information about Solidar</source>
+        <translation>Információk a Solidarról</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -420,13 +420,13 @@ Ez a termék az OpenSSL Project által lett kifejlesztve az OpenSSL Toolkit (htt
     </message>
     <message>
         <location line="-347"/>
-        <source>Send coins to a Worldleadcurrency address</source>
+        <source>Send coins to a Solidar address</source>
         <translation>Érmék küldése megadott címre</translation>
     </message>
     <message>
         <location line="+49"/>
-        <source>Modify configuration options for Worldleadcurrency</source>
-        <translation>Worldleadcurrency konfigurációs opciók</translation>
+        <source>Modify configuration options for Solidar</source>
+        <translation>Solidar konfigurációs opciók</translation>
     </message>
     <message>
         <location line="+9"/>
@@ -456,8 +456,8 @@ Ez a termék az OpenSSL Project által lett kifejlesztve az OpenSSL Toolkit (htt
     <message>
         <location line="-165"/>
         <location line="+530"/>
-        <source>Worldleadcurrency</source>
-        <translation>Worldleadcurrency</translation>
+        <source>Solidar</source>
+        <translation>Solidar</translation>
     </message>
     <message>
         <location line="-530"/>
@@ -481,8 +481,8 @@ Ez a termék az OpenSSL Project által lett kifejlesztve az OpenSSL Toolkit (htt
     </message>
     <message>
         <location line="+22"/>
-        <source>&amp;About Worldleadcurrency</source>
-        <translation>&amp;A Worldleadcurrencyról</translation>
+        <source>&amp;About Solidar</source>
+        <translation>&amp;A Solidarról</translation>
     </message>
     <message>
         <location line="+9"/>
@@ -501,13 +501,13 @@ Ez a termék az OpenSSL Project által lett kifejlesztve az OpenSSL Toolkit (htt
     </message>
     <message>
         <location line="+7"/>
-        <source>Sign messages with your Worldleadcurrency addresses to prove you own them</source>
-        <translation>Üzenet aláírása a Worldleadcurrency címmel, amivel bizonyítja, hogy a cím az ön tulajdona.</translation>
+        <source>Sign messages with your Solidar addresses to prove you own them</source>
+        <translation>Üzenet aláírása a Solidar címmel, amivel bizonyítja, hogy a cím az ön tulajdona.</translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>Verify messages to ensure they were signed with specified Worldleadcurrency addresses</source>
-        <translation>Annak ellenőrzése, hogy az üzenetek valóban a megjelölt Worldleadcurrency címekkel vannak-e alaírva</translation>
+        <source>Verify messages to ensure they were signed with specified Solidar addresses</source>
+        <translation>Annak ellenőrzése, hogy az üzenetek valóban a megjelölt Solidar címekkel vannak-e alaírva</translation>
     </message>
     <message>
         <location line="+28"/>
@@ -537,14 +537,14 @@ Ez a termék az OpenSSL Project által lett kifejlesztve az OpenSSL Toolkit (htt
     </message>
     <message>
         <location line="+47"/>
-        <source>Worldleadcurrency client</source>
-        <translation>Worldleadcurrency kliens</translation>
+        <source>Solidar client</source>
+        <translation>Solidar kliens</translation>
     </message>
     <message numerus="yes">
         <location line="+141"/>
-        <source>%n active connection(s) to Worldleadcurrency network</source>
+        <source>%n active connection(s) to Solidar network</source>
         <translation>
-            <numerusform>%n aktív kapcsolat a Worldleadcurrency-hálózattal</numerusform>
+            <numerusform>%n aktív kapcsolat a Solidar-hálózattal</numerusform>
         </translation>
     </message>
     <message>
@@ -665,7 +665,7 @@ Cím: %4
     <message>
         <location line="-23"/>
         <location line="+23"/>
-        <source>URI can not be parsed! This can be caused by an invalid Worldleadcurrency address or malformed URI parameters.</source>
+        <source>URI can not be parsed! This can be caused by an invalid Solidar address or malformed URI parameters.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -680,7 +680,7 @@ Cím: %4
     </message>
     <message>
         <location filename="../bitcoin.cpp" line="+111"/>
-        <source>A fatal error occurred. Worldleadcurrency can no longer continue safely and will quit.</source>
+        <source>A fatal error occurred. Solidar can no longer continue safely and will quit.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -746,8 +746,8 @@ Cím: %4
     </message>
     <message>
         <location line="-5"/>
-        <source>The entered address &quot;%1&quot; is not a valid Worldleadcurrency address.</source>
-        <translation>A megadott &quot;%1&quot; cím nem egy érvényes Worldleadcurrency-cím.</translation>
+        <source>The entered address &quot;%1&quot; is not a valid Solidar address.</source>
+        <translation>A megadott &quot;%1&quot; cím nem egy érvényes Solidar-cím.</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -765,7 +765,7 @@ Cím: %4
     <message>
         <location filename="../guiutil.cpp" line="+424"/>
         <location line="+12"/>
-        <source>Worldleadcurrency-Qt</source>
+        <source>Solidar-Qt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -829,12 +829,12 @@ Cím: %4
     </message>
     <message>
         <location line="+31"/>
-        <source>Automatically start Worldleadcurrency after logging in to the system.</source>
-        <translation>Induljon el a Worldleadcurrency a számítógép bekapcsolásakor</translation>
+        <source>Automatically start Solidar after logging in to the system.</source>
+        <translation>Induljon el a Solidar a számítógép bekapcsolásakor</translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>&amp;Start Worldleadcurrency on system login</source>
+        <source>&amp;Start Solidar on system login</source>
         <translation>&amp;Induljon el a számítógép bekapcsolásakor</translation>
     </message>
     <message>
@@ -854,8 +854,8 @@ Cím: %4
     </message>
     <message>
         <location line="+6"/>
-        <source>Automatically open the Worldleadcurrency client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>A Worldleadcurrency-kliens portjának automatikus megnyitása a routeren. Ez csak akkor működik, ha a routered támogatja az UPnP-t és az engedélyezve is van rajta.</translation>
+        <source>Automatically open the Solidar client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>A Solidar-kliens portjának automatikus megnyitása a routeren. Ez csak akkor működik, ha a routered támogatja az UPnP-t és az engedélyezve is van rajta.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -864,8 +864,8 @@ Cím: %4
     </message>
     <message>
         <location line="+7"/>
-        <source>Connect to the Worldleadcurrency network through a SOCKS proxy (e.g. when connecting through Tor).</source>
-        <translation>SOCKS proxyn keresztüli csatlakozás a Worldleadcurrency hálózatához (pl. Tor-on keresztüli csatlakozás esetén)</translation>
+        <source>Connect to the Solidar network through a SOCKS proxy (e.g. when connecting through Tor).</source>
+        <translation>SOCKS proxyn keresztüli csatlakozás a Solidar hálózatához (pl. Tor-on keresztüli csatlakozás esetén)</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -939,7 +939,7 @@ Cím: %4
     </message>
     <message>
         <location line="+13"/>
-        <source>The user interface language can be set here. This setting will take effect after restarting Worldleadcurrency.</source>
+        <source>The user interface language can be set here. This setting will take effect after restarting Solidar.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -954,7 +954,7 @@ Cím: %4
     </message>
     <message>
         <location line="+9"/>
-        <source>Whether to show Worldleadcurrency addresses in the transaction list or not.</source>
+        <source>Whether to show Solidar addresses in the transaction list or not.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1006,8 +1006,8 @@ Cím: %4
     <message>
         <location line="-9"/>
         <location line="+9"/>
-        <source>This setting will take effect after restarting Worldleadcurrency.</source>
-        <translation>Ez a beállítás a Worldleadcurrency ujraindítása után lép érvénybe.</translation>
+        <source>This setting will take effect after restarting Solidar.</source>
+        <translation>Ez a beállítás a Solidar ujraindítása után lép érvénybe.</translation>
     </message>
     <message>
         <location line="+29"/>
@@ -1025,8 +1025,8 @@ Cím: %4
     <message>
         <location line="+50"/>
         <location line="+166"/>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Worldleadcurrency network after a connection is established, but this process has not completed yet.</source>
-        <translation>A kijelzett információ lehet, hogy elavult. A pénztárcája automatikusan szinkronizálja magát a Worldleadcurrency hálózattal miután a kapcsolat létrejön, de ez e folyamat még nem fejeződött be.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Solidar network after a connection is established, but this process has not completed yet.</source>
+        <translation>A kijelzett információ lehet, hogy elavult. A pénztárcája automatikusan szinkronizálja magát a Solidar hálózattal miután a kapcsolat létrejön, de ez e folyamat még nem fejeződött be.</translation>
     </message>
     <message>
         <location line="-124"/>
@@ -1079,7 +1079,7 @@ Cím: %4
     <name>PaymentServer</name>
     <message>
         <location filename="../paymentserver.cpp" line="+107"/>
-        <source>Cannot start worldleadcurrency: click-to-pay handler</source>
+        <source>Cannot start solidar: click-to-pay handler</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1229,7 +1229,7 @@ Cím: %4
     </message>
     <message>
         <location line="+7"/>
-        <source>Show the Worldleadcurrency-Qt help message to get a list with possible Worldleadcurrency command-line options.</source>
+        <source>Show the Solidar-Qt help message to get a list with possible Solidar command-line options.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1249,12 +1249,12 @@ Cím: %4
     </message>
     <message>
         <location line="-104"/>
-        <source>Worldleadcurrency - Debug window</source>
+        <source>Solidar - Debug window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+25"/>
-        <source>Worldleadcurrency Core</source>
+        <source>Solidar Core</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1264,7 +1264,7 @@ Cím: %4
     </message>
     <message>
         <location line="+7"/>
-        <source>Open the Worldleadcurrency debug log file from the current data directory. This can take a few seconds for large log files.</source>
+        <source>Open the Solidar debug log file from the current data directory. This can take a few seconds for large log files.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1274,7 +1274,7 @@ Cím: %4
     </message>
     <message>
         <location filename="../rpcconsole.cpp" line="-30"/>
-        <source>Welcome to the Worldleadcurrency RPC console.</source>
+        <source>Welcome to the Solidar RPC console.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1329,8 +1329,8 @@ Cím: %4
     </message>
     <message>
         <location line="+10"/>
-        <source>123.456 WLC</source>
-        <translation>123.456 WLC</translation>
+        <source>123.456 SLR</source>
+        <translation>123.456 SLR</translation>
     </message>
     <message>
         <location line="+31"/>
@@ -1459,8 +1459,8 @@ Cím: %4
     </message>
     <message>
         <location filename="../sendcoinsentry.cpp" line="+1"/>
-        <source>Enter a Worldleadcurrency address (e.g. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</source>
-        <translation>Adj meg egy Worldleadcurrency-címet (pl.: 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L )</translation>
+        <source>Enter a Solidar address (e.g. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</source>
+        <translation>Adj meg egy Solidar-címet (pl.: 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L )</translation>
     </message>
 </context>
 <context>
@@ -1483,7 +1483,7 @@ Cím: %4
     <message>
         <location line="+18"/>
         <source>The address to sign the message with (e.g. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</source>
-        <translation>Adj meg egy Worldleadcurrency-címet (pl.: 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L )</translation>
+        <translation>Adj meg egy Solidar-címet (pl.: 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L )</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -1524,7 +1524,7 @@ Cím: %4
     </message>
     <message>
         <location line="+21"/>
-        <source>Sign the message to prove you own this Worldleadcurrency address</source>
+        <source>Sign the message to prove you own this Solidar address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1556,11 +1556,11 @@ Cím: %4
     <message>
         <location line="+21"/>
         <source>The address the message was signed with (e.g. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</source>
-        <translation>Adj meg egy Worldleadcurrency-címet (pl.: 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L )</translation>
+        <translation>Adj meg egy Solidar-címet (pl.: 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L )</translation>
     </message>
     <message>
         <location line="+40"/>
-        <source>Verify the message to ensure it was signed with the specified Worldleadcurrency address</source>
+        <source>Verify the message to ensure it was signed with the specified Solidar address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1576,8 +1576,8 @@ Cím: %4
     <message>
         <location filename="../signverifymessagedialog.cpp" line="+27"/>
         <location line="+3"/>
-        <source>Enter a Worldleadcurrency address (e.g. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</source>
-        <translation>Adj meg egy Worldleadcurrency-címet (pl.: 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L )</translation>
+        <source>Enter a Solidar address (e.g. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</source>
+        <translation>Adj meg egy Solidar-címet (pl.: 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L )</translation>
     </message>
     <message>
         <location line="-2"/>
@@ -1586,8 +1586,8 @@ Cím: %4
     </message>
     <message>
         <location line="+3"/>
-        <source>Enter Worldleadcurrency signature</source>
-        <translation>Adja meg a Worldleadcurrency aláírást</translation>
+        <source>Enter Solidar signature</source>
+        <translation>Adja meg a Solidar aláírást</translation>
     </message>
     <message>
         <location line="+82"/>
@@ -1660,7 +1660,7 @@ Cím: %4
     <name>SplashScreen</name>
     <message>
         <location filename="../splashscreen.cpp" line="+22"/>
-        <source>The Worldleadcurrency developers</source>
+        <source>The Solidar developers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2228,8 +2228,8 @@ Cím: %4
     <name>bitcoin-core</name>
     <message>
         <location filename="../bitcoinstrings.cpp" line="+131"/>
-        <source>Worldleadcurrency version</source>
-        <translation>Worldleadcurrency verzió</translation>
+        <source>Solidar version</source>
+        <translation>Solidar verzió</translation>
     </message>
     <message>
         <location line="+66"/>
@@ -2340,7 +2340,7 @@ Cím: %4
     </message>
     <message>
         <location line="+3"/>
-        <source>Cannot obtain a lock on data directory %s. Worldleadcurrency is probably already running.</source>
+        <source>Cannot obtain a lock on data directory %s. Solidar is probably already running.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2385,8 +2385,8 @@ Cím: %4
     </message>
     <message>
         <location line="+3"/>
-        <source>Warning: Please check that your computer&apos;s date and time are correct! If your clock is wrong Worldleadcurrency will not work properly.</source>
-        <translation>Figyelem: Ellenőrizd, hogy helyesen van-e beállítva a gépeden a dátum és az idő.  A Worldleadcurrency nem fog megfelelően működni, ha rosszul van beállítvaaz órád.</translation>
+        <source>Warning: Please check that your computer&apos;s date and time are correct! If your clock is wrong Solidar will not work properly.</source>
+        <translation>Figyelem: Ellenőrizd, hogy helyesen van-e beállítva a gépeden a dátum és az idő.  A Solidar nem fog megfelelően működni, ha rosszul van beállítvaaz órád.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -2550,7 +2550,7 @@ Cím: %4
     </message>
     <message>
         <location line="+6"/>
-        <source>Send command to -server or worldleadcurrencyd</source>
+        <source>Send command to -server or solidard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2560,12 +2560,12 @@ Cím: %4
     </message>
     <message>
         <location line="+3"/>
-        <source>Specify configuration file (default: worldleadcurrency.conf)</source>
+        <source>Specify configuration file (default: solidar.conf)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>Specify pid file (default: worldleadcurrencyd.pid)</source>
+        <source>Specify pid file (default: solidard.pid)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2588,13 +2588,13 @@ Cím: %4
         <source>%s, you must set a rpcpassword in the configuration file:
 %s
 It is recommended you use the following random password:
-rpcuser=worldleadcurrencyrpc
+rpcuser=solidarrpc
 rpcpassword=%s
 (you do not need to remember this password)
 The username and password MUST NOT be the same.
 If the file does not exist, create it with owner-readable-only file permissions.
 It is also recommended to set alertnotify so you are notified of problems;
-for example: alertnotify=echo %%s | mail -s &quot;Worldleadcurrency Alert&quot; admin@foo.com
+for example: alertnotify=echo %%s | mail -s &quot;Solidar Alert&quot; admin@foo.com
 </source>
         <translation type="unfinished"></translation>
     </message>
@@ -2665,8 +2665,8 @@ for example: alertnotify=echo %%s | mail -s &quot;Worldleadcurrency Alert&quot; 
     </message>
     <message>
         <location line="+5"/>
-        <source>SSL options: (see the Worldleadcurrency Wiki for SSL setup instructions)</source>
-        <translation>SSL-opciók: (lásd a Worldleadcurrency Wiki SSL-beállítási instrukcióit)</translation>
+        <source>SSL options: (see the Solidar Wiki for SSL setup instructions)</source>
+        <translation>SSL-opciók: (lásd a Solidar Wiki SSL-beállítási instrukcióit)</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -2866,13 +2866,13 @@ for example: alertnotify=echo %%s | mail -s &quot;Worldleadcurrency Alert&quot; 
     </message>
     <message>
         <location line="+1"/>
-        <source>Error loading wallet.dat: Wallet requires newer version of Worldleadcurrency</source>
-        <translation>Hiba a wallet.dat betöltése közben: ehhez a tárcához újabb verziójú Worldleadcurrency-kliens szükséges</translation>
+        <source>Error loading wallet.dat: Wallet requires newer version of Solidar</source>
+        <translation>Hiba a wallet.dat betöltése közben: ehhez a tárcához újabb verziójú Solidar-kliens szükséges</translation>
     </message>
     <message>
         <location line="+94"/>
-        <source>Wallet needed to be rewritten: restart Worldleadcurrency to complete</source>
-        <translation>A Tárca újraírása szükséges: Indítsa újra a teljesen a Worldleadcurrency-t</translation>
+        <source>Wallet needed to be rewritten: restart Solidar to complete</source>
+        <translation>A Tárca újraírása szükséges: Indítsa újra a teljesen a Solidar-t</translation>
     </message>
     <message>
         <location line="-96"/>
@@ -2931,8 +2931,8 @@ for example: alertnotify=echo %%s | mail -s &quot;Worldleadcurrency Alert&quot; 
     </message>
     <message>
         <location line="-25"/>
-        <source>Unable to bind to %s on this computer. Worldleadcurrency is probably already running.</source>
-        <translation>A %s nem elérhető ezen a gépen. A Worldleadcurrency valószínűleg fut már.</translation>
+        <source>Unable to bind to %s on this computer. Solidar is probably already running.</source>
+        <translation>A %s nem elérhető ezen a gépen. A Solidar valószínűleg fut már.</translation>
     </message>
     <message>
         <location line="+63"/>

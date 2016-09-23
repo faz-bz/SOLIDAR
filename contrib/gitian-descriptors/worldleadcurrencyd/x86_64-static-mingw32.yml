@@ -1,5 +1,5 @@
 ---
-name: "worldleadcurrencyd"
+name: "solidard"
 suites:
 - "precise"
 architectures:
@@ -70,9 +70,9 @@ script: |
   popd
   export PATH=$PREFIX/bin:$PREFIX/usr/bin:$PATH
   
-  mkdir -p "$BUILD"/src/worldleadcurrency
-  tar -C "$BUILD"/src/worldleadcurrency -xf "$GITIANDIR"/src-local.tar.xz
-  pushd "$BUILD"/src/worldleadcurrency/src
+  mkdir -p "$BUILD"/src/solidar
+  tar -C "$BUILD"/src/solidar -xf "$GITIANDIR"/src-local.tar.xz
+  pushd "$BUILD"/src/solidar/src
   echo  >.patch -e '--- a/makefile.linux-mingw'
   echo >>.patch -e '+++ b/makefile.linux-mingw'
   echo >>.patch -e '@@ -2,10 +2,10 @@'
@@ -125,7 +125,7 @@ script: |
   echo >>.patch -e ' \tLIBS += -l miniupnpc -l iphlpapi'
   echo >>.patch -e ' \tDEFS += -DSTATICLIB -DUSE_UPNP=$(USE_UPNP)'
   echo >>.patch -e ' endif'
-  echo >>.patch -e '@@ -98,7 +93,7 @@ all: worldleadcurrencyd.exe'
+  echo >>.patch -e '@@ -98,7 +93,7 @@ all: solidard.exe'
   echo >>.patch -e ' DEFS += -I"$(CURDIR)/leveldb/include"'
   echo >>.patch -e ' DEFS += -I"$(CURDIR)/leveldb/helpers"'
   echo >>.patch -e ' leveldb/libleveldb.a:'
@@ -145,18 +145,18 @@ script: |
     USE_QRCODE=1 \
     USE_UPNP=0 \
     DEBUGFLAGS="-frandom-seed=bitcoin" \
-    worldleadcurrencyd.exe
-  ${TARGET}-strip worldleadcurrencyd.exe
+    solidard.exe
+  ${TARGET}-strip solidard.exe
   find "$PREFIX" -mindepth 1 -maxdepth 1 -print0 | xargs -0 rm -rf
   popd
   
   mkdir -p "$PREFIX"/bin
-  cp -a "$BUILD"/src/worldleadcurrency/src/worldleadcurrencyd.exe "$PREFIX"/bin
+  cp -a "$BUILD"/src/solidar/src/solidard.exe "$PREFIX"/bin
   
   mkdir -p "$PREFIX"/src
   tar -C "$PREFIX"/src -xf "$GITIANDIR"/src-local.tar.xz
   
   pushd "$PREFIX"
   find * -not -type d -print0 | sort -z | xargs -0 \
-    zip -r "$OUTDIR"/worldleadcurrencyd-${TARGET}-${WORLDLEADCURRENCY_VER}-gitian.zip
+    zip -r "$OUTDIR"/solidard-${TARGET}-${WORLDLEADCURRENCY_VER}-gitian.zip
   popd

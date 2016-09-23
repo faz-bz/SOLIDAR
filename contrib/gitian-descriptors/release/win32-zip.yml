@@ -10,8 +10,8 @@ packages:
 reference_datetime: "2012-07-01 00:00:00"
 remotes: []
 files:
-- "Worldleadcurrency-Qt-i686-static-mingw32-0.8.6.1-gitian.zip"
-- "worldleadcurrencyd-i686-static-mingw32-0.8.6.1-gitian.zip"
+- "Solidar-Qt-i686-static-mingw32-0.8.6.1-gitian.zip"
+- "solidard-i686-static-mingw32-0.8.6.1-gitian.zip"
 - "src-local.tar.xz"
 script: |
   export ARCH=win32
@@ -27,21 +27,21 @@ script: |
   export TZ=UTC
   export FAKETIME=$REFERENCE_DATETIME
   
-  mkdir -p "$PREFIX"/worldleadcurrency-${WORLDLEADCURRENCY_VER}-${ARCH}
-  pushd "$PREFIX"/worldleadcurrency-${WORLDLEADCURRENCY_VER}-${ARCH}
+  mkdir -p "$PREFIX"/solidar-${WORLDLEADCURRENCY_VER}-${ARCH}
+  pushd "$PREFIX"/solidar-${WORLDLEADCURRENCY_VER}-${ARCH}
 
   mkdir -p src
   tar -C src -xf "$GITIANDIR"/src-local.tar.xz
   cp -a src/doc/README_windows.txt ./README.txt
   cp -a src/COPYING ./COPYING.txt
-  unzip "$GITIANDIR"/worldleadcurrencyd-i686-static-mingw32-${WORLDLEADCURRENCY_VER}-gitian.zip bin/worldleadcurrencyd.exe
+  unzip "$GITIANDIR"/solidard-i686-static-mingw32-${WORLDLEADCURRENCY_VER}-gitian.zip bin/solidard.exe
   mkdir -p daemon
-  mv bin/worldleadcurrencyd.exe daemon/
-  unzip "$GITIANDIR"/Worldleadcurrency-Qt-i686-static-mingw32-${WORLDLEADCURRENCY_VER}-gitian.zip bin/Worldleadcurrency-Qt.exe
-  mv bin/Worldleadcurrency-Qt.exe ./
+  mv bin/solidard.exe daemon/
+  unzip "$GITIANDIR"/Solidar-Qt-i686-static-mingw32-${WORLDLEADCURRENCY_VER}-gitian.zip bin/Solidar-Qt.exe
+  mv bin/Solidar-Qt.exe ./
   rmdir bin
   
   cd ..
-  find worldleadcurrency-${WORLDLEADCURRENCY_VER}-${ARCH} -not -type d -print0 | sort -z | xargs -0 \
-    zip -r "$OUTDIR"/worldleadcurrency-${WORLDLEADCURRENCY_VER}-${ARCH}.zip
+  find solidar-${WORLDLEADCURRENCY_VER}-${ARCH} -not -type d -print0 | sort -z | xargs -0 \
+    zip -r "$OUTDIR"/solidar-${WORLDLEADCURRENCY_VER}-${ARCH}.zip
   popd

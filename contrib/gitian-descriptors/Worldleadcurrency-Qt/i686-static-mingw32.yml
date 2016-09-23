@@ -1,5 +1,5 @@
 ---
-name: "Worldleadcurrency-Qt"
+name: "Solidar-Qt"
 suites:
 - "precise"
 architectures:
@@ -73,9 +73,9 @@ script: |
   popd
   export PATH=$PREFIX/bin:$PREFIX/usr/bin:$PATH
   
-  mkdir -p "$BUILD"/src/worldleadcurrency
-  tar -C "$BUILD"/src/worldleadcurrency -xf "$GITIANDIR"/src-local.tar.xz
-  pushd "$BUILD"/src/worldleadcurrency
+  mkdir -p "$BUILD"/src/solidar
+  tar -C "$BUILD"/src/solidar -xf "$GITIANDIR"/src-local.tar.xz
+  pushd "$BUILD"/src/solidar
   QMAKEPATH="$PREFIX" \
   QMAKESPEC=unsupported/win32-g++-cross \
   qmake \
@@ -89,17 +89,17 @@ script: |
     USE_DBUS=0
   sed -r 's:-lgdi32 (.+) -lcrypto:\1 -lcrypto -lgdi32:' -i Makefile.Release
   make
-  ${TARGET}-strip release/worldleadcurrency-qt.exe
+  ${TARGET}-strip release/solidar-qt.exe
   find "$PREFIX" -mindepth 1 -maxdepth 1 -print0 | xargs -0 rm -rf
   popd
   
   mkdir -p "$PREFIX"/bin
-  cp -a "$BUILD"/src/worldleadcurrency/release/worldleadcurrency-qt.exe "$PREFIX"/bin/Worldleadcurrency-Qt.exe
+  cp -a "$BUILD"/src/solidar/release/solidar-qt.exe "$PREFIX"/bin/Solidar-Qt.exe
   
   mkdir -p "$PREFIX"/src
   tar -C "$PREFIX"/src -xf "$GITIANDIR"/src-local.tar.xz
   
   pushd "$PREFIX"
   find * -not -type d -print0 | sort -z | xargs -0 \
-    zip -r "$OUTDIR"/Worldleadcurrency-Qt-${TARGET}-${WORLDLEADCURRENCY_VER}-gitian.zip
+    zip -r "$OUTDIR"/Solidar-Qt-${TARGET}-${WORLDLEADCURRENCY_VER}-gitian.zip
   popd

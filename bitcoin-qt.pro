@@ -1,6 +1,6 @@
 TEMPLATE = app
-TARGET = worldleadcurrency-qt
-macx:TARGET = "Worldleadcurrency-Qt"
+TARGET = solidar-qt
+macx:TARGET = "Solidar-Qt"
 VERSION = 0.8.6.1
 INCLUDEPATH += src src/json src/qt
 QT += network

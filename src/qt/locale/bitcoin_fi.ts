@@ -6,13 +6,13 @@
     <name>AboutDialog</name>
     <message>
         <location filename="../forms/aboutdialog.ui" line="+14"/>
-        <source>About Worldleadcurrency</source>
-        <translation>Tietoa Worldleadcurrencyista</translation>
+        <source>About Solidar</source>
+        <translation>Tietoa Solidarista</translation>
     </message>
     <message>
         <location line="+39"/>
-        <source>&lt;b&gt;Worldleadcurrency&lt;/b&gt; version</source>
-        <translation>&lt;b&gt;Worldleadcurrency&lt;/b&gt; versio</translation>
+        <source>&lt;b&gt;Solidar&lt;/b&gt; version</source>
+        <translation>&lt;b&gt;Solidar&lt;/b&gt; versio</translation>
     </message>
     <message>
         <location line="+57"/>
@@ -37,7 +37,7 @@ Tämä ohjelma sisältää OpenSSL projektin OpenSSL työkalupakin (http://www.o
     </message>
     <message>
         <location line="+0"/>
-        <source>The Worldleadcurrency developers</source>
+        <source>The Solidar developers</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -70,8 +70,8 @@ Tämä ohjelma sisältää OpenSSL projektin OpenSSL työkalupakin (http://www.o
     </message>
     <message>
         <location filename="../addressbookpage.cpp" line="+63"/>
-        <source>These are your Worldleadcurrency addresses for receiving payments. You may want to give a different one to each sender so you can keep track of who is paying you.</source>
-        <translation>Nämä ovat Worldleadcurrency-osoitteesi joihin voit vastaanottaa maksuja. Voit haluta antaa jokaiselle maksajalle omansa, että pystyt seuraamaan keneltä maksut tulevat.</translation>
+        <source>These are your Solidar addresses for receiving payments. You may want to give a different one to each sender so you can keep track of who is paying you.</source>
+        <translation>Nämä ovat Solidar-osoitteesi joihin voit vastaanottaa maksuja. Voit haluta antaa jokaiselle maksajalle omansa, että pystyt seuraamaan keneltä maksut tulevat.</translation>
     </message>
     <message>
         <location filename="../forms/addressbookpage.ui" line="+14"/>
@@ -85,8 +85,8 @@ Tämä ohjelma sisältää OpenSSL projektin OpenSSL työkalupakin (http://www.o
     </message>
     <message>
         <location line="+11"/>
-        <source>Sign a message to prove you own a Worldleadcurrency address</source>
-        <translation>Allekirjoita viesti todistaaksesi, että omistat Worldleadcurrency-osoitteen</translation>
+        <source>Sign a message to prove you own a Solidar address</source>
+        <translation>Allekirjoita viesti todistaaksesi, että omistat Solidar-osoitteen</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -110,8 +110,8 @@ Tämä ohjelma sisältää OpenSSL projektin OpenSSL työkalupakin (http://www.o
     </message>
     <message>
         <location line="-44"/>
-        <source>Verify a message to ensure it was signed with a specified Worldleadcurrency address</source>
-        <translation>Tarkista viestin allekirjoitus varmistaaksesi, että se allekirjoitettiin tietyllä Worldleadcurrency-osoitteella</translation>
+        <source>Verify a message to ensure it was signed with a specified Solidar address</source>
+        <translation>Tarkista viestin allekirjoitus varmistaaksesi, että se allekirjoitettiin tietyllä Solidar-osoitteella</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -125,7 +125,7 @@ Tämä ohjelma sisältää OpenSSL projektin OpenSSL työkalupakin (http://www.o
     </message>
     <message>
         <location filename="../addressbookpage.cpp" line="-5"/>
-        <source>These are your Worldleadcurrency addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <source>These are your Solidar addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -261,7 +261,7 @@ Tämä ohjelma sisältää OpenSSL projektin OpenSSL työkalupakin (http://www.o
     </message>
     <message>
         <location line="+11"/>
-        <source>Worldleadcurrency will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your worldleadcurrencys from being stolen by malware infecting your computer.</source>
+        <source>Solidar will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your solidars from being stolen by malware infecting your computer.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -363,7 +363,7 @@ Tämä ohjelma sisältää OpenSSL projektin OpenSSL työkalupakin (http://www.o
     <message>
         <location line="-14"/>
         <source>Show the list of addresses for receiving payments</source>
-        <translation>Näytä Worldleadcurrencyien vastaanottamiseen käytetyt osoitteet</translation>
+        <translation>Näytä Solidarien vastaanottamiseen käytetyt osoitteet</translation>
     </message>
     <message>
         <location line="+31"/>
@@ -377,8 +377,8 @@ Tämä ohjelma sisältää OpenSSL projektin OpenSSL työkalupakin (http://www.o
     </message>
     <message>
         <location line="+4"/>
-        <source>Show information about Worldleadcurrency</source>
-        <translation>Näytä tietoa Worldleadcurrency-projektista</translation>
+        <source>Show information about Solidar</source>
+        <translation>Näytä tietoa Solidar-projektista</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -422,13 +422,13 @@ Tämä ohjelma sisältää OpenSSL projektin OpenSSL työkalupakin (http://www.o
     </message>
     <message>
         <location line="-347"/>
-        <source>Send coins to a Worldleadcurrency address</source>
-        <translation>Lähetä kolikoita Worldleadcurrency-osoitteeseen</translation>
+        <source>Send coins to a Solidar address</source>
+        <translation>Lähetä kolikoita Solidar-osoitteeseen</translation>
     </message>
     <message>
         <location line="+49"/>
-        <source>Modify configuration options for Worldleadcurrency</source>
-        <translation>Muuta Worldleadcurrencyin konfiguraatioasetuksia</translation>
+        <source>Modify configuration options for Solidar</source>
+        <translation>Muuta Solidarin konfiguraatioasetuksia</translation>
     </message>
     <message>
         <location line="+9"/>
@@ -458,8 +458,8 @@ Tämä ohjelma sisältää OpenSSL projektin OpenSSL työkalupakin (http://www.o
     <message>
         <location line="-165"/>
         <location line="+530"/>
-        <source>Worldleadcurrency</source>
-        <translation>Worldleadcurrency</translation>
+        <source>Solidar</source>
+        <translation>Solidar</translation>
     </message>
     <message>
         <location line="-530"/>
@@ -483,8 +483,8 @@ Tämä ohjelma sisältää OpenSSL projektin OpenSSL työkalupakin (http://www.o
     </message>
     <message>
         <location line="+22"/>
-        <source>&amp;About Worldleadcurrency</source>
-        <translation>&amp;Tietoa Worldleadcurrencyista</translation>
+        <source>&amp;About Solidar</source>
+        <translation>&amp;Tietoa Solidarista</translation>
     </message>
     <message>
         <location line="+9"/>
@@ -494,7 +494,7 @@ Tämä ohjelma sisältää OpenSSL projektin OpenSSL työkalupakin (http://www.o
     <message>
         <location line="+1"/>
         <source>Show or hide the main Window</source>
-        <translation>Näytä tai piilota Worldleadcurrency-ikkuna</translation>
+        <translation>Näytä tai piilota Solidar-ikkuna</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -503,13 +503,13 @@ Tämä ohjelma sisältää OpenSSL projektin OpenSSL työkalupakin (http://www.o
     </message>
     <message>
         <location line="+7"/>
-        <source>Sign messages with your Worldleadcurrency addresses to prove you own them</source>
-        <translation>Allekirjoita viestisi omalla Worldleadcurrency -osoitteellasi todistaaksesi, että omistat ne</translation>
+        <source>Sign messages with your Solidar addresses to prove you own them</source>
+        <translation>Allekirjoita viestisi omalla Solidar -osoitteellasi todistaaksesi, että omistat ne</translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>Verify messages to ensure they were signed with specified Worldleadcurrency addresses</source>
-        <translation>Varmista, että viestisi on allekirjoitettu määritetyllä Worldleadcurrency -osoitteella</translation>
+        <source>Verify messages to ensure they were signed with specified Solidar addresses</source>
+        <translation>Varmista, että viestisi on allekirjoitettu määritetyllä Solidar -osoitteella</translation>
     </message>
     <message>
         <location line="+28"/>
@@ -539,15 +539,15 @@ Tämä ohjelma sisältää OpenSSL projektin OpenSSL työkalupakin (http://www.o
     </message>
     <message>
         <location line="+47"/>
-        <source>Worldleadcurrency client</source>
-        <translation>Worldleadcurrency-asiakas</translation>
+        <source>Solidar client</source>
+        <translation>Solidar-asiakas</translation>
     </message>
     <message numerus="yes">
         <location line="+141"/>
-        <source>%n active connection(s) to Worldleadcurrency network</source>
+        <source>%n active connection(s) to Solidar network</source>
         <translation>
-            <numerusform>%n aktiivinen yhteys Worldleadcurrency-verkkoon</numerusform>
-            <numerusform>%n aktiivista yhteyttä Worldleadcurrency-verkkoon</numerusform>
+            <numerusform>%n aktiivinen yhteys Solidar-verkkoon</numerusform>
+            <numerusform>%n aktiivista yhteyttä Solidar-verkkoon</numerusform>
         </translation>
     </message>
     <message>
@@ -670,8 +670,8 @@ Osoite: %4</translation>
     <message>
         <location line="-23"/>
         <location line="+23"/>
-        <source>URI can not be parsed! This can be caused by an invalid Worldleadcurrency address or malformed URI parameters.</source>
-        <translation>URIa ei voitu jäsentää! Tämä voi johtua kelvottomasta Worldleadcurrency-osoitteesta tai virheellisistä URI parametreista.</translation>
+        <source>URI can not be parsed! This can be caused by an invalid Solidar address or malformed URI parameters.</source>
+        <translation>URIa ei voitu jäsentää! Tämä voi johtua kelvottomasta Solidar-osoitteesta tai virheellisistä URI parametreista.</translation>
     </message>
     <message>
         <location line="+17"/>
@@ -685,8 +685,8 @@ Osoite: %4</translation>
     </message>
     <message>
         <location filename="../bitcoin.cpp" line="+111"/>
-        <source>A fatal error occurred. Worldleadcurrency can no longer continue safely and will quit.</source>
-        <translation>Peruuttamaton virhe on tapahtunut. Worldleadcurrency ei voi enää jatkaa turvallisesti ja sammutetaan.</translation>
+        <source>A fatal error occurred. Solidar can no longer continue safely and will quit.</source>
+        <translation>Peruuttamaton virhe on tapahtunut. Solidar ei voi enää jatkaa turvallisesti ja sammutetaan.</translation>
     </message>
 </context>
 <context>
@@ -751,8 +751,8 @@ Osoite: %4</translation>
     </message>
     <message>
         <location line="-5"/>
-        <source>The entered address &quot;%1&quot; is not a valid Worldleadcurrency address.</source>
-        <translation>Antamasi osoite &quot;%1&quot; ei ole validi Worldleadcurrency-osoite.</translation>
+        <source>The entered address &quot;%1&quot; is not a valid Solidar address.</source>
+        <translation>Antamasi osoite &quot;%1&quot; ei ole validi Solidar-osoite.</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -770,8 +770,8 @@ Osoite: %4</translation>
     <message>
         <location filename="../guiutil.cpp" line="+424"/>
         <location line="+12"/>
-        <source>Worldleadcurrency-Qt</source>
-        <translation>Worldleadcurrency-Qt</translation>
+        <source>Solidar-Qt</source>
+        <translation>Solidar-Qt</translation>
     </message>
     <message>
         <location line="-12"/>
@@ -833,13 +833,13 @@ Osoite: %4</translation>
     </message>
     <message>
         <location line="+31"/>
-        <source>Automatically start Worldleadcurrency after logging in to the system.</source>
-        <translation>Käynnistä Worldleadcurrency kirjautumisen yhteydessä.</translation>
+        <source>Automatically start Solidar after logging in to the system.</source>
+        <translation>Käynnistä Solidar kirjautumisen yhteydessä.</translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>&amp;Start Worldleadcurrency on system login</source>
-        <translation>&amp;Käynnistä Worldleadcurrency kirjautumisen yhteydessä</translation>
+        <source>&amp;Start Solidar on system login</source>
+        <translation>&amp;Käynnistä Solidar kirjautumisen yhteydessä</translation>
     </message>
     <message>
         <location line="+35"/>
@@ -858,8 +858,8 @@ Osoite: %4</translation>
     </message>
     <message>
         <location line="+6"/>
-        <source>Automatically open the Worldleadcurrency client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Avaa Worldleadcurrency-asiakasohjelman portti reitittimellä automaattisesti. Tämä toimii vain, jos reitittimesi tukee UPnP:tä ja se on käytössä.</translation>
+        <source>Automatically open the Solidar client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Avaa Solidar-asiakasohjelman portti reitittimellä automaattisesti. Tämä toimii vain, jos reitittimesi tukee UPnP:tä ja se on käytössä.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -868,8 +868,8 @@ Osoite: %4</translation>
     </message>
     <message>
         <location line="+7"/>
-        <source>Connect to the Worldleadcurrency network through a SOCKS proxy (e.g. when connecting through Tor).</source>
-        <translation>Ota yhteys Worldleadcurrency-verkkoon SOCKS-proxyn läpi (esimerkiksi kun haluat käyttää Tor-verkkoa).</translation>
+        <source>Connect to the Solidar network through a SOCKS proxy (e.g. when connecting through Tor).</source>
+        <translation>Ota yhteys Solidar-verkkoon SOCKS-proxyn läpi (esimerkiksi kun haluat käyttää Tor-verkkoa).</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -924,7 +924,7 @@ Osoite: %4</translation>
     <message>
         <location line="+7"/>
         <source>Minimize instead of exit the application when the window is closed. When this option is enabled, the application will be closed only after selecting Quit in the menu.</source>
-        <translation>Ikkunaa suljettaessa vain pienentää Worldleadcurrency-ohjelman ikkunan lopettamatta itse ohjelmaa. Kun tämä asetus on valittuna, ohjelman voi sulkea vain valitsemalla Lopeta ohjelman valikosta.</translation>
+        <translation>Ikkunaa suljettaessa vain pienentää Solidar-ohjelman ikkunan lopettamatta itse ohjelmaa. Kun tämä asetus on valittuna, ohjelman voi sulkea vain valitsemalla Lopeta ohjelman valikosta.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -943,8 +943,8 @@ Osoite: %4</translation>
     </message>
     <message>
         <location line="+13"/>
-        <source>The user interface language can be set here. This setting will take effect after restarting Worldleadcurrency.</source>
-        <translation>Tässä voit määritellä käyttöliittymän kielen. Muutokset astuvat voimaan seuraavan kerran, kun Worldleadcurrency käynnistetään.</translation>
+        <source>The user interface language can be set here. This setting will take effect after restarting Solidar.</source>
+        <translation>Tässä voit määritellä käyttöliittymän kielen. Muutokset astuvat voimaan seuraavan kerran, kun Solidar käynnistetään.</translation>
     </message>
     <message>
         <location line="+11"/>
@@ -958,8 +958,8 @@ Osoite: %4</translation>
     </message>
     <message>
         <location line="+9"/>
-        <source>Whether to show Worldleadcurrency addresses in the transaction list or not.</source>
-        <translation>Näytetäänkö Worldleadcurrency-osoitteet rahansiirrot listassa vai ei.</translation>
+        <source>Whether to show Solidar addresses in the transaction list or not.</source>
+        <translation>Näytetäänkö Solidar-osoitteet rahansiirrot listassa vai ei.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1010,8 +1010,8 @@ Osoite: %4</translation>
     <message>
         <location line="-9"/>
         <location line="+9"/>
-        <source>This setting will take effect after restarting Worldleadcurrency.</source>
-        <translation>Tämä asetus astuu voimaan seuraavalla kerralla, kun Worldleadcurrency käynnistetään.</translation>
+        <source>This setting will take effect after restarting Solidar.</source>
+        <translation>Tämä asetus astuu voimaan seuraavalla kerralla, kun Solidar käynnistetään.</translation>
     </message>
     <message>
         <location line="+29"/>
@@ -1029,8 +1029,8 @@ Osoite: %4</translation>
     <message>
         <location line="+50"/>
         <location line="+166"/>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Worldleadcurrency network after a connection is established, but this process has not completed yet.</source>
-        <translation>Näytetyt tiedot eivät välttämättä ole ajantasalla. Lompakkosi synkronoituu Worldleadcurrency-verkon kanssa automaattisesti yhteyden muodostamisen jälkeen, mutta synkronointi on vielä meneillään.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Solidar network after a connection is established, but this process has not completed yet.</source>
+        <translation>Näytetyt tiedot eivät välttämättä ole ajantasalla. Lompakkosi synkronoituu Solidar-verkon kanssa automaattisesti yhteyden muodostamisen jälkeen, mutta synkronointi on vielä meneillään.</translation>
     </message>
     <message>
         <location line="-124"/>
@@ -1065,12 +1065,12 @@ Osoite: %4</translation>
     <message>
         <location line="-101"/>
         <source>Your current balance</source>
-        <translation>Tililläsi tällä hetkellä olevien Worldleadcurrencyien määrä</translation>
+        <translation>Tililläsi tällä hetkellä olevien Solidarien määrä</translation>
     </message>
     <message>
         <location line="+29"/>
         <source>Total of transactions that have yet to be confirmed, and do not yet count toward the current balance</source>
-        <translation>Niiden saapuvien rahansiirtojen määrä, joita Worldleadcurrency-verkko ei vielä ole ehtinyt vahvistaa ja siten eivät vielä näy saldossa.</translation>
+        <translation>Niiden saapuvien rahansiirtojen määrä, joita Solidar-verkko ei vielä ole ehtinyt vahvistaa ja siten eivät vielä näy saldossa.</translation>
     </message>
     <message>
         <location filename="../overviewpage.cpp" line="+117"/>
@@ -1083,7 +1083,7 @@ Osoite: %4</translation>
     <name>PaymentServer</name>
     <message>
         <location filename="../paymentserver.cpp" line="+107"/>
-        <source>Cannot start worldleadcurrency: click-to-pay handler</source>
+        <source>Cannot start solidar: click-to-pay handler</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1233,8 +1233,8 @@ Osoite: %4</translation>
     </message>
     <message>
         <location line="+7"/>
-        <source>Show the Worldleadcurrency-Qt help message to get a list with possible Worldleadcurrency command-line options.</source>
-        <translation>Näytä Worldleadcurrency-Qt komentoriviparametrien ohjesivu, jossa on listattuna mahdolliset komentoriviparametrit.</translation>
+        <source>Show the Solidar-Qt help message to get a list with possible Solidar command-line options.</source>
+        <translation>Näytä Solidar-Qt komentoriviparametrien ohjesivu, jossa on listattuna mahdolliset komentoriviparametrit.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1253,13 +1253,13 @@ Osoite: %4</translation>
     </message>
     <message>
         <location line="-104"/>
-        <source>Worldleadcurrency - Debug window</source>
-        <translation>Worldleadcurrency - Debug ikkuna</translation>
+        <source>Solidar - Debug window</source>
+        <translation>Solidar - Debug ikkuna</translation>
     </message>
     <message>
         <location line="+25"/>
-        <source>Worldleadcurrency Core</source>
-        <translation>Worldleadcurrency-ydin</translation>
+        <source>Solidar Core</source>
+        <translation>Solidar-ydin</translation>
     </message>
     <message>
         <location line="+279"/>
@@ -1268,7 +1268,7 @@ Osoite: %4</translation>
     </message>
     <message>
         <location line="+7"/>
-        <source>Open the Worldleadcurrency debug log file from the current data directory. This can take a few seconds for large log files.</source>
+        <source>Open the Solidar debug log file from the current data directory. This can take a few seconds for large log files.</source>
         <translation>Avaa lokitiedosto nykyisestä data-kansiosta. Tämä voi viedä useamman sekunnin, jos lokitiedosto on iso.</translation>
     </message>
     <message>
@@ -1278,8 +1278,8 @@ Osoite: %4</translation>
     </message>
     <message>
         <location filename="../rpcconsole.cpp" line="-30"/>
-        <source>Welcome to the Worldleadcurrency RPC console.</source>
-        <translation>Tervetuloa Worldleadcurrency RPC konsoliin.</translation>
+        <source>Welcome to the Solidar RPC console.</source>
+        <translation>Tervetuloa Solidar RPC konsoliin.</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -1304,7 +1304,7 @@ Osoite: %4</translation>
         <location line="+5"/>
         <location line="+5"/>
         <source>Send Coins</source>
-        <translation>Lähetä Worldleadcurrencyeja</translation>
+        <translation>Lähetä Solidareja</translation>
     </message>
     <message>
         <location line="+50"/>
@@ -1333,8 +1333,8 @@ Osoite: %4</translation>
     </message>
     <message>
         <location line="+10"/>
-        <source>123.456 WLC</source>
-        <translation>123,456 WLC</translation>
+        <source>123.456 SLR</source>
+        <translation>123,456 SLR</translation>
     </message>
     <message>
         <location line="+31"/>
@@ -1354,7 +1354,7 @@ Osoite: %4</translation>
     <message>
         <location line="+5"/>
         <source>Confirm send coins</source>
-        <translation>Hyväksy Worldleadcurrencyien lähettäminen</translation>
+        <translation>Hyväksy Solidarien lähettäminen</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -1374,7 +1374,7 @@ Osoite: %4</translation>
     <message>
         <location line="+5"/>
         <source>The amount to pay must be larger than 0.</source>
-        <translation>Maksettavan summan tulee olla suurempi kuin 0 Worldleadcurrencyia.</translation>
+        <translation>Maksettavan summan tulee olla suurempi kuin 0 Solidaria.</translation>
     </message>
     <message>
         <location line="+5"/>
@@ -1462,8 +1462,8 @@ Osoite: %4</translation>
     </message>
     <message>
         <location filename="../sendcoinsentry.cpp" line="+1"/>
-        <source>Enter a Worldleadcurrency address (e.g. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</source>
-        <translation>Anna Worldleadcurrency-osoite (esim. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</translation>
+        <source>Enter a Solidar address (e.g. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</source>
+        <translation>Anna Solidar-osoite (esim. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</translation>
     </message>
 </context>
 <context>
@@ -1527,8 +1527,8 @@ Osoite: %4</translation>
     </message>
     <message>
         <location line="+21"/>
-        <source>Sign the message to prove you own this Worldleadcurrency address</source>
-        <translation>Allekirjoita viesti todistaaksesi, että omistat tämän Worldleadcurrency-osoitteen</translation>
+        <source>Sign the message to prove you own this Solidar address</source>
+        <translation>Allekirjoita viesti todistaaksesi, että omistat tämän Solidar-osoitteen</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1563,8 +1563,8 @@ Osoite: %4</translation>
     </message>
     <message>
         <location line="+40"/>
-        <source>Verify the message to ensure it was signed with the specified Worldleadcurrency address</source>
-        <translation>Tarkista viestin allekirjoitus varmistaaksesi, että se allekirjoitettiin tietyllä Worldleadcurrency-osoitteella</translation>
+        <source>Verify the message to ensure it was signed with the specified Solidar address</source>
+        <translation>Tarkista viestin allekirjoitus varmistaaksesi, että se allekirjoitettiin tietyllä Solidar-osoitteella</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1579,8 +1579,8 @@ Osoite: %4</translation>
     <message>
         <location filename="../signverifymessagedialog.cpp" line="+27"/>
         <location line="+3"/>
-        <source>Enter a Worldleadcurrency address (e.g. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</source>
-        <translation>Anna Worldleadcurrency-osoite (esim. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</translation>
+        <source>Enter a Solidar address (e.g. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</source>
+        <translation>Anna Solidar-osoite (esim. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</translation>
     </message>
     <message>
         <location line="-2"/>
@@ -1589,8 +1589,8 @@ Osoite: %4</translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>Enter Worldleadcurrency signature</source>
-        <translation>Syötä Worldleadcurrency-allekirjoitus</translation>
+        <source>Enter Solidar signature</source>
+        <translation>Syötä Solidar-allekirjoitus</translation>
     </message>
     <message>
         <location line="+82"/>
@@ -1663,7 +1663,7 @@ Osoite: %4</translation>
     <name>SplashScreen</name>
     <message>
         <location filename="../splashscreen.cpp" line="+22"/>
-        <source>The Worldleadcurrency developers</source>
+        <source>The Solidar developers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1994,7 +1994,7 @@ Osoite: %4</translation>
     <message>
         <location line="+2"/>
         <source>Destination address of transaction.</source>
-        <translation>Rahansiirron kohteen Worldleadcurrency-osoite</translation>
+        <translation>Rahansiirron kohteen Solidar-osoite</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -2186,7 +2186,7 @@ Osoite: %4</translation>
     <message>
         <location filename="../walletmodel.cpp" line="+197"/>
         <source>Send Coins</source>
-        <translation>Lähetä Worldleadcurrencyeja</translation>
+        <translation>Lähetä Solidareja</translation>
     </message>
 </context>
 <context>
@@ -2236,8 +2236,8 @@ Osoite: %4</translation>
     <name>bitcoin-core</name>
     <message>
         <location filename="../bitcoinstrings.cpp" line="+131"/>
-        <source>Worldleadcurrency version</source>
-        <translation>Worldleadcurrencyin versio</translation>
+        <source>Solidar version</source>
+        <translation>Solidarin versio</translation>
     </message>
     <message>
         <location line="+66"/>
@@ -2341,7 +2341,7 @@ Osoite: %4</translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>Cannot obtain a lock on data directory %s. Worldleadcurrency is probably already running.</source>
+        <source>Cannot obtain a lock on data directory %s. Solidar is probably already running.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2386,8 +2386,8 @@ Osoite: %4</translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>Warning: Please check that your computer&apos;s date and time are correct! If your clock is wrong Worldleadcurrency will not work properly.</source>
-        <translation>Varoitus: Tarkista että tietokoneesi kellonaika ja päivämäärä ovat paikkansapitäviä! Worldleadcurrency ei toimi oikein väärällä päivämäärällä ja/tai kellonajalla.</translation>
+        <source>Warning: Please check that your computer&apos;s date and time are correct! If your clock is wrong Solidar will not work properly.</source>
+        <translation>Varoitus: Tarkista että tietokoneesi kellonaika ja päivämäärä ovat paikkansapitäviä! Solidar ei toimi oikein väärällä päivämäärällä ja/tai kellonajalla.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -2551,7 +2551,7 @@ Osoite: %4</translation>
     </message>
     <message>
         <location line="+6"/>
-        <source>Send command to -server or worldleadcurrencyd</source>
+        <source>Send command to -server or solidard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2561,12 +2561,12 @@ Osoite: %4</translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>Specify configuration file (default: worldleadcurrency.conf)</source>
+        <source>Specify configuration file (default: solidar.conf)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>Specify pid file (default: worldleadcurrencyd.pid)</source>
+        <source>Specify pid file (default: solidard.pid)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2589,13 +2589,13 @@ Osoite: %4</translation>
         <source>%s, you must set a rpcpassword in the configuration file:
 %s
 It is recommended you use the following random password:
-rpcuser=worldleadcurrencyrpc
+rpcuser=solidarrpc
 rpcpassword=%s
 (you do not need to remember this password)
 The username and password MUST NOT be the same.
 If the file does not exist, create it with owner-readable-only file permissions.
 It is also recommended to set alertnotify so you are notified of problems;
-for example: alertnotify=echo %%s | mail -s &quot;Worldleadcurrency Alert&quot; admin@foo.com
+for example: alertnotify=echo %%s | mail -s &quot;Solidar Alert&quot; admin@foo.com
 </source>
         <translation type="unfinished"></translation>
     </message>
@@ -2666,8 +2666,8 @@ for example: alertnotify=echo %%s | mail -s &quot;Worldleadcurrency Alert&quot; 
     </message>
     <message>
         <location line="+5"/>
-        <source>SSL options: (see the Worldleadcurrency Wiki for SSL setup instructions)</source>
-        <translation>SSL asetukset (katso Worldleadcurrency Wikistä tarkemmat SSL ohjeet)</translation>
+        <source>SSL options: (see the Solidar Wiki for SSL setup instructions)</source>
+        <translation>SSL asetukset (katso Solidar Wikistä tarkemmat SSL ohjeet)</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -2857,13 +2857,13 @@ TLSv1+HIGH:!SSLv2:!aNULL:!eNULL:!AH:!3DES:@STRENGTH)</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Error loading wallet.dat: Wallet requires newer version of Worldleadcurrency</source>
-        <translation>Virhe ladattaessa wallet.dat-tiedostoa: Tarvitset uudemman version Worldleadcurrencyista</translation>
+        <source>Error loading wallet.dat: Wallet requires newer version of Solidar</source>
+        <translation>Virhe ladattaessa wallet.dat-tiedostoa: Tarvitset uudemman version Solidarista</translation>
     </message>
     <message>
         <location line="+94"/>
-        <source>Wallet needed to be rewritten: restart Worldleadcurrency to complete</source>
-        <translation>Lompakko tarvitsee uudelleenkirjoittaa: käynnistä Worldleadcurrency uudelleen</translation>
+        <source>Wallet needed to be rewritten: restart Solidar to complete</source>
+        <translation>Lompakko tarvitsee uudelleenkirjoittaa: käynnistä Solidar uudelleen</translation>
     </message>
     <message>
         <location line="-96"/>
@@ -2922,8 +2922,8 @@ TLSv1+HIGH:!SSLv2:!aNULL:!eNULL:!AH:!3DES:@STRENGTH)</translation>
     </message>
     <message>
         <location line="-25"/>
-        <source>Unable to bind to %s on this computer. Worldleadcurrency is probably already running.</source>
-        <translation>Kytkeytyminen %s ei onnistu tällä tietokoneella. Worldleadcurrency on todennäköisesti jo ajamassa.</translation>
+        <source>Unable to bind to %s on this computer. Solidar is probably already running.</source>
+        <translation>Kytkeytyminen %s ei onnistu tällä tietokoneella. Solidar on todennäköisesti jo ajamassa.</translation>
     </message>
     <message>
         <location line="+63"/>

@@ -6,13 +6,13 @@
     <name>AboutDialog</name>
     <message>
         <location filename="../forms/aboutdialog.ui" line="+14"/>
-        <source>About Worldleadcurrency</source>
-        <translation>Despre Worldleadcurrency</translation>
+        <source>About Solidar</source>
+        <translation>Despre Solidar</translation>
     </message>
     <message>
         <location line="+39"/>
-        <source>&lt;b&gt;Worldleadcurrency&lt;/b&gt; version</source>
-        <translation>&lt;b&gt;Worldleadcurrency&lt;/b&gt; versiunea</translation>
+        <source>&lt;b&gt;Solidar&lt;/b&gt; version</source>
+        <translation>&lt;b&gt;Solidar&lt;/b&gt; versiunea</translation>
     </message>
     <message>
         <location line="+57"/>
@@ -31,7 +31,7 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="+0"/>
-        <source>The Worldleadcurrency developers</source>
+        <source>The Solidar developers</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -64,8 +64,8 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location filename="../addressbookpage.cpp" line="+63"/>
-        <source>These are your Worldleadcurrency addresses for receiving payments. You may want to give a different one to each sender so you can keep track of who is paying you.</source>
-        <translation>Acestea sunt adresele dumneavoastră Worldleadcurrency pentru a primi plăţi. Dacă doriţi, puteți da o adresa diferită fiecărui expeditor, pentru a putea ţine evidenţa plăţilor.</translation>
+        <source>These are your Solidar addresses for receiving payments. You may want to give a different one to each sender so you can keep track of who is paying you.</source>
+        <translation>Acestea sunt adresele dumneavoastră Solidar pentru a primi plăţi. Dacă doriţi, puteți da o adresa diferită fiecărui expeditor, pentru a putea ţine evidenţa plăţilor.</translation>
     </message>
     <message>
         <location filename="../forms/addressbookpage.ui" line="+14"/>
@@ -79,7 +79,7 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="+11"/>
-        <source>Sign a message to prove you own a Worldleadcurrency address</source>
+        <source>Sign a message to prove you own a Solidar address</source>
         <translation>Semneaza mesajul pentru a dovedi ca detii aceasta adresa Bitocin</translation>
     </message>
     <message>
@@ -104,7 +104,7 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="-44"/>
-        <source>Verify a message to ensure it was signed with a specified Worldleadcurrency address</source>
+        <source>Verify a message to ensure it was signed with a specified Solidar address</source>
         <translation>Verifica mesajul pentru a te asigura ca a fost insemnat cu o adresa bitcoin specifica</translation>
     </message>
     <message>
@@ -119,7 +119,7 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location filename="../addressbookpage.cpp" line="-5"/>
-        <source>These are your Worldleadcurrency addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <source>These are your Solidar addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -255,7 +255,7 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="+11"/>
-        <source>Worldleadcurrency will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your worldleadcurrencys from being stolen by malware infecting your computer.</source>
+        <source>Solidar will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your solidars from being stolen by malware infecting your computer.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -371,8 +371,8 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="+4"/>
-        <source>Show information about Worldleadcurrency</source>
-        <translation>Informaţii despre Worldleadcurrency</translation>
+        <source>Show information about Solidar</source>
+        <translation>Informaţii despre Solidar</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -416,13 +416,13 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="-347"/>
-        <source>Send coins to a Worldleadcurrency address</source>
-        <translation>&amp;Trimiteţi Worldleadcurrency către o anumită adresă</translation>
+        <source>Send coins to a Solidar address</source>
+        <translation>&amp;Trimiteţi Solidar către o anumită adresă</translation>
     </message>
     <message>
         <location line="+49"/>
-        <source>Modify configuration options for Worldleadcurrency</source>
-        <translation>Modifică setările pentru Worldleadcurrency</translation>
+        <source>Modify configuration options for Solidar</source>
+        <translation>Modifică setările pentru Solidar</translation>
     </message>
     <message>
         <location line="+9"/>
@@ -452,8 +452,8 @@ This product includes software developed by the OpenSSL Project for use in the O
     <message>
         <location line="-165"/>
         <location line="+530"/>
-        <source>Worldleadcurrency</source>
-        <translation>Worldleadcurrency</translation>
+        <source>Solidar</source>
+        <translation>Solidar</translation>
     </message>
     <message>
         <location line="-530"/>
@@ -477,8 +477,8 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="+22"/>
-        <source>&amp;About Worldleadcurrency</source>
-        <translation>&amp;Despre Worldleadcurrency</translation>
+        <source>&amp;About Solidar</source>
+        <translation>&amp;Despre Solidar</translation>
     </message>
     <message>
         <location line="+9"/>
@@ -497,12 +497,12 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="+7"/>
-        <source>Sign messages with your Worldleadcurrency addresses to prove you own them</source>
+        <source>Sign messages with your Solidar addresses to prove you own them</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>Verify messages to ensure they were signed with specified Worldleadcurrency addresses</source>
+        <source>Verify messages to ensure they were signed with specified Solidar addresses</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -533,16 +533,16 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="+47"/>
-        <source>Worldleadcurrency client</source>
-        <translation>Client Worldleadcurrency</translation>
+        <source>Solidar client</source>
+        <translation>Client Solidar</translation>
     </message>
     <message numerus="yes">
         <location line="+141"/>
-        <source>%n active connection(s) to Worldleadcurrency network</source>
+        <source>%n active connection(s) to Solidar network</source>
         <translation>
-            <numerusform>%n active connections to Worldleadcurrency network</numerusform>
-            <numerusform>%n active connections to Worldleadcurrency network</numerusform>
-            <numerusform>%n active connections to Worldleadcurrency network</numerusform>
+            <numerusform>%n active connections to Solidar network</numerusform>
+            <numerusform>%n active connections to Solidar network</numerusform>
+            <numerusform>%n active connections to Solidar network</numerusform>
         </translation>
     </message>
     <message>
@@ -665,7 +665,7 @@ Address: %4
     <message>
         <location line="-23"/>
         <location line="+23"/>
-        <source>URI can not be parsed! This can be caused by an invalid Worldleadcurrency address or malformed URI parameters.</source>
+        <source>URI can not be parsed! This can be caused by an invalid Solidar address or malformed URI parameters.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -680,7 +680,7 @@ Address: %4
     </message>
     <message>
         <location filename="../bitcoin.cpp" line="+111"/>
-        <source>A fatal error occurred. Worldleadcurrency can no longer continue safely and will quit.</source>
+        <source>A fatal error occurred. Solidar can no longer continue safely and will quit.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -746,7 +746,7 @@ Address: %4
     </message>
     <message>
         <location line="-5"/>
-        <source>The entered address &quot;%1&quot; is not a valid Worldleadcurrency address.</source>
+        <source>The entered address &quot;%1&quot; is not a valid Solidar address.</source>
         <translation>Adresa introdusă &quot;%1&quot; nu este o adresă bitcoin valabilă.</translation>
     </message>
     <message>
@@ -765,8 +765,8 @@ Address: %4
     <message>
         <location filename="../guiutil.cpp" line="+424"/>
         <location line="+12"/>
-        <source>Worldleadcurrency-Qt</source>
-        <translation>Worldleadcurrency-Qt</translation>
+        <source>Solidar-Qt</source>
+        <translation>Solidar-Qt</translation>
     </message>
     <message>
         <location line="-12"/>
@@ -828,13 +828,13 @@ Address: %4
     </message>
     <message>
         <location line="+31"/>
-        <source>Automatically start Worldleadcurrency after logging in to the system.</source>
-        <translation>Porneşte automat programul Worldleadcurrency la pornirea computerului.</translation>
+        <source>Automatically start Solidar after logging in to the system.</source>
+        <translation>Porneşte automat programul Solidar la pornirea computerului.</translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>&amp;Start Worldleadcurrency on system login</source>
-        <translation>&amp;S Porneşte Worldleadcurrency la pornirea sistemului</translation>
+        <source>&amp;Start Solidar on system login</source>
+        <translation>&amp;S Porneşte Solidar la pornirea sistemului</translation>
     </message>
     <message>
         <location line="+35"/>
@@ -853,8 +853,8 @@ Address: %4
     </message>
     <message>
         <location line="+6"/>
-        <source>Automatically open the Worldleadcurrency client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Deschide automat în router portul aferent clientului Worldleadcurrency. Funcţionează doar în cazul în care routerul e compatibil UPnP şi opţiunea e activată.</translation>
+        <source>Automatically open the Solidar client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Deschide automat în router portul aferent clientului Solidar. Funcţionează doar în cazul în care routerul e compatibil UPnP şi opţiunea e activată.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -863,8 +863,8 @@ Address: %4
     </message>
     <message>
         <location line="+7"/>
-        <source>Connect to the Worldleadcurrency network through a SOCKS proxy (e.g. when connecting through Tor).</source>
-        <translation>Conectare la reţeaua Worldleadcurrency folosind un proxy SOCKS (de exemplu, când conexiunea se stabileşte prin reţeaua Tor)</translation>
+        <source>Connect to the Solidar network through a SOCKS proxy (e.g. when connecting through Tor).</source>
+        <translation>Conectare la reţeaua Solidar folosind un proxy SOCKS (de exemplu, când conexiunea se stabileşte prin reţeaua Tor)</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -938,8 +938,8 @@ Address: %4
     </message>
     <message>
         <location line="+13"/>
-        <source>The user interface language can be set here. This setting will take effect after restarting Worldleadcurrency.</source>
-        <translation>Limba interfeței utilizatorului poate fi setat aici. Această setare va avea efect după repornirea Worldleadcurrency.</translation>
+        <source>The user interface language can be set here. This setting will take effect after restarting Solidar.</source>
+        <translation>Limba interfeței utilizatorului poate fi setat aici. Această setare va avea efect după repornirea Solidar.</translation>
     </message>
     <message>
         <location line="+11"/>
@@ -953,8 +953,8 @@ Address: %4
     </message>
     <message>
         <location line="+9"/>
-        <source>Whether to show Worldleadcurrency addresses in the transaction list or not.</source>
-        <translation>Vezi dacă adresele Worldleadcurrency sunt în lista de tranzacție sau nu</translation>
+        <source>Whether to show Solidar addresses in the transaction list or not.</source>
+        <translation>Vezi dacă adresele Solidar sunt în lista de tranzacție sau nu</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1005,7 +1005,7 @@ Address: %4
     <message>
         <location line="-9"/>
         <location line="+9"/>
-        <source>This setting will take effect after restarting Worldleadcurrency.</source>
+        <source>This setting will take effect after restarting Solidar.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1024,8 +1024,8 @@ Address: %4
     <message>
         <location line="+50"/>
         <location line="+166"/>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Worldleadcurrency network after a connection is established, but this process has not completed yet.</source>
-        <translation>Informațiile afișate pot fi expirate. Portofelul tău se sincronizează automat cu rețeaua Worldleadcurrency după ce o conexiune este stabilita, dar acest proces nu a fost finalizat încă.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Solidar network after a connection is established, but this process has not completed yet.</source>
+        <translation>Informațiile afișate pot fi expirate. Portofelul tău se sincronizează automat cu rețeaua Solidar după ce o conexiune este stabilita, dar acest proces nu a fost finalizat încă.</translation>
     </message>
     <message>
         <location line="-124"/>
@@ -1078,7 +1078,7 @@ Address: %4
     <name>PaymentServer</name>
     <message>
         <location filename="../paymentserver.cpp" line="+107"/>
-        <source>Cannot start worldleadcurrency: click-to-pay handler</source>
+        <source>Cannot start solidar: click-to-pay handler</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1228,8 +1228,8 @@ Address: %4
     </message>
     <message>
         <location line="+7"/>
-        <source>Show the Worldleadcurrency-Qt help message to get a list with possible Worldleadcurrency command-line options.</source>
-        <translation>Arata mesajul de ajutor Worldleadcurrency-QT pentru a obtine o lista cu posibilele optiuni ale comenzilor Worldleadcurrency</translation>
+        <source>Show the Solidar-Qt help message to get a list with possible Solidar command-line options.</source>
+        <translation>Arata mesajul de ajutor Solidar-QT pentru a obtine o lista cu posibilele optiuni ale comenzilor Solidar</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1248,13 +1248,13 @@ Address: %4
     </message>
     <message>
         <location line="-104"/>
-        <source>Worldleadcurrency - Debug window</source>
-        <translation>Worldleadcurrency-Fereastra pentru debug</translation>
+        <source>Solidar - Debug window</source>
+        <translation>Solidar-Fereastra pentru debug</translation>
     </message>
     <message>
         <location line="+25"/>
-        <source>Worldleadcurrency Core</source>
-        <translation>Worldleadcurrency Core</translation>
+        <source>Solidar Core</source>
+        <translation>Solidar Core</translation>
     </message>
     <message>
         <location line="+279"/>
@@ -1263,7 +1263,7 @@ Address: %4
     </message>
     <message>
         <location line="+7"/>
-        <source>Open the Worldleadcurrency debug log file from the current data directory. This can take a few seconds for large log files.</source>
+        <source>Open the Solidar debug log file from the current data directory. This can take a few seconds for large log files.</source>
         <translation>Deschide logurile debug din directorul curent. Aceasta poate dura cateva secunde pentru fisierele mai mari</translation>
     </message>
     <message>
@@ -1273,7 +1273,7 @@ Address: %4
     </message>
     <message>
         <location filename="../rpcconsole.cpp" line="-30"/>
-        <source>Welcome to the Worldleadcurrency RPC console.</source>
+        <source>Welcome to the Solidar RPC console.</source>
         <translation>Bun venit la consola bitcoin RPC</translation>
     </message>
     <message>
@@ -1299,7 +1299,7 @@ Address: %4
         <location line="+5"/>
         <location line="+5"/>
         <source>Send Coins</source>
-        <translation>Trimite Worldleadcurrency</translation>
+        <translation>Trimite Solidar</translation>
     </message>
     <message>
         <location line="+50"/>
@@ -1328,8 +1328,8 @@ Address: %4
     </message>
     <message>
         <location line="+10"/>
-        <source>123.456 WLC</source>
-        <translation>123.456 WLC</translation>
+        <source>123.456 SLR</source>
+        <translation>123.456 SLR</translation>
     </message>
     <message>
         <location line="+31"/>
@@ -1457,8 +1457,8 @@ Address: %4
     </message>
     <message>
         <location filename="../sendcoinsentry.cpp" line="+1"/>
-        <source>Enter a Worldleadcurrency address (e.g. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</source>
-        <translation>Introduceţi o adresă Worldleadcurrency (de exemplu: 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</translation>
+        <source>Enter a Solidar address (e.g. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</source>
+        <translation>Introduceţi o adresă Solidar (de exemplu: 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</translation>
     </message>
 </context>
 <context>
@@ -1481,7 +1481,7 @@ Address: %4
     <message>
         <location line="+18"/>
         <source>The address to sign the message with (e.g. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</source>
-        <translation>Introduceţi o adresă Worldleadcurrency (de exemplu: 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</translation>
+        <translation>Introduceţi o adresă Solidar (de exemplu: 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -1522,8 +1522,8 @@ Address: %4
     </message>
     <message>
         <location line="+21"/>
-        <source>Sign the message to prove you own this Worldleadcurrency address</source>
-        <translation>Semneaza mesajul pentru a dovedi ca detii acesta adresa Worldleadcurrency</translation>
+        <source>Sign the message to prove you own this Solidar address</source>
+        <translation>Semneaza mesajul pentru a dovedi ca detii acesta adresa Solidar</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1554,12 +1554,12 @@ Address: %4
     <message>
         <location line="+21"/>
         <source>The address the message was signed with (e.g. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</source>
-        <translation>Introduceţi o adresă Worldleadcurrency (de exemplu: 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</translation>
+        <translation>Introduceţi o adresă Solidar (de exemplu: 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</translation>
     </message>
     <message>
         <location line="+40"/>
-        <source>Verify the message to ensure it was signed with the specified Worldleadcurrency address</source>
-        <translation>Verifica mesajul pentru a fi sigur ca a fost semnat cu adresa Worldleadcurrency specifica</translation>
+        <source>Verify the message to ensure it was signed with the specified Solidar address</source>
+        <translation>Verifica mesajul pentru a fi sigur ca a fost semnat cu adresa Solidar specifica</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1574,8 +1574,8 @@ Address: %4
     <message>
         <location filename="../signverifymessagedialog.cpp" line="+27"/>
         <location line="+3"/>
-        <source>Enter a Worldleadcurrency address (e.g. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</source>
-        <translation>Introduceţi o adresă Worldleadcurrency (de exemplu: 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</translation>
+        <source>Enter a Solidar address (e.g. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</source>
+        <translation>Introduceţi o adresă Solidar (de exemplu: 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</translation>
     </message>
     <message>
         <location line="-2"/>
@@ -1584,7 +1584,7 @@ Address: %4
     </message>
     <message>
         <location line="+3"/>
-        <source>Enter Worldleadcurrency signature</source>
+        <source>Enter Solidar signature</source>
         <translation>Introduce semnatura bitocin</translation>
     </message>
     <message>
@@ -1658,7 +1658,7 @@ Address: %4
     <name>SplashScreen</name>
     <message>
         <location filename="../splashscreen.cpp" line="+22"/>
-        <source>The Worldleadcurrency developers</source>
+        <source>The Solidar developers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2186,7 +2186,7 @@ Address: %4
     <message>
         <location filename="../walletmodel.cpp" line="+197"/>
         <source>Send Coins</source>
-        <translation>Trimite Worldleadcurrency</translation>
+        <translation>Trimite Solidar</translation>
     </message>
 </context>
 <context>
@@ -2236,8 +2236,8 @@ Address: %4
     <name>bitcoin-core</name>
     <message>
         <location filename="../bitcoinstrings.cpp" line="+131"/>
-        <source>Worldleadcurrency version</source>
-        <translation>versiunea Worldleadcurrency</translation>
+        <source>Solidar version</source>
+        <translation>versiunea Solidar</translation>
     </message>
     <message>
         <location line="+66"/>
@@ -2342,7 +2342,7 @@ Address: %4
     </message>
     <message>
         <location line="+3"/>
-        <source>Cannot obtain a lock on data directory %s. Worldleadcurrency is probably already running.</source>
+        <source>Cannot obtain a lock on data directory %s. Solidar is probably already running.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2387,7 +2387,7 @@ Address: %4
     </message>
     <message>
         <location line="+3"/>
-        <source>Warning: Please check that your computer&apos;s date and time are correct! If your clock is wrong Worldleadcurrency will not work properly.</source>
+        <source>Warning: Please check that your computer&apos;s date and time are correct! If your clock is wrong Solidar will not work properly.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2552,7 +2552,7 @@ Address: %4
     </message>
     <message>
         <location line="+6"/>
-        <source>Send command to -server or worldleadcurrencyd</source>
+        <source>Send command to -server or solidard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2562,12 +2562,12 @@ Address: %4
     </message>
     <message>
         <location line="+3"/>
-        <source>Specify configuration file (default: worldleadcurrency.conf)</source>
+        <source>Specify configuration file (default: solidar.conf)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>Specify pid file (default: worldleadcurrencyd.pid)</source>
+        <source>Specify pid file (default: solidard.pid)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2590,13 +2590,13 @@ Address: %4
         <source>%s, you must set a rpcpassword in the configuration file:
 %s
 It is recommended you use the following random password:
-rpcuser=worldleadcurrencyrpc
+rpcuser=solidarrpc
 rpcpassword=%s
 (you do not need to remember this password)
 The username and password MUST NOT be the same.
 If the file does not exist, create it with owner-readable-only file permissions.
 It is also recommended to set alertnotify so you are notified of problems;
-for example: alertnotify=echo %%s | mail -s &quot;Worldleadcurrency Alert&quot; admin@foo.com
+for example: alertnotify=echo %%s | mail -s &quot;Solidar Alert&quot; admin@foo.com
 </source>
         <translation type="unfinished"></translation>
     </message>
@@ -2667,8 +2667,8 @@ for example: alertnotify=echo %%s | mail -s &quot;Worldleadcurrency Alert&quot; 
     </message>
     <message>
         <location line="+5"/>
-        <source>SSL options: (see the Worldleadcurrency Wiki for SSL setup instructions)</source>
-        <translation>Optiuni SSl (vezi Worldleadcurrency wiki pentru intructiunile de instalare)</translation>
+        <source>SSL options: (see the Solidar Wiki for SSL setup instructions)</source>
+        <translation>Optiuni SSl (vezi Solidar wiki pentru intructiunile de instalare)</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -2859,12 +2859,12 @@ for example: alertnotify=echo %%s | mail -s &quot;Worldleadcurrency Alert&quot; 
     </message>
     <message>
         <location line="+1"/>
-        <source>Error loading wallet.dat: Wallet requires newer version of Worldleadcurrency</source>
-        <translation>Eroare incarcare wallet.dat: Portofelul are nevoie de o versiune Worldleadcurrency mai noua</translation>
+        <source>Error loading wallet.dat: Wallet requires newer version of Solidar</source>
+        <translation>Eroare incarcare wallet.dat: Portofelul are nevoie de o versiune Solidar mai noua</translation>
     </message>
     <message>
         <location line="+94"/>
-        <source>Wallet needed to be rewritten: restart Worldleadcurrency to complete</source>
+        <source>Wallet needed to be rewritten: restart Solidar to complete</source>
         <translation>Portofelul trebuie rescris: restarteaza aplicatia bitcoin pentru a face asta.</translation>
     </message>
     <message>
@@ -2926,8 +2926,8 @@ details suggestions history
     </message>
     <message>
         <location line="-25"/>
-        <source>Unable to bind to %s on this computer. Worldleadcurrency is probably already running.</source>
-        <translation>Imposibilitatea de a lega la% s pe acest computer. Worldleadcurrency este, probabil, deja în execuție.</translation>
+        <source>Unable to bind to %s on this computer. Solidar is probably already running.</source>
+        <translation>Imposibilitatea de a lega la% s pe acest computer. Solidar este, probabil, deja în execuție.</translation>
     </message>
     <message>
         <location line="+63"/>

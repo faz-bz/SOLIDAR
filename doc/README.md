@@ -1,4 +1,4 @@
-Worldleadcurrency 0.8.6 BETA
+Solidar 0.8.6 BETA
 ===================
 
 Copyright (c) 2009-2013 Bitcoin Developers
@@ -11,7 +11,7 @@ cryptographic software written by Eric Young ([eay@cryptsoft.com](mailto:eay@cry
 
 Intro
 ---------------------
-Worldleadcurrency is a free open source peer-to-peer electronic cash system that is
+Solidar is a free open source peer-to-peer electronic cash system that is
 completely decentralized, without the need for a central server or trusted
 parties.  Users hold the crypto keys to their own money and transact directly
 with each other, with the help of a P2P network to check for double-spending.
@@ -19,15 +19,15 @@ with each other, with the help of a P2P network to check for double-spending.
 
 Setup
 ---------------------
-You need the Qt4 run-time libraries to run Worldleadcurrency-Qt. On Debian or Ubuntu:
+You need the Qt4 run-time libraries to run Solidar-Qt. On Debian or Ubuntu:
 	`sudo apt-get install libqtgui4`
 
 Unpack the files into a directory and run:
 
-- bin/32/worldleadcurrency-qt (GUI, 32-bit)
-- bin/32/worldleadcurrencyd (headless, 32-bit)
-- bin/64/worldleadcurrency-qt (GUI, 64-bit)
-- bin/64/worldleadcurrencyd (headless, 64-bit)
+- bin/32/solidar-qt (GUI, 32-bit)
+- bin/32/solidard (headless, 32-bit)
+- bin/64/solidar-qt (GUI, 64-bit)
+- bin/64/solidard (headless, 64-bit)
 
 See the documentation at the [Bitcoin Wiki](https://en.bitcoin.it/wiki/Main_Page)
 for help and more information.

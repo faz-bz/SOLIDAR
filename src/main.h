@@ -57,7 +57,7 @@ static const mpq MPQ_MAX_MONEY = mpq("1999999999999999/1");
 inline bool MoneyRange(int64 nValue) { return (nValue >= 0 && nValue <= I64_MAX_MONEY); }
 inline bool MoneyRange(mpz zValue) { return (zValue >= 0 && zValue <= MPZ_MAX_MONEY); }
 inline bool MoneyRange(mpq qValue) { return (qValue >= 0 && qValue <= MPQ_MAX_MONEY); }
-/** Subsidy, demurrage, and budgetary requirements for Worldleadcurrency host currency */
+/** Subsidy, demurrage, and budgetary requirements for Solidar host currency */
 static const mpq TITHE_RATIO = mpq("99/100");
 static const int EQ_HEIGHT = 25000;
 static const int DEMURRAGE_RATE = 262144;

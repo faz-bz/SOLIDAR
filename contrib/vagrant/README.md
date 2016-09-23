@@ -1,8 +1,8 @@
 Automated Gitian builds with Vagrant
 ====================================
 
-This directory contains platform-independent scripts for building worldleadcurrencyd
-and Worldleadcurrency-QT using the deterministic Gitian build process.
+This directory contains platform-independent scripts for building solidard
+and Solidar-QT using the deterministic Gitian build process.
 
 Dependencies
 ------------

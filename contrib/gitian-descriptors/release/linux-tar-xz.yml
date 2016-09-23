@@ -11,10 +11,10 @@ packages:
 reference_datetime: "2012-07-01 00:00:00"
 remotes: []
 files:
-- "Worldleadcurrency-Qt-i686-pc-linux-gnu-0.8.6.1-gitian.zip"
-- "Worldleadcurrency-Qt-x86_64-pc-linux-gnu-0.8.6.1-gitian.zip"
-- "worldleadcurrencyd-i686-pc-linux-gnu-0.8.6.1-gitian.zip"
-- "worldleadcurrencyd-x86_64-pc-linux-gnu-0.8.6.1-gitian.zip"
+- "Solidar-Qt-i686-pc-linux-gnu-0.8.6.1-gitian.zip"
+- "Solidar-Qt-x86_64-pc-linux-gnu-0.8.6.1-gitian.zip"
+- "solidard-i686-pc-linux-gnu-0.8.6.1-gitian.zip"
+- "solidard-x86_64-pc-linux-gnu-0.8.6.1-gitian.zip"
 - "src-local.tar.xz"
 script: |
   export ARCH=linux
@@ -30,27 +30,27 @@ script: |
   export TZ=UTC
   export FAKETIME=$REFERENCE_DATETIME
   
-  mkdir -p "$PREFIX"/worldleadcurrency-${WORLDLEADCURRENCY_VER}-${ARCH}
-  pushd "$PREFIX"/worldleadcurrency-${WORLDLEADCURRENCY_VER}-${ARCH}
+  mkdir -p "$PREFIX"/solidar-${WORLDLEADCURRENCY_VER}-${ARCH}
+  pushd "$PREFIX"/solidar-${WORLDLEADCURRENCY_VER}-${ARCH}
 
   mkdir -p src
   tar -C src -xf "$GITIANDIR"/src-local.tar.xz
   cp -a src/doc/README.md .
   cp -a src/COPYING .
   mkdir -p bin/32
-  unzip "$GITIANDIR"/worldleadcurrencyd-i686-pc-linux-gnu-${WORLDLEADCURRENCY_VER}-gitian.zip bin/worldleadcurrencyd
-  unzip "$GITIANDIR"/Worldleadcurrency-Qt-i686-pc-linux-gnu-${WORLDLEADCURRENCY_VER}-gitian.zip bin/Worldleadcurrency-Qt
-  mv bin/worldleadcurrencyd bin/Worldleadcurrency-Qt bin/32
+  unzip "$GITIANDIR"/solidard-i686-pc-linux-gnu-${WORLDLEADCURRENCY_VER}-gitian.zip bin/solidard
+  unzip "$GITIANDIR"/Solidar-Qt-i686-pc-linux-gnu-${WORLDLEADCURRENCY_VER}-gitian.zip bin/Solidar-Qt
+  mv bin/solidard bin/Solidar-Qt bin/32
   mkdir -p bin/64
-  unzip "$GITIANDIR"/worldleadcurrencyd-x86_64-pc-linux-gnu-${WORLDLEADCURRENCY_VER}-gitian.zip bin/worldleadcurrencyd
-  unzip "$GITIANDIR"/Worldleadcurrency-Qt-x86_64-pc-linux-gnu-${WORLDLEADCURRENCY_VER}-gitian.zip bin/Worldleadcurrency-Qt
-  mv bin/worldleadcurrencyd bin/Worldleadcurrency-Qt bin/64
+  unzip "$GITIANDIR"/solidard-x86_64-pc-linux-gnu-${WORLDLEADCURRENCY_VER}-gitian.zip bin/solidard
+  unzip "$GITIANDIR"/Solidar-Qt-x86_64-pc-linux-gnu-${WORLDLEADCURRENCY_VER}-gitian.zip bin/Solidar-Qt
+  mv bin/solidard bin/Solidar-Qt bin/64
   
   cd ..
-  find worldleadcurrency-${WORLDLEADCURRENCY_VER}-${ARCH} -not -type d -print0 | sort -z | xargs -0 \
-    tar -uf "$OUTDIR"/worldleadcurrency-${WORLDLEADCURRENCY_VER}-${ARCH}.tar
+  find solidar-${WORLDLEADCURRENCY_VER}-${ARCH} -not -type d -print0 | sort -z | xargs -0 \
+    tar -uf "$OUTDIR"/solidar-${WORLDLEADCURRENCY_VER}-${ARCH}.tar
   popd
   
   pushd "$OUTDIR"
-  xz -6e worldleadcurrency-${WORLDLEADCURRENCY_VER}-${ARCH}.tar
+  xz -6e solidar-${WORLDLEADCURRENCY_VER}-${ARCH}.tar
   popd

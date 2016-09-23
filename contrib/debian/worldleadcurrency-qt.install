@@ -1,6 +1,6 @@
-worldleadcurrency-qt usr/bin
-share/pixmaps/worldleadcurrency32.xpm usr/share/pixmaps
-share/pixmaps/worldleadcurrency16.xpm usr/share/pixmaps
-share/pixmaps/worldleadcurrency128.png usr/share/pixmaps
-debian/worldleadcurrency-qt.desktop usr/share/applications
-debian/worldleadcurrency-qt.protocol usr/share/kde4/services/
+solidar-qt usr/bin
+share/pixmaps/solidar32.xpm usr/share/pixmaps
+share/pixmaps/solidar16.xpm usr/share/pixmaps
+share/pixmaps/solidar128.png usr/share/pixmaps
+debian/solidar-qt.desktop usr/share/applications
+debian/solidar-qt.protocol usr/share/kde4/services/

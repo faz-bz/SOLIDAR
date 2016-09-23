@@ -6,13 +6,13 @@
     <name>AboutDialog</name>
     <message>
         <location filename="../forms/aboutdialog.ui" line="+14"/>
-        <source>About Worldleadcurrency</source>
-        <translation>O Worldleadcurrencyu</translation>
+        <source>About Solidar</source>
+        <translation>O Solidaru</translation>
     </message>
     <message>
         <location line="+39"/>
-        <source>&lt;b&gt;Worldleadcurrency&lt;/b&gt; version</source>
-        <translation>&lt;b&gt;Worldleadcurrency&lt;/b&gt; verze</translation>
+        <source>&lt;b&gt;Solidar&lt;/b&gt; version</source>
+        <translation>&lt;b&gt;Solidar&lt;/b&gt; verze</translation>
     </message>
     <message>
         <location line="+57"/>
@@ -36,8 +36,8 @@ Tento produkt zahrnuje programy vyvinuté OpenSSL Projektem pro použití v Open
     </message>
     <message>
         <location line="+0"/>
-        <source>The Worldleadcurrency developers</source>
-        <translation>Vývojáři Worldleadcurrencyu</translation>
+        <source>The Solidar developers</source>
+        <translation>Vývojáři Solidaru</translation>
     </message>
 </context>
 <context>
@@ -69,8 +69,8 @@ Tento produkt zahrnuje programy vyvinuté OpenSSL Projektem pro použití v Open
     </message>
     <message>
         <location filename="../addressbookpage.cpp" line="+63"/>
-        <source>These are your Worldleadcurrency addresses for receiving payments. You may want to give a different one to each sender so you can keep track of who is paying you.</source>
-        <translation>Tohle jsou tvé Worldleadcurrencyové adresy pro příjem plateb. Můžeš dát pokaždé každému plátci novou adresu, abys věděl, kdo ti kdy kolik platil.</translation>
+        <source>These are your Solidar addresses for receiving payments. You may want to give a different one to each sender so you can keep track of who is paying you.</source>
+        <translation>Tohle jsou tvé Solidarové adresy pro příjem plateb. Můžeš dát pokaždé každému plátci novou adresu, abys věděl, kdo ti kdy kolik platil.</translation>
     </message>
     <message>
         <location filename="../forms/addressbookpage.ui" line="+14"/>
@@ -84,8 +84,8 @@ Tento produkt zahrnuje programy vyvinuté OpenSSL Projektem pro použití v Open
     </message>
     <message>
         <location line="+11"/>
-        <source>Sign a message to prove you own a Worldleadcurrency address</source>
-        <translation>Podepiš zprávu, čímž prokážeš, že jsi vlastníkem Worldleadcurrencyové adresy</translation>
+        <source>Sign a message to prove you own a Solidar address</source>
+        <translation>Podepiš zprávu, čímž prokážeš, že jsi vlastníkem Solidarové adresy</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -109,8 +109,8 @@ Tento produkt zahrnuje programy vyvinuté OpenSSL Projektem pro použití v Open
     </message>
     <message>
         <location line="-44"/>
-        <source>Verify a message to ensure it was signed with a specified Worldleadcurrency address</source>
-        <translation>Ověř zprávu, aby ses ujistil, že byla podepsána danou Worldleadcurrencyovou adresou</translation>
+        <source>Verify a message to ensure it was signed with a specified Solidar address</source>
+        <translation>Ověř zprávu, aby ses ujistil, že byla podepsána danou Solidarovou adresou</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -124,8 +124,8 @@ Tento produkt zahrnuje programy vyvinuté OpenSSL Projektem pro použití v Open
     </message>
     <message>
         <location filename="../addressbookpage.cpp" line="-5"/>
-        <source>These are your Worldleadcurrency addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Tohle jsou tvé Worldleadcurrencyové adresy pro posílání plateb. Před odesláním mincí si vždy zkontroluj částku a cílovou adresu.</translation>
+        <source>These are your Solidar addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>Tohle jsou tvé Solidarové adresy pro posílání plateb. Před odesláním mincí si vždy zkontroluj částku a cílovou adresu.</translation>
     </message>
     <message>
         <location line="+13"/>
@@ -260,7 +260,7 @@ Tento produkt zahrnuje programy vyvinuté OpenSSL Projektem pro použití v Open
     </message>
     <message>
         <location line="+11"/>
-        <source>Worldleadcurrency will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your worldleadcurrencys from being stolen by malware infecting your computer.</source>
+        <source>Solidar will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your solidars from being stolen by malware infecting your computer.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -376,8 +376,8 @@ Tento produkt zahrnuje programy vyvinuté OpenSSL Projektem pro použití v Open
     </message>
     <message>
         <location line="+4"/>
-        <source>Show information about Worldleadcurrency</source>
-        <translation>Zobraz informace o Worldleadcurrencyu</translation>
+        <source>Show information about Solidar</source>
+        <translation>Zobraz informace o Solidaru</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -421,13 +421,13 @@ Tento produkt zahrnuje programy vyvinuté OpenSSL Projektem pro použití v Open
     </message>
     <message>
         <location line="-347"/>
-        <source>Send coins to a Worldleadcurrency address</source>
-        <translation>Pošli mince na Worldleadcurrencyovou adresu</translation>
+        <source>Send coins to a Solidar address</source>
+        <translation>Pošli mince na Solidarovou adresu</translation>
     </message>
     <message>
         <location line="+49"/>
-        <source>Modify configuration options for Worldleadcurrency</source>
-        <translation>Uprav nastavení Worldleadcurrencyu</translation>
+        <source>Modify configuration options for Solidar</source>
+        <translation>Uprav nastavení Solidaru</translation>
     </message>
     <message>
         <location line="+9"/>
@@ -457,8 +457,8 @@ Tento produkt zahrnuje programy vyvinuté OpenSSL Projektem pro použití v Open
     <message>
         <location line="-165"/>
         <location line="+530"/>
-        <source>Worldleadcurrency</source>
-        <translation>Worldleadcurrency</translation>
+        <source>Solidar</source>
+        <translation>Solidar</translation>
     </message>
     <message>
         <location line="-530"/>
@@ -482,8 +482,8 @@ Tento produkt zahrnuje programy vyvinuté OpenSSL Projektem pro použití v Open
     </message>
     <message>
         <location line="+22"/>
-        <source>&amp;About Worldleadcurrency</source>
-        <translation>O &amp;Worldleadcurrencyu</translation>
+        <source>&amp;About Solidar</source>
+        <translation>O &amp;Solidaru</translation>
     </message>
     <message>
         <location line="+9"/>
@@ -502,13 +502,13 @@ Tento produkt zahrnuje programy vyvinuté OpenSSL Projektem pro použití v Open
     </message>
     <message>
         <location line="+7"/>
-        <source>Sign messages with your Worldleadcurrency addresses to prove you own them</source>
-        <translation>Podepiš zprávy svými Worldleadcurrencyovými adresami, čímž prokážeš, že jsi jejich vlastníkem</translation>
+        <source>Sign messages with your Solidar addresses to prove you own them</source>
+        <translation>Podepiš zprávy svými Solidarovými adresami, čímž prokážeš, že jsi jejich vlastníkem</translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>Verify messages to ensure they were signed with specified Worldleadcurrency addresses</source>
-        <translation>Ověř zprávy, aby ses ujistil, že byly podepsány danými Worldleadcurrencyovými adresami</translation>
+        <source>Verify messages to ensure they were signed with specified Solidar addresses</source>
+        <translation>Ověř zprávy, aby ses ujistil, že byly podepsány danými Solidarovými adresami</translation>
     </message>
     <message>
         <location line="+28"/>
@@ -538,16 +538,16 @@ Tento produkt zahrnuje programy vyvinuté OpenSSL Projektem pro použití v Open
     </message>
     <message>
         <location line="+47"/>
-        <source>Worldleadcurrency client</source>
-        <translation>Worldleadcurrency klient</translation>
+        <source>Solidar client</source>
+        <translation>Solidar klient</translation>
     </message>
     <message numerus="yes">
         <location line="+141"/>
-        <source>%n active connection(s) to Worldleadcurrency network</source>
+        <source>%n active connection(s) to Solidar network</source>
         <translation>
-            <numerusform>%n aktivní spojení do Worldleadcurrencyové sítě</numerusform>
-            <numerusform>%n aktivní spojení do Worldleadcurrencyové sítě</numerusform>
-            <numerusform>%n aktivních spojení do Worldleadcurrencyové sítě</numerusform>
+            <numerusform>%n aktivní spojení do Solidarové sítě</numerusform>
+            <numerusform>%n aktivní spojení do Solidarové sítě</numerusform>
+            <numerusform>%n aktivních spojení do Solidarové sítě</numerusform>
         </translation>
     </message>
     <message>
@@ -674,8 +674,8 @@ Adresa: %4
     <message>
         <location line="-23"/>
         <location line="+23"/>
-        <source>URI can not be parsed! This can be caused by an invalid Worldleadcurrency address or malformed URI parameters.</source>
-        <translation>Nepodařilo se analyzovat URI! Důvodem může být neplatná Worldleadcurrencyová adresa nebo poškozené parametry URI.</translation>
+        <source>URI can not be parsed! This can be caused by an invalid Solidar address or malformed URI parameters.</source>
+        <translation>Nepodařilo se analyzovat URI! Důvodem může být neplatná Solidarová adresa nebo poškozené parametry URI.</translation>
     </message>
     <message>
         <location line="+17"/>
@@ -689,8 +689,8 @@ Adresa: %4
     </message>
     <message>
         <location filename="../bitcoin.cpp" line="+111"/>
-        <source>A fatal error occurred. Worldleadcurrency can no longer continue safely and will quit.</source>
-        <translation>Stala se fatální chyba. Worldleadcurrency nemůže bezpečně pokračovat v činnosti, a proto skončí.</translation>
+        <source>A fatal error occurred. Solidar can no longer continue safely and will quit.</source>
+        <translation>Stala se fatální chyba. Solidar nemůže bezpečně pokračovat v činnosti, a proto skončí.</translation>
     </message>
 </context>
 <context>
@@ -755,8 +755,8 @@ Adresa: %4
     </message>
     <message>
         <location line="-5"/>
-        <source>The entered address &quot;%1&quot; is not a valid Worldleadcurrency address.</source>
-        <translation>Zadaná adresa &quot;%1&quot; není platná Worldleadcurrencyová adresa.</translation>
+        <source>The entered address &quot;%1&quot; is not a valid Solidar address.</source>
+        <translation>Zadaná adresa &quot;%1&quot; není platná Solidarová adresa.</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -774,8 +774,8 @@ Adresa: %4
     <message>
         <location filename="../guiutil.cpp" line="+424"/>
         <location line="+12"/>
-        <source>Worldleadcurrency-Qt</source>
-        <translation>Worldleadcurrency-Qt</translation>
+        <source>Solidar-Qt</source>
+        <translation>Solidar-Qt</translation>
     </message>
     <message>
         <location line="-12"/>
@@ -837,13 +837,13 @@ Adresa: %4
     </message>
     <message>
         <location line="+31"/>
-        <source>Automatically start Worldleadcurrency after logging in to the system.</source>
-        <translation>Automaticky spustí Worldleadcurrency po přihlášení do systému.</translation>
+        <source>Automatically start Solidar after logging in to the system.</source>
+        <translation>Automaticky spustí Solidar po přihlášení do systému.</translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>&amp;Start Worldleadcurrency on system login</source>
-        <translation>S&amp;pustit Worldleadcurrency po přihlášení do systému</translation>
+        <source>&amp;Start Solidar on system login</source>
+        <translation>S&amp;pustit Solidar po přihlášení do systému</translation>
     </message>
     <message>
         <location line="+35"/>
@@ -862,7 +862,7 @@ Adresa: %4
     </message>
     <message>
         <location line="+6"/>
-        <source>Automatically open the Worldleadcurrency client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <source>Automatically open the Solidar client port on the router. This only works when your router supports UPnP and it is enabled.</source>
         <translation>Automaticky otevře potřebný port na routeru. Tohle funguje jen za předpokladu, že tvůj router podporuje UPnP a že je UPnP povolené.</translation>
     </message>
     <message>
@@ -872,8 +872,8 @@ Adresa: %4
     </message>
     <message>
         <location line="+7"/>
-        <source>Connect to the Worldleadcurrency network through a SOCKS proxy (e.g. when connecting through Tor).</source>
-        <translation>Připojí se do Worldleadcurrencyové sítě přes SOCKS proxy (např. když se připojuje přes Tor).</translation>
+        <source>Connect to the Solidar network through a SOCKS proxy (e.g. when connecting through Tor).</source>
+        <translation>Připojí se do Solidarové sítě přes SOCKS proxy (např. když se připojuje přes Tor).</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -947,8 +947,8 @@ Adresa: %4
     </message>
     <message>
         <location line="+13"/>
-        <source>The user interface language can be set here. This setting will take effect after restarting Worldleadcurrency.</source>
-        <translation>Tady lze nastavit jazyk uživatelského rozhraní. Nastavení se projeví až po restartování Worldleadcurrencyu.</translation>
+        <source>The user interface language can be set here. This setting will take effect after restarting Solidar.</source>
+        <translation>Tady lze nastavit jazyk uživatelského rozhraní. Nastavení se projeví až po restartování Solidaru.</translation>
     </message>
     <message>
         <location line="+11"/>
@@ -962,7 +962,7 @@ Adresa: %4
     </message>
     <message>
         <location line="+9"/>
-        <source>Whether to show Worldleadcurrency addresses in the transaction list or not.</source>
+        <source>Whether to show Solidar addresses in the transaction list or not.</source>
         <translation>Zda ukazovat bitcoinové adresy ve výpisu transakcí nebo ne.</translation>
     </message>
     <message>
@@ -1014,8 +1014,8 @@ Adresa: %4
     <message>
         <location line="-9"/>
         <location line="+9"/>
-        <source>This setting will take effect after restarting Worldleadcurrency.</source>
-        <translation>Nastavení se projeví až po restartování Worldleadcurrencyu.</translation>
+        <source>This setting will take effect after restarting Solidar.</source>
+        <translation>Nastavení se projeví až po restartování Solidaru.</translation>
     </message>
     <message>
         <location line="+29"/>
@@ -1033,8 +1033,8 @@ Adresa: %4
     <message>
         <location line="+50"/>
         <location line="+166"/>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Worldleadcurrency network after a connection is established, but this process has not completed yet.</source>
-        <translation>Zobrazené informace nemusí být aktuální. Tvá peněženka se automaticky sesynchronizuje s Worldleadcurrencyovou sítí, jakmile se s ní spojí. Zatím ale ještě není synchronizace dokončena.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Solidar network after a connection is established, but this process has not completed yet.</source>
+        <translation>Zobrazené informace nemusí být aktuální. Tvá peněženka se automaticky sesynchronizuje s Solidarovou sítí, jakmile se s ní spojí. Zatím ale ještě není synchronizace dokončena.</translation>
     </message>
     <message>
         <location line="-124"/>
@@ -1087,7 +1087,7 @@ Adresa: %4
     <name>PaymentServer</name>
     <message>
         <location filename="../paymentserver.cpp" line="+107"/>
-        <source>Cannot start worldleadcurrency: click-to-pay handler</source>
+        <source>Cannot start solidar: click-to-pay handler</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1237,8 +1237,8 @@ Adresa: %4
     </message>
     <message>
         <location line="+7"/>
-        <source>Show the Worldleadcurrency-Qt help message to get a list with possible Worldleadcurrency command-line options.</source>
-        <translation>Seznam parametrů Worldleadcurrencyu pro příkazovou řádku získáš v nápovědě Worldleadcurrencyu Qt.</translation>
+        <source>Show the Solidar-Qt help message to get a list with possible Solidar command-line options.</source>
+        <translation>Seznam parametrů Solidaru pro příkazovou řádku získáš v nápovědě Solidaru Qt.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1257,13 +1257,13 @@ Adresa: %4
     </message>
     <message>
         <location line="-104"/>
-        <source>Worldleadcurrency - Debug window</source>
-        <translation>Worldleadcurrency - ladicí okno</translation>
+        <source>Solidar - Debug window</source>
+        <translation>Solidar - ladicí okno</translation>
     </message>
     <message>
         <location line="+25"/>
-        <source>Worldleadcurrency Core</source>
-        <translation>Jádro Worldleadcurrencyu</translation>
+        <source>Solidar Core</source>
+        <translation>Jádro Solidaru</translation>
     </message>
     <message>
         <location line="+279"/>
@@ -1272,8 +1272,8 @@ Adresa: %4
     </message>
     <message>
         <location line="+7"/>
-        <source>Open the Worldleadcurrency debug log file from the current data directory. This can take a few seconds for large log files.</source>
-        <translation>Otevři soubor s ladicími záznamy Worldleadcurrencyu z aktuálního datového adresáře. U velkých logů to může pár vteřin zabrat.</translation>
+        <source>Open the Solidar debug log file from the current data directory. This can take a few seconds for large log files.</source>
+        <translation>Otevři soubor s ladicími záznamy Solidaru z aktuálního datového adresáře. U velkých logů to může pár vteřin zabrat.</translation>
     </message>
     <message>
         <location line="+102"/>
@@ -1282,8 +1282,8 @@ Adresa: %4
     </message>
     <message>
         <location filename="../rpcconsole.cpp" line="-30"/>
-        <source>Welcome to the Worldleadcurrency RPC console.</source>
-        <translation>Vítej v Worldleadcurrencyové RPC konzoli.</translation>
+        <source>Welcome to the Solidar RPC console.</source>
+        <translation>Vítej v Solidarové RPC konzoli.</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -1337,8 +1337,8 @@ Adresa: %4
     </message>
     <message>
         <location line="+10"/>
-        <source>123.456 WLC</source>
-        <translation>123.456 WLC</translation>
+        <source>123.456 SLR</source>
+        <translation>123.456 SLR</translation>
     </message>
     <message>
         <location line="+31"/>
@@ -1466,8 +1466,8 @@ Adresa: %4
     </message>
     <message>
         <location filename="../sendcoinsentry.cpp" line="+1"/>
-        <source>Enter a Worldleadcurrency address (e.g. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</source>
-        <translation>Zadej Worldleadcurrencyovou adresu (např. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</translation>
+        <source>Enter a Solidar address (e.g. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</source>
+        <translation>Zadej Solidarovou adresu (např. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</translation>
     </message>
 </context>
 <context>
@@ -1531,8 +1531,8 @@ Adresa: %4
     </message>
     <message>
         <location line="+21"/>
-        <source>Sign the message to prove you own this Worldleadcurrency address</source>
-        <translation>Podepiš zprávu, čímž prokážeš, že jsi vlastníkem této Worldleadcurrencyové adresy</translation>
+        <source>Sign the message to prove you own this Solidar address</source>
+        <translation>Podepiš zprávu, čímž prokážeš, že jsi vlastníkem této Solidarové adresy</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1567,8 +1567,8 @@ Adresa: %4
     </message>
     <message>
         <location line="+40"/>
-        <source>Verify the message to ensure it was signed with the specified Worldleadcurrency address</source>
-        <translation>Ověř zprávu, aby ses ujistil, že byla podepsána danou Worldleadcurrencyovou adresou</translation>
+        <source>Verify the message to ensure it was signed with the specified Solidar address</source>
+        <translation>Ověř zprávu, aby ses ujistil, že byla podepsána danou Solidarovou adresou</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1583,8 +1583,8 @@ Adresa: %4
     <message>
         <location filename="../signverifymessagedialog.cpp" line="+27"/>
         <location line="+3"/>
-        <source>Enter a Worldleadcurrency address (e.g. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</source>
-        <translation>Zadej Worldleadcurrencyovou adresu (např. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</translation>
+        <source>Enter a Solidar address (e.g. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</source>
+        <translation>Zadej Solidarovou adresu (např. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</translation>
     </message>
     <message>
         <location line="-2"/>
@@ -1593,8 +1593,8 @@ Adresa: %4
     </message>
     <message>
         <location line="+3"/>
-        <source>Enter Worldleadcurrency signature</source>
-        <translation>Vlož Worldleadcurrencyový podpis</translation>
+        <source>Enter Solidar signature</source>
+        <translation>Vlož Solidarový podpis</translation>
     </message>
     <message>
         <location line="+82"/>
@@ -1667,8 +1667,8 @@ Adresa: %4
     <name>SplashScreen</name>
     <message>
         <location filename="../splashscreen.cpp" line="+22"/>
-        <source>The Worldleadcurrency developers</source>
-        <translation>Vývojáři Worldleadcurrencyu</translation>
+        <source>The Solidar developers</source>
+        <translation>Vývojáři Solidaru</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -2245,8 +2245,8 @@ Adresa: %4
     <name>bitcoin-core</name>
     <message>
         <location filename="../bitcoinstrings.cpp" line="+131"/>
-        <source>Worldleadcurrency version</source>
-        <translation>Verze Worldleadcurrencyu</translation>
+        <source>Solidar version</source>
+        <translation>Verze Solidaru</translation>
     </message>
     <message>
         <location line="+66"/>
@@ -2350,8 +2350,8 @@ Adresa: %4
     </message>
     <message>
         <location line="+3"/>
-        <source>Cannot obtain a lock on data directory %s. Worldleadcurrency is probably already running.</source>
-        <translation>Nedaří se mi získat zámek na datový adresář %s. Worldleadcurrency pravděpodobně už jednou běží.</translation>
+        <source>Cannot obtain a lock on data directory %s. Solidar is probably already running.</source>
+        <translation>Nedaří se mi získat zámek na datový adresář %s. Solidar pravděpodobně už jednou běží.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -2395,8 +2395,8 @@ Adresa: %4
     </message>
     <message>
         <location line="+3"/>
-        <source>Warning: Please check that your computer&apos;s date and time are correct! If your clock is wrong Worldleadcurrency will not work properly.</source>
-        <translation>Upozornění: Zkontroluj, že máš v počítači správně nastavený datum a čas! Pokud jsou nastaveny špatně, Worldleadcurrency nebude fungovat správně.</translation>
+        <source>Warning: Please check that your computer&apos;s date and time are correct! If your clock is wrong Solidar will not work properly.</source>
+        <translation>Upozornění: Zkontroluj, že máš v počítači správně nastavený datum a čas! Pokud jsou nastaveny špatně, Solidar nebude fungovat správně.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -2560,7 +2560,7 @@ Adresa: %4
     </message>
     <message>
         <location line="+6"/>
-        <source>Send command to -server or worldleadcurrencyd</source>
+        <source>Send command to -server or solidard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2570,12 +2570,12 @@ Adresa: %4
     </message>
     <message>
         <location line="+3"/>
-        <source>Specify configuration file (default: worldleadcurrency.conf)</source>
+        <source>Specify configuration file (default: solidar.conf)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>Specify pid file (default: worldleadcurrencyd.pid)</source>
+        <source>Specify pid file (default: solidard.pid)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2598,13 +2598,13 @@ Adresa: %4
         <source>%s, you must set a rpcpassword in the configuration file:
 %s
 It is recommended you use the following random password:
-rpcuser=worldleadcurrencyrpc
+rpcuser=solidarrpc
 rpcpassword=%s
 (you do not need to remember this password)
 The username and password MUST NOT be the same.
 If the file does not exist, create it with owner-readable-only file permissions.
 It is also recommended to set alertnotify so you are notified of problems;
-for example: alertnotify=echo %%s | mail -s &quot;Worldleadcurrency Alert&quot; admin@foo.com
+for example: alertnotify=echo %%s | mail -s &quot;Solidar Alert&quot; admin@foo.com
 </source>
         <translation type="unfinished"></translation>
     </message>
@@ -2675,8 +2675,8 @@ for example: alertnotify=echo %%s | mail -s &quot;Worldleadcurrency Alert&quot; 
     </message>
     <message>
         <location line="+5"/>
-        <source>SSL options: (see the Worldleadcurrency Wiki for SSL setup instructions)</source>
-        <translation>Možnosti SSL: (viz instrukce nastavení SSL v Worldleadcurrency Wiki)</translation>
+        <source>SSL options: (see the Solidar Wiki for SSL setup instructions)</source>
+        <translation>Možnosti SSL: (viz instrukce nastavení SSL v Solidar Wiki)</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -2865,13 +2865,13 @@ for example: alertnotify=echo %%s | mail -s &quot;Worldleadcurrency Alert&quot; 
     </message>
     <message>
         <location line="+1"/>
-        <source>Error loading wallet.dat: Wallet requires newer version of Worldleadcurrency</source>
-        <translation>Chyba při načítání wallet.dat: peněženka vyžaduje novější verzi Worldleadcurrencyu</translation>
+        <source>Error loading wallet.dat: Wallet requires newer version of Solidar</source>
+        <translation>Chyba při načítání wallet.dat: peněženka vyžaduje novější verzi Solidaru</translation>
     </message>
     <message>
         <location line="+94"/>
-        <source>Wallet needed to be rewritten: restart Worldleadcurrency to complete</source>
-        <translation>Soubor s peněženkou potřeboval přepsat: restartuj Worldleadcurrency, aby se operace dokončila</translation>
+        <source>Wallet needed to be rewritten: restart Solidar to complete</source>
+        <translation>Soubor s peněženkou potřeboval přepsat: restartuj Solidar, aby se operace dokončila</translation>
     </message>
     <message>
         <location line="-96"/>
@@ -2930,8 +2930,8 @@ for example: alertnotify=echo %%s | mail -s &quot;Worldleadcurrency Alert&quot; 
     </message>
     <message>
         <location line="-25"/>
-        <source>Unable to bind to %s on this computer. Worldleadcurrency is probably already running.</source>
-        <translation>Nedaří se mi připojit na %s na tomhle počítači. Worldleadcurrency už pravděpodobně jednou běží.</translation>
+        <source>Unable to bind to %s on this computer. Solidar is probably already running.</source>
+        <translation>Nedaří se mi připojit na %s na tomhle počítači. Solidar už pravděpodobně jednou běží.</translation>
     </message>
     <message>
         <location line="+63"/>

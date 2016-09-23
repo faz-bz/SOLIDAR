@@ -118,10 +118,10 @@ OBJS= \
 	obj/auxpow.o
 
 
-all: worldleadcurrencyd.exe
+all: solidard.exe
 
-test check: test_worldleadcurrency.exe FORCE
-	test_worldleadcurrency.exe
+test check: test_solidar.exe FORCE
+	test_solidar.exe
 
 #
 # LevelDB support
@@ -135,7 +135,7 @@ leveldb/libleveldb.a:
 obj/%.o: %.cpp $(HEADERS)
 	$(CXX) -c $(CFLAGS) -o $@ $<
 
-worldleadcurrencyd.exe: $(OBJS:obj/%=obj/%)
+solidard.exe: $(OBJS:obj/%=obj/%)
 	$(CXX) $(CFLAGS) $(LDFLAGS) -o $@ $(LIBPATHS) $^ $(LIBS)
 
 TESTOBJS := $(patsubst test/%.cpp,obj-test/%.o,$(wildcard test/*.cpp))
@@ -143,11 +143,11 @@ TESTOBJS := $(patsubst test/%.cpp,obj-test/%.o,$(wildcard test/*.cpp))
 obj-test/%.o: test/%.cpp $(HEADERS)
 	$(CXX) -c $(TESTDEFS) $(CFLAGS) -o $@ $<
 
-test_worldleadcurrency.exe: $(TESTOBJS) $(filter-out obj/init.o,$(OBJS:obj/%=obj/%))
+test_solidar.exe: $(TESTOBJS) $(filter-out obj/init.o,$(OBJS:obj/%=obj/%))
 	$(CXX) $(CFLAGS) $(LDFLAGS) -o $@ $(LIBPATHS) $^ -lboost_unit_test_framework$(BOOST_SUFFIX) $(LIBS)
 
 clean:
-	rm -f worldleadcurrencyd.exe test_worldleadcurrency.exe
+	rm -f solidard.exe test_solidar.exe
 	rm -f obj/*
 	rm -f obj-test/*
 	cd leveldb && $(MAKE) TARGET_OS=NATIVE_WINDOWS clean && cd ..

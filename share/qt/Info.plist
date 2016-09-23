@@ -15,19 +15,19 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleExecutable</key>
-	<string>Worldleadcurrency-Qt</string>
+	<string>Solidar-Qt</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.worldleadcurrency.Worldleadcurrency-Qt</string>
+	<string>org.solidar.Solidar-Qt</string>
         <key>CFBundleURLTypes</key>
         <array>
           <dict>
             <key>CFBundleTypeRole</key>
             <string>Editor</string>
             <key>CFBundleURLName</key>
-            <string>org.worldleadcurrency.BitcoinPayment</string>
+            <string>org.solidar.BitcoinPayment</string>
             <key>CFBundleURLSchemes</key>
             <array>
-              <string>worldleadcurrency</string>
+              <string>solidar</string>
             </array>
           </dict>
         </array>

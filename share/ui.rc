@@ -1,4 +1,4 @@
-worldleadcurrency              ICON    "pixmaps/bitcoin.ico"
+solidar              ICON    "pixmaps/bitcoin.ico"
 
 #include "wx/msw/wx.rc"
 

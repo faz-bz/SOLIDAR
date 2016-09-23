@@ -1,6 +1,6 @@
 [Protocol]
-exec=worldleadcurrency-qt '%u'
-protocol=worldleadcurrency
+exec=solidar-qt '%u'
+protocol=solidar
 input=none
 output=none
 helper=true

@@ -34,9 +34,9 @@ QString BitcoinUnits::name(int unit)
 {
     switch(unit)
     {
-    case BTC: return QString("WLC");
-    case mBTC: return QString("mWLC");
-    case uBTC: return QString::fromUtf8("μWLC");
+    case BTC: return QString("SLR");
+    case mBTC: return QString("mSLR");
+    case uBTC: return QString::fromUtf8("μSLR");
     default: return QString("???");
     }
 }
@@ -45,9 +45,9 @@ QString BitcoinUnits::description(int unit)
 {
     switch(unit)
     {
-    case BTC: return QString("Worldleadcurrencys");
-    case mBTC: return QString("Milli-Worldleadcurrencys (1 / 1,000)");
-    case uBTC: return QString("Micro-Worldleadcurrencys (1 / 1,000,000)");
+    case BTC: return QString("Solidars");
+    case mBTC: return QString("Milli-Solidars (1 / 1,000)");
+    case uBTC: return QString("Micro-Solidars (1 / 1,000,000)");
     default: return QString("???");
     }
 }

@@ -20,14 +20,14 @@ BEGIN
     BEGIN
         BLOCK "040904E4" // U.S. English - multilingual (hex)
         BEGIN
-            VALUE "CompanyName",        "Worldleadcurrency"
-            VALUE "FileDescription",    "Worldleadcurrency-Qt (OSS GUI client for Worldleadcurrency)"
+            VALUE "CompanyName",        "Solidar"
+            VALUE "FileDescription",    "Solidar-Qt (OSS GUI client for Solidar)"
             VALUE "FileVersion",        VER_FILEVERSION_STR
-            VALUE "InternalName",       "worldleadcurrency-qt"
+            VALUE "InternalName",       "solidar-qt"
             VALUE "LegalCopyright",     COPYRIGHT_STR
             VALUE "LegalTrademarks1",   "Distributed under the MIT/X11 software license, see the accompanying file COPYING or http://www.opensource.org/licenses/mit-license.php."
-            VALUE "OriginalFilename",   "worldleadcurrency-qt.exe"
-            VALUE "ProductName",        "Worldleadcurrency-Qt"
+            VALUE "OriginalFilename",   "solidar-qt.exe"
+            VALUE "ProductName",        "Solidar-Qt"
             VALUE "ProductVersion",     VER_PRODUCTVERSION_STR
         END
     END

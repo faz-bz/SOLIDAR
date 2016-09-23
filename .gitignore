@@ -1,7 +1,7 @@
 src/*.exe
-src/worldleadcurrency
-src/worldleadcurrencyd
-src/test_worldleadcurrency
+src/solidar
+src/solidard
+src/test_solidar
 .*.swp
 *.*~*
 *.bak
@@ -9,17 +9,17 @@ src/test_worldleadcurrency
 *.orig
 *.o
 *.patch
-.worldleadcurrency
+.solidar
 
 # Compilation and Qt preprocessor part
 *.qm
 Makefile
-worldleadcurrency-qt
-Worldleadcurrency-Qt.app
+solidar-qt
+Solidar-Qt.app
 
 # Unit-tests
 Makefile.test
-worldleadcurrency-qt_test
+solidar-qt_test
 
 # Resources cpp
 qrc_*.cpp
