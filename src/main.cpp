@@ -1092,7 +1092,7 @@ uint256 static GetOrphanRoot(const CBlockHeader* pblock)
 }
 
 
-// SLR reward / tax-system
+// solidar reward / tax-system
 mpq static GetInitialDistributionAmount(int nHeight)
 {
     mpq nSubsidy = 0;
@@ -1995,7 +1995,7 @@ bool CBlock::ConnectBlock(CValidationState &state, CBlockIndex* pindex, CCoinsVi
     if (fBenchmark)
         printf("- Connect %u transactions: %.2fms (%.3fms/tx, %.3fms/txin)\n", (unsigned)vtx.size(), 0.001 * nTime, 0.001 * nTime / vtx.size(), nInputs <= 1 ? 0 : 0.001 * nTime / (nInputs-1));
 
-    // Errorcodes for no SLR tax payed: Wrong amount or wrong address.
+    // Errorcodes for no solidar tax payed: Wrong amount or wrong address.
     mpq qCheckTaxPayment  = ((GetInitialDistributionAmount(pindex->nHeight) + GetPerpetualSubsidyAmount(pindex->nHeight)) * TITHE_RATIO);
     const mpq qTaxValue = RoundAbsolute(qCheckTaxPayment, ROUND_AWAY_FROM_ZERO);
     const mpz zTaxValue = qTaxValue.get_num() / qTaxValue.get_den();
@@ -2563,7 +2563,7 @@ bool CBlock::AcceptBlock(CValidationState &state, CDiskBlockPos *dbp)
             return state.DoS(100, error("AcceptBlock() : rejected by checkpoint lock-in at %d", nHeight));
 
         //Memi from DVC
-        // SLR currently doesn't enforce 2 blocks, since merged mining
+        // solidar currently doesn't enforce 2 blocks, since merged mining
         // produces v1 blocks and normal mining should produce v2 blocks.
 #if 0
         // Reject block.nVersion=1 blocks when 95% (75% on testnet) of the network has upgraded:
@@ -3203,7 +3203,7 @@ Let this be the awaited dawn.";
             << ParseHex("c26be5ec809aa4bf6b30aa89823cff7cedc3679a")
             << OP_EQUALVERIFY
             << OP_CHECKSIG;
-        const char* pszMessage4 = "Ich w\xc3\xbc""nsche SLR viel Erfolg zum Nutzen der 99 Prozent!";
+        const char* pszMessage4 = "Ich w\xc3\xbc""nsche WLC viel Erfolg zum Nutzen der 99 Prozent!";
         txNew.vout[4].SetInitialValue(1LL);
         txNew.vout[4].scriptPubKey = CScript()
             << ParseHex("202020202020")
@@ -4752,7 +4752,7 @@ CBlockTemplate* CreateNewBlock(CReserveKey& reservekey)
         txNew.vout[0].scriptPubKey << pubkey << OP_CHECKSIG;
         txNew.nRefHeight = nHeight;
 		
-        // Create SLR tax tx
+        // Create solidar tax tx
         mpq nBlockTax = ((GetInitialDistributionAmount(nHeight) + GetPerpetualSubsidyAmount(nHeight)) * TITHE_RATIO);
         txNew.vout[1].scriptPubKey = CScript() << OP_DUP << OP_HASH160 << ParseHex(GetBlockTaxAddress(nHeight)) << OP_EQUALVERIFY << OP_CHECKSIG;
         txNew.vout[1].SetInitialValue(RoundAbsolute(nBlockTax, ROUND_AWAY_FROM_ZERO));
@@ -4944,7 +4944,7 @@ CBlockTemplate* CreateNewBlock(CReserveKey& reservekey)
         nLastBlockSize = nBlockSize;
         printf("CreateNewBlock(): total size %"PRI64u"\n", nBlockSize);
 
-        // SLR - mining reward
+        // solidar - mining reward
         mpq nBlockReward = (GetInitialDistributionAmount(nHeight) + GetPerpetualSubsidyAmount(nHeight)) * (1 - TITHE_RATIO) + nFees;
         pblock->vtx[0].vout[0].SetInitialValue(RoundAbsolute(nBlockReward, ROUND_TOWARDS_ZERO));
         pblocktemplate->vTxFees[0] = -nFees;
@@ -5051,7 +5051,7 @@ bool CheckWork(CBlock* pblock, CWallet& wallet, CReserveKey& reservekey)
             return error("AUX POW parent hash %s is not under target %s", auxpow->GetParentBlockHash().GetHex().c_str(), hashTarget.GetHex().c_str());
 
         //// debug print
-        printf("SLRMiner:\n");
+        printf("SolidarMiner:\n");
         printf("AUX proof-of-work found \n our hash: %s \n parent hash: %s \n target: %s\n",
                hash.GetHex().c_str(),
                auxpow->GetParentBlockHash().GetHex().c_str(),
@@ -5064,7 +5064,7 @@ bool CheckWork(CBlock* pblock, CWallet& wallet, CReserveKey& reservekey)
             return false;
 
         //// debug print
-        printf("SLRMiner:\n");
+        printf("SolidarMiner:\n");
         printf("proof-of-work found \n hash: %s \ntarget: %s\n", hash.GetHex().c_str(), hashTarget.GetHex().c_str());
      }
 
