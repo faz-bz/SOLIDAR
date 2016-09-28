@@ -4961,7 +4961,7 @@ CBlockTemplate* CreateNewBlock(CReserveKey& reservekey)
         printf("CreateNewBlock(): total size %"PRI64u"\n", nBlockSize);
 
         // solidar - mining reward
-        mpq nBlockReward = (GetInitialDistributionAmount(nHeight) + GetPerpetualSubsidyAmount(nHeight)) * (1 - TITHE_RATIO) + nFees;
+        mpq nBlockReward = (GetInitialDistributionAmount(nHeight) + GetPerpetualSubsidyAmount(nHeight)) * (1 - TITHE_RATIO) + nFees -1;
         pblock->vtx[0].vout[0].SetInitialValue(RoundAbsolute(nBlockReward, ROUND_TOWARDS_ZERO));
         pblocktemplate->vTxFees[0] = -nFees;
 
