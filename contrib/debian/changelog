@@ -1,27 +1,3 @@
-solidar (0.8.3~precise2) precise; urgency=high
-
-  [Hendrik Richter]
-    * Prevent rounding error in Blockreward.
-    * Change Merge mining ChainID from 11 (Collides with terracoin) 
-      to 5588 after Bloch 72000.
-    * Add soft-fork to truncate input amounts rather than accumulate fractional
-      satoshi. This allows for a refactoring of the code that will make future
-      maintenance much easier. -from freicoin
-    * Rebrand the currency from worldleadcurrency to solidar.
-    * Fix sendmany bug where a copy and paste error leads to a wrong calculation amount.
-    * Adding a 10 satoshi transaction fee to include transactions by miners asap.
-    * Fix compiling qt-wallet on linux  
-    
- -- Hendrik Richter <info@winc-ev.org> 28 Sept 2016
-
-worldleadcurrency (0.8.3~precise1) precise; urgency=high
-
-  [Hendrik Richter]
-    * New fork from freicoin, worldleadcurrency -the social money
-    * Integrating merge mining from devcoin
-    
- -- Hendrik Richter <info@winc-ev.org> 30 Nov 2014
-
 freicoin (0.8.3~precise9) precise; urgency=high
 
   [Mark Friedenbach]
