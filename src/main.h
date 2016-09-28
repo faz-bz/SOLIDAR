@@ -656,7 +656,7 @@ public:
         @param[in] mapInputs	Map of previous transactions that have outputs we're spending
         @return	Sum of value of all inputs (scriptSigs)
      */
-    mpq GetValueIn(CCoinsViewCache& mapInputs) const;
+    mpq GetValueIn(CCoinsViewCache& mapInputs, bool fTruncateInputs) const;
 
     static bool AllowFree(double dPriority)
     {
@@ -712,6 +712,7 @@ public:
     // This does not modify the UTXO set. If pvChecks is not NULL, script checks are pushed onto it
     // instead of being performed inline.
     bool CheckInputs(CValidationState &state, CCoinsViewCache &view, bool fScriptChecks = true,
+                     bool fScriptChecks = true,
                      unsigned int flags = SCRIPT_VERIFY_P2SH | SCRIPT_VERIFY_STRICTENC,
                      std::vector<CScriptCheck> *pvChecks = NULL) const;
 
