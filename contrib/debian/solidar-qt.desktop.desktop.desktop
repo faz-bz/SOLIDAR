@@ -8,4 +8,4 @@ Type=Application
 Icon=/usr/share/pixmaps/solidar128.png
 MimeType=x-scheme-handler/solidar;
 Categories=Office; Finance;
-Name[de_DE]=solidar-qt.desktop
+Name[de_DE]=solidar-qt.desktop.desktop
