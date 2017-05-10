@@ -12,7 +12,7 @@
 #include "ui_interface.h"
 #include "checkqueue.h"
 #include "auxpow.h" // Memi from DVC
-#include <boost/algorithm/string/replace.hpp>ge
+#include <boost/algorithm/string/replace.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/fstream.hpp>
 
