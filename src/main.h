@@ -58,6 +58,7 @@ inline bool MoneyRange(int64 nValue) { return (nValue >= 0 && nValue <= I64_MAX_
 inline bool MoneyRange(mpz zValue) { return (zValue >= 0 && zValue <= MPZ_MAX_MONEY); }
 inline bool MoneyRange(mpq qValue) { return (qValue >= 0 && qValue <= MPQ_MAX_MONEY); }
 /** Subsidy, demurrage, and budgetary requirements for Solidar host currency */
+static const mpq TITHE_RATIO_NEW = mpq("999/1000");
 static const mpq TITHE_RATIO = mpq("99/100");
 static const int EQ_HEIGHT = 25000;
 static const int DEMURRAGE_RATE = 262144;

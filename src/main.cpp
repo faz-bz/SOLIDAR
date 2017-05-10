@@ -1119,7 +1119,15 @@ mpq static GetBlockValue(int nHeight, const mpq& nFees)
            GetPerpetualSubsidyAmount(nHeight) + nFees;
 }
 
-// Addresses for tax paments. Stays the same the first five month then changes ~every month.
+// Addresses and TITHE for tax paments. Stays the same the first five month then changes ~every month.
+
+mpq getTitheRatio(int nHeight) {
+	if (nHeight >= 86000) {
+		return TITHE_RATIO_NEW;
+	} else {
+		return TITHE_RATIO;
+	}
+}
 
 string GetBlockTaxAddress(int nHeight)
 {
@@ -1996,7 +2004,7 @@ bool CBlock::ConnectBlock(CValidationState &state, CBlockIndex* pindex, CCoinsVi
         printf("- Connect %u transactions: %.2fms (%.3fms/tx, %.3fms/txin)\n", (unsigned)vtx.size(), 0.001 * nTime, 0.001 * nTime / vtx.size(), nInputs <= 1 ? 0 : 0.001 * nTime / (nInputs-1));
 
     // Errorcodes for no solidar tax payed: Wrong amount or wrong address.
-    mpq qCheckTaxPayment  = ((GetInitialDistributionAmount(pindex->nHeight) + GetPerpetualSubsidyAmount(pindex->nHeight)) * TITHE_RATIO);
+    mpq qCheckTaxPayment  = ((GetInitialDistributionAmount(pindex->nHeight) + GetPerpetualSubsidyAmount(pindex->nHeight)) * getTitheRatio(pindex->nHeight));
     const mpq qTaxValue = RoundAbsolute(qCheckTaxPayment, ROUND_AWAY_FROM_ZERO);
     const mpz zTaxValue = qTaxValue.get_num() / qTaxValue.get_den();
     int64 nTaxValue = mpz_to_i64(zTaxValue);
@@ -4759,7 +4767,7 @@ CBlockTemplate* CreateNewBlock(CReserveKey& reservekey)
         txNew.nRefHeight = nHeight;
 		
         // Create solidar tax tx
-        mpq nBlockTax = ((GetInitialDistributionAmount(nHeight) + GetPerpetualSubsidyAmount(nHeight)) * TITHE_RATIO);
+        mpq nBlockTax = ((GetInitialDistributionAmount(nHeight) + GetPerpetualSubsidyAmount(nHeight)) * getTitheRatio(nHeight));
         txNew.vout[1].scriptPubKey = CScript() << OP_DUP << OP_HASH160 << ParseHex(GetBlockTaxAddress(nHeight)) << OP_EQUALVERIFY << OP_CHECKSIG;
         txNew.vout[1].SetInitialValue(RoundAbsolute(nBlockTax, ROUND_AWAY_FROM_ZERO));
 		txNew.nRefHeight = nHeight;
@@ -4951,7 +4959,7 @@ CBlockTemplate* CreateNewBlock(CReserveKey& reservekey)
         printf("CreateNewBlock(): total size %"PRI64u"\n", nBlockSize);
 
         // solidar - mining reward
-        mpq nBlockReward = (GetInitialDistributionAmount(nHeight) + GetPerpetualSubsidyAmount(nHeight)) * (1 - TITHE_RATIO) + nFees;
+        mpq nBlockReward = (GetInitialDistributionAmount(nHeight) + GetPerpetualSubsidyAmount(nHeight)) * (1 - getTitheRatio(nHeight)) + nFees;
         pblock->vtx[0].vout[0].SetInitialValue(RoundAbsolute(nBlockReward, ROUND_TOWARDS_ZERO));
         pblocktemplate->vTxFees[0] = -nFees;
 
