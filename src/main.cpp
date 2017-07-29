@@ -1504,6 +1504,11 @@ mpq GetPerpetualSubsidyAmount(int nHeight)
     return MPQ_MAX_MONEY * -Params().HostDemurrageRate();
 }
 
+mpq GetPerpetualSubsidyAmountNew(int nHeight)
+{
+    return MPQ_MAX_MONEY/5 * -Params().HostDemurrageRate();
+}
+
 CBudget GetPerpetualSubsidyBudget(int nHeight)
 {
     static CBudget emptyBudget = CBudget(0, std::vector<CBudgetEntry>());
@@ -1518,6 +1523,10 @@ CBudget GetTransactionFeeBudget(int nHeight)
 
 mpq GetBlockValue(int nHeight, const mpq& nFees)
 {
+    if (nHeight > 200000) {
+        return GetPerpetualSubsidyAmountNew(nHeight) + nFees;
+    }
+    
     return GetInitialDistributionAmount(nHeight) +
            GetPerpetualSubsidyAmount(nHeight) + nFees;
 }
