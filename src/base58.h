@@ -66,9 +66,9 @@ inline std::string EncodeBase58(const std::vector<unsigned char>& vch)
     return EncodeBase58(&vch[0], &vch[0] + vch.size());
 }
 
-// Decode a base58-encoded string psz into byte vector vchRet
+// Decode a base58-encoded string psz into byte vector vch
 // returns true if decoding is successful
-inline bool DecodeBase58(const char* psz, std::vector<unsigned char>& vchRet)
+inline bool DecodeBase58(const char* psz, std::vector<unsigned char>& vch)
 {
     // Skip leading spaces.
     while (*psz && isspace(*psz))
@@ -114,11 +114,11 @@ inline bool DecodeBase58(const char* psz, std::vector<unsigned char>& vchRet)
     return true;
 }
 
-// Decode a base58-encoded string str into byte vector vchRet
+// Decode a base58-encoded string str into byte vector vch
 // returns true if decoding is successful
-inline bool DecodeBase58(const std::string& str, std::vector<unsigned char>& vchRet)
+inline bool DecodeBase58(const std::string& str, std::vector<unsigned char>& vch)
 {
-    return DecodeBase58(str.c_str(), vchRet);
+    return DecodeBase58(str.c_str(), vch);
 }
 
 
