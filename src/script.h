@@ -12,6 +12,7 @@
 #include <boost/variant.hpp>
 
 #include "keystore.h"
+#include "util.h"
 
 class CCoins;
 class CTransaction;
