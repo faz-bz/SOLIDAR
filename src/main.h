@@ -1868,13 +1868,19 @@ public:
         return (int64)nTime;
     }
 
-    CScriptNum GetBlockWork() const
+    uint256 GetBlockWork() const
     {
-        CScriptNum bnTarget;
-        bnTarget.SetCompact(nBits);
-        if (bnTarget <= 0)
+         uint256 bnTarget;
+        bool fNegative;
+        bool fOverflow;
+        bnTarget.SetCompact(nBits, &fNegative, &fOverflow);
+        if (fNegative || fOverflow || bnTarget == 0)
             return 0;
-        return (CScriptNum(1)<<256) / (bnTarget+1);
+        // We need to compute 2**256 / (bnTarget+1), but we can't represent 2**256
+        // as it's too large for a uint256. However, as 2**256 is at least as large
+        // as bnTarget+1, it is equal to ((2**256 - bnTarget - 1) / (bnTarget+1)) + 1,
+        // or ~bnTarget / (nTarget+1) + 1.
+        return (~bnTarget / (bnTarget + 1)) + 1;
     }
 
     bool IsInMainChain() const
