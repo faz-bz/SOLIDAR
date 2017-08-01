@@ -399,6 +399,8 @@ public:
     friend class uint160;
     friend class uint256;
     friend inline int Testuint256AdHoc(std::vector<std::string> vArg);
+    
+    
 };
 
 typedef base_uint<160> base_uint160;
@@ -587,6 +589,10 @@ public:
         else
             *this = 0;
     }
+    uint256& SetCompact(uint32_t nCompact, bool *pfNegative = NULL, bool *pfOverflow = NULL);
+    uint32_t GetCompact(bool fNegative = false) const;
+
+    uint64_t GetHash(const uint256& salt) const;
 };
 
 inline bool operator==(const uint256& a, uint64 b)                           { return (base_uint256)a == b; }
@@ -778,6 +784,9 @@ inline int Testuint256AdHoc(std::vector<std::string> vArg)
 
     return (0);
 }
+
+
+uint256& SetCompact(uint32_t nCompact, bool *pfNegative = NULL, bool *pfOverflow = NULL);
 
 #endif
 
