@@ -148,6 +148,7 @@ OBJS= \
     obj/hash.o \
     obj/bloom.o \
     obj/noui.o \
+    obj/unit256.o \
     obj/leveldb.o \
     obj/txdb.o 
 
