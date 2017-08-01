@@ -5,7 +5,6 @@
 #ifndef BITCOIN_MAIN_H
 #define BITCOIN_MAIN_H
 
-#include "bignum.h"
 #include "sync.h"
 #include "net.h"
 #include "script.h"
@@ -1869,13 +1868,13 @@ public:
         return (int64)nTime;
     }
 
-    CBigNum GetBlockWork() const
+    CScriptNum GetBlockWork() const
     {
-        CBigNum bnTarget;
+        CScriptNum bnTarget;
         bnTarget.SetCompact(nBits);
         if (bnTarget <= 0)
             return 0;
-        return (CBigNum(1)<<256) / (bnTarget+1);
+        return (CScriptNum(1)<<256) / (bnTarget+1);
     }
 
     bool IsInMainChain() const
