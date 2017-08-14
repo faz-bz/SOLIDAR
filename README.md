@@ -1,7 +1,7 @@
 Solidar integration/staging tree
 =================================
 
-http://www.solidar.com/
+https://www.solidar.it/
 
 Copyright (c) 2009-2013 Bitcoin Developers
 
@@ -15,7 +15,7 @@ out collectively by the network. Solidar is also the name of the open source
 software which enables the use of this currency.
 
 For more information, as well as an immediately useable, binary version of
-the Solidar client software, see http://www.solidar.com.
+the Solidar client software, see https://www.solidar.it.
 
 License
 -------
@@ -34,7 +34,7 @@ development team members simply pulls it.
 
 If it is a *more complicated or potentially controversial* change, then the patch
 submitter will be asked to start a discussion (if they haven't already) on the
-[mailing list](https://groups.google.com/forum/#!forum/solidar).
+[mailing list](not available).
 
 The patch will be accepted if there is broad consensus that it is a good thing.
 Developers should expect to rework and resubmit patches if the code doesn't
